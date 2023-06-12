@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import PhotoImage
 
-def menu_principal(x):
 
+def menu_principal():
     def decision_hiragana():
         print("Se ha hecho clic en Hiragana")
 
@@ -48,6 +48,7 @@ def menu_principal(x):
 
     # Iniciar el bucle principal de la ventana
     menu.mainloop()
+
 
 if __name__ == "__main__":
 
