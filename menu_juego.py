@@ -1,14 +1,23 @@
 import tkinter as tk
 from tkinter import PhotoImage
 
-def menu_juego():
+import alfabeto.hiragana
+import alfabeto.katakana
+import juego
+
+
+def menu_juego(alfabetoUsado):
+    decision = None
+
     def japones_a_español():
         print("Japones a español")
-        return True
+        nonlocal decision
+        decision = True
 
     def español_a_japones():
         print("Español a japones")
-        return False
+        nonlocal decision
+        decision = False
 
     # Crear la ventana principal
     menu = tk.Tk()
@@ -39,7 +48,11 @@ def menu_juego():
     # Iniciar el bucle principal de la ventana
     menu.mainloop()
 
-def seleccionar_caracteres():
+    caracteres = seleccionar_caracteres(alfabetoUsado)
+    juego.jugar(caracteres,decision)
+
+
+def seleccionar_caracteres(decisionAlfabeto):
     opcion_vocales = False
     opcion_basico = False
     opcion_compuesto = False
@@ -74,18 +87,18 @@ def seleccionar_caracteres():
     menu.iconbitmap("menu_imagenes/icono.ico")
 
     # Crear los widgets de las opciones
-    Vocales = tk.Checkbutton(menu, text="Vocales", command=lambda: toggle_opcion("Vocales"))
-    Basico = tk.Checkbutton(menu, text="Basico", command=lambda: toggle_opcion("Basico"))
-    Compuesto = tk.Checkbutton(menu, text="Compuesto", command=lambda: toggle_opcion("Compuesto"))
-    Combinado1 = tk.Checkbutton(menu, text="Combinado 1", command=lambda: toggle_opcion("Combinado 1"))
-    Combinado2 = tk.Checkbutton(menu, text="Combinado 2", command=lambda: toggle_opcion("Combinado 2"))
+    vocales = tk.Checkbutton(menu, text="Vocales", command=lambda: toggle_opcion("Vocales"))
+    basico = tk.Checkbutton(menu, text="Basico", command=lambda: toggle_opcion("Basico"))
+    compuesto = tk.Checkbutton(menu, text="Compuesto", command=lambda: toggle_opcion("Compuesto"))
+    combinado1 = tk.Checkbutton(menu, text="Combinado 1", command=lambda: toggle_opcion("Combinado 1"))
+    combinado2 = tk.Checkbutton(menu, text="Combinado 2", command=lambda: toggle_opcion("Combinado 2"))
 
     # Posicionar las opciones en la ventana
-    Vocales.pack()
-    Basico.pack()
-    Compuesto.pack()
-    Combinado1.pack()
-    Combinado2.pack()
+    vocales.pack()
+    basico.pack()
+    compuesto.pack()
+    combinado1.pack()
+    combinado2.pack()
 
     # Crear el botón de continuar
     boton_continuar = tk.Button(menu, text="Continuar", command=continuar)
@@ -94,4 +107,19 @@ def seleccionar_caracteres():
     # Iniciar el bucle principal de la ventana
     menu.mainloop()
 
-seleccionar_caracteres()
+    caracteres = {}
+
+    if decisionAlfabeto:
+        if vocales: caracteres |= alfabeto.hiragana.vocales
+        if basico: caracteres |= alfabeto.hiragana.basico
+        if compuesto: caracteres |= alfabeto.hiragana.compuesto
+        if combinado1: caracteres |= alfabeto.hiragana.combinado_1
+        if combinado2: caracteres |= alfabeto.hiragana.combinados_2
+    else:
+        if vocales: caracteres |= alfabeto.katakana.vocales
+        if basico: caracteres |= alfabeto.katakana.basico
+        if compuesto: caracteres |= alfabeto.katakana.compuesto
+        if combinado1: caracteres |= alfabeto.katakana.combinado_1
+        if combinado2: caracteres |= alfabeto.katakana.combinados_2
+
+    return caracteres

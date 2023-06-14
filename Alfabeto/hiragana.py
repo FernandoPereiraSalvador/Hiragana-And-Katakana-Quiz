@@ -1,5 +1,5 @@
-hiragana_vocales = {'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お'}
-hiragana_basico = {
+vocales = {'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お'}
+basico = {
                    'ka':'か','ki':'き','ku':'く','ke':'け','ko':'こ',
                    'sa':'さ','shi':'し','su':'す','se':'せ','so':'そ',
                    'ta':'た','chi':'ち','tsu':'つ','te':'て','to':'と',
@@ -10,14 +10,14 @@ hiragana_basico = {
                    'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
                    'wa':'わ','wo/o':'を','n':'ん'
 }
-hiragana_compuesto = {
+compuesto = {
                       'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
                       'za':'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
                       'da':'だ','dji':'ぢ','dzu':'づ','de':'で','do':'ど',
                       'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
                       'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ'
 }
-hiragana_combinado_1 = {
+combinado_1 = {
                         'kya':'きゃ','kyu':'きゅ','kyo':'きょ',
                         'sha':'しゃ','shu':'しゅ','sho':'しょ',
                         'cha':'ちゃ','chu':'ちゅ','cho':'ちょ',
@@ -26,7 +26,7 @@ hiragana_combinado_1 = {
                         'mya':'みゃ','myu':'みゅ','myo':'みょ',
                         'rya':'りゃ','ryu':'りゅ','ryo':'りょ'
 }
-hiragana_combinados_2 = {
+combinados_2 = {
                          'gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ',
                          'ja':'じゃ','ju':'じゅ','jo':'じょ',
                          'dja':'ぢゃ','dju':'ぢゅ','djo':'ぢょ',

@@ -1,6 +1,6 @@
-katakana_vocales = {'a': 'ア', 'i': 'イ', 'u': 'ウ', 'e': 'エ', 'o': 'オ'}
+vocales = {'a': 'ア', 'i': 'イ', 'u': 'ウ', 'e': 'エ', 'o': 'オ'}
 
-katakana_basico = {
+basico = {
                    'ka':'カ','ki':'キ','ku':'ク','ke':'ケ','ko':'コ',
                    'sa':'サ','shi':'シ','su':'ス','se':'セ','so':'ソ',
                    'ta':'タ','chi':'チ','tsu':'ツ','te':'テ','to':'ト',
@@ -12,7 +12,7 @@ katakana_basico = {
                    'wa':'ワ','wo':'ヲ ','n':'ン'
 }
 
-katakana_compuesto = {
+compuesto = {
                       'ga':'ガ','gi':'ギ','gu':'グ','ge':'ゲ','go':'ゴ',
                       'za':'ザ','ji':'ジ','zu':'ズ','ze':'ゼ','zo':'ゾ',
                       'da':'ダ','dji':'ヂ','dzu':'ヅ','de':'デ','do':'ド',
@@ -20,7 +20,7 @@ katakana_compuesto = {
                       'pa':'パ','pi':'ピ','pu':'プ','pe':'ペ','po':'ポ'
 }
 
-katakana_combinado_1 = {
+combinado_1 = {
                         'kya':'キャ','kyu':'キュ','kyo':'キョ',
                         'sha':'シャ','shu':'シュ','sho':'ショ',
                         'cha':'チャ','chu':'チュ','cho':'チョ',
@@ -29,7 +29,7 @@ katakana_combinado_1 = {
                         'mya':'みゃ','myu':'みゅ','myo':'みょ'
 }
 
-katakana_combinado_2 = {
+combinado_2 = {
                         'rya': 'りゃ', 'ryu': 'りゅ', 'ryo': 'りょ',
                         'gya':'ギャ','gyu':'ギュ','gyo':'ギョ',
                         'ja':'ジャ','ju':'ジュ','jo':'ジョ',
