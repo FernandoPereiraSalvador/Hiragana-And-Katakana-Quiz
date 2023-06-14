@@ -110,16 +110,16 @@ def seleccionar_caracteres(decisionAlfabeto):
     caracteres = {}
 
     if decisionAlfabeto:
-        if vocales: caracteres |= alfabeto.hiragana.vocales
-        if basico: caracteres |= alfabeto.hiragana.basico
-        if compuesto: caracteres |= alfabeto.hiragana.compuesto
-        if combinado1: caracteres |= alfabeto.hiragana.combinado_1
-        if combinado2: caracteres |= alfabeto.hiragana.combinados_2
+        if opcion_vocales: caracteres |= alfabeto.hiragana.vocales
+        if opcion_basico: caracteres |= alfabeto.hiragana.basico
+        if opcion_compuesto: caracteres |= alfabeto.hiragana.compuesto
+        if opcion_combinado1: caracteres |= alfabeto.hiragana.combinado_1
+        if opcion_combinado2: caracteres |= alfabeto.hiragana.combinado_2
     else:
-        if vocales: caracteres |= alfabeto.katakana.vocales
-        if basico: caracteres |= alfabeto.katakana.basico
-        if compuesto: caracteres |= alfabeto.katakana.compuesto
-        if combinado1: caracteres |= alfabeto.katakana.combinado_1
-        if combinado2: caracteres |= alfabeto.katakana.combinados_2
+        if opcion_vocales: caracteres |= alfabeto.katakana.vocales
+        if opcion_basico: caracteres |= alfabeto.katakana.basico
+        if opcion_compuesto: caracteres |= alfabeto.katakana.compuesto
+        if opcion_combinado1: caracteres |= alfabeto.katakana.combinado_1
+        if opcion_combinado2: caracteres |= alfabeto.katakana.combinado_2
 
     return caracteres

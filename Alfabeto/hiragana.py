@@ -26,7 +26,7 @@ combinado_1 = {
                         'mya':'みゃ','myu':'みゅ','myo':'みょ',
                         'rya':'りゃ','ryu':'りゅ','ryo':'りょ'
 }
-combinados_2 = {
+combinado_2 = {
                          'gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ',
                          'ja':'じゃ','ju':'じゅ','jo':'じょ',
                          'dja':'ぢゃ','dju':'ぢゅ','djo':'ぢょ',
