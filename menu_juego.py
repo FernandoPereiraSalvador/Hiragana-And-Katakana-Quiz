@@ -87,22 +87,31 @@ def seleccionar_caracteres(decisionAlfabeto):
     menu.iconbitmap("menu_imagenes/icono.ico")
 
     # Crear los widgets de las opciones
-    vocales = tk.Checkbutton(menu, text="Vocales", command=lambda: toggle_opcion("Vocales"))
-    basico = tk.Checkbutton(menu, text="Basico", command=lambda: toggle_opcion("Basico"))
-    compuesto = tk.Checkbutton(menu, text="Compuesto", command=lambda: toggle_opcion("Compuesto"))
-    combinado1 = tk.Checkbutton(menu, text="Combinado 1", command=lambda: toggle_opcion("Combinado 1"))
-    combinado2 = tk.Checkbutton(menu, text="Combinado 2", command=lambda: toggle_opcion("Combinado 2"))
+    opciones_frame = tk.Frame(menu)
+    opciones_frame.pack(pady=20)
 
-    # Posicionar las opciones en la ventana
-    vocales.pack()
-    basico.pack()
-    compuesto.pack()
-    combinado1.pack()
-    combinado2.pack()
+    vocales = tk.Checkbutton(opciones_frame, text="Vocales", command=lambda: toggle_opcion("Vocales"), font=("Arial", 14))
+    basico = tk.Checkbutton(opciones_frame, text="Basico", command=lambda: toggle_opcion("Basico"), font=("Arial", 14))
+    compuesto = tk.Checkbutton(opciones_frame, text="Compuesto", command=lambda: toggle_opcion("Compuesto"), font=("Arial", 14))
+    combinado1 = tk.Checkbutton(opciones_frame, text="Combinado 1", command=lambda: toggle_opcion("Combinado 1"), font=("Arial", 14))
+    combinado2 = tk.Checkbutton(opciones_frame, text="Combinado 2", command=lambda: toggle_opcion("Combinado 2"), font=("Arial", 14))
+
+    vocales.pack(pady=5)
+    basico.pack(pady=5)
+    compuesto.pack(pady=5)
+    combinado1.pack(pady=5)
+    combinado2.pack(pady=5)
 
     # Crear el botón de continuar
-    boton_continuar = tk.Button(menu, text="Continuar", command=continuar)
+    boton_frame = tk.Frame(menu)
+    boton_frame.pack(pady=20)
+
+    boton_continuar = tk.Button(boton_frame, text="Continuar", command=continuar, font=("Arial", 16), padx=20, pady=10)
     boton_continuar.pack()
+
+    # Centrar la ventana en la pantalla
+    menu.update_idletasks()
+    menu.geometry("900x550+300+100")
 
     # Iniciar el bucle principal de la ventana
     menu.mainloop()

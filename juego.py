@@ -69,7 +69,6 @@ def japones_a_español(caracteres):
                 ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
                 numero_de_errores += 1
                 errores[e] = v
-                menu.destroy()
 
             menu.destroy()
 
