@@ -74,5 +74,3 @@ def mostrar_grafico_tkinter():
     canvas.get_tk_widget().pack()
 
     root.mainloop()
-
-mostrar_grafico_tkinter()

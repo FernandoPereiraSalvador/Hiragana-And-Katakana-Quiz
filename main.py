@@ -1,20 +1,18 @@
 import tkinter as tk
 from tkinter import PhotoImage
-
+import menu_juego
+import datos
 
 def menu_principal():
     def decision_hiragana():
-        import menu_juego
         menu_juego.menu_juego(True)
         print("Se ha hecho clic en Hiragana")
 
     def decision_katakana():
-        import menu_juego
         menu_juego.menu_juego(False)
         print("Se ha hecho clic en Katakana")
 
     def mostrar_registro():
-        import datos
         datos.mostrar_grafico_tkinter()
         print("Se ha hecho clic en Registro")
 
