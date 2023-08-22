@@ -49,7 +49,7 @@ def menu_juego(alfabetoUsado):
     menu.mainloop()
 
     caracteres = seleccionar_caracteres(alfabetoUsado)
-    juego.jugar(caracteres,decision)
+    juego.jugar(caracteres,decision,alfabetoUsado)
 
 
 def seleccionar_caracteres(decisionAlfabeto):

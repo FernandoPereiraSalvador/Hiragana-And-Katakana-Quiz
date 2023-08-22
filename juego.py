@@ -4,10 +4,11 @@ import random
 
 # japones a español: true
 # español a japones: false
+import datos
 import main
 
 
-def jugar(caracteres, modoJuego):
+def jugar(caracteres, modoJuego,alfabeto_elegido):
     keys = list(caracteres.keys())
     index = 0
 
@@ -18,14 +19,15 @@ def jugar(caracteres, modoJuego):
         index += 1
 
     if modoJuego:
-        print('hola')
-        japones_a_español(caracteres)
+        japones_a_español(caracteres,alfabeto_elegido)
     else:
-        print('hola3')
-        español_a_japones(caracteres)
+        español_a_japones(caracteres,alfabeto_elegido)
 
 
-def japones_a_español(caracteres):
+def japones_a_español(caracteres,alfabeto_elegido):
+    numeroErrores = 0
+    errores = {}
+
     while caracteres:
 
         print('hola')
@@ -52,10 +54,7 @@ def japones_a_español(caracteres):
         respuesta_var = tk.StringVar()
 
         def submit():
-            global numero_de_errores
-            global errores
-            numero_de_errores = 0
-            errores = {}
+            nonlocal numeroErrores, errores
 
             respuesta = respuesta_var.get()
 
@@ -67,7 +66,7 @@ def japones_a_español(caracteres):
 
             else:
                 ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
-                numero_de_errores += 1
+                numeroErrores += 1
                 errores[e] = v
 
             menu.destroy()
@@ -87,9 +86,16 @@ def japones_a_español(caracteres):
         sub_btn.place(x=400, y=440)
         menu.mainloop()
 
+    datos.guardar(numeroErrores,errores,alfabeto_elegido)
 
-def español_a_japones(caracteres):
+
+def español_a_japones(caracteres,alfabeto_elegido):
     respuesta = None
+
+    global numeroErrores, errores
+    numeroErrores = 0
+    errores = {}
+
     while caracteres:
 
         def boton_salida():
@@ -117,9 +123,7 @@ def español_a_japones(caracteres):
         opcion_escogida = random.choice(list(opciones_posibles.items()))
 
         def respuesta_comprobar():
-            global numero_de_errores, errores, respuesta
-            numero_de_errores = 0
-            errores = {}
+            global respuesta, numeroErrores
             e = opcion_escogida[1]
             v = opcion_escogida[0]
             if respuesta == opcion_escogida:
@@ -127,7 +131,7 @@ def español_a_japones(caracteres):
                 del caracteres[v]
             else:
                 ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
-                numero_de_errores += 1
+                numeroErrores += 1
                 errores[e] = v
             menu.destroy()
 
@@ -173,3 +177,5 @@ def español_a_japones(caracteres):
         print(caracteres)
 
         menu.mainloop()
+
+    datos.guardar(numeroErrores, errores, alfabeto_elegido)

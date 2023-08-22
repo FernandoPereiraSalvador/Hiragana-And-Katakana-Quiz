@@ -1,0 +1,266 @@
+[
+    {
+        "fecha": "2023-08-21 20:11:28.576620",
+        "numeroErrores": 3,
+        "errores": {
+            "\u30a2": "a",
+            "\u30a4": "i",
+            "\u30aa": "o"
+        },
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:10:14.283204",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:13.552848",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:12.647385",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:11.622060",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:10.134188",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:08.946440",
+        "numeroErrores": 5,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:07.285496",
+        "numeroErrores": 4,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e",
+            "\u304a": "o"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:05.688806",
+        "numeroErrores": 3,
+        "errores": {
+            "\u3046": "u",
+            "\u3048": "e"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:10:03.658725",
+        "numeroErrores": 2,
+        "errores": {
+            "\u3046": "u"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:09:59.924446",
+        "numeroErrores": 1,
+        "errores": {
+            "\u3046": "u"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:06:39.868721",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:06:38.978771",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:06:37.897480",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:06:35.292325",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:06:33.700360",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:06:31.543723",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-21 20:05:55.243148",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:54.243938",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:52.302613",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:51.057141",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:48.750799",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:47.829058",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:45.473007",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:43.336797",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:27.497048",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:26.195747",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:24.720281",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:22.951281",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:20.881571",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:04.556660",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:03.134861",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:01.869847",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:05:00.419261",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 20:04:54.663425",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-21 19:54:56.959298",
+        "numeroErrores": 3,
+        "errores": {
+            "i": "\u3044",
+            "a": "\u3042"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-20 17:35:39.783168",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    }
+]

@@ -14,6 +14,8 @@ def menu_principal():
         print("Se ha hecho clic en Katakana")
 
     def mostrar_registro():
+        import datos
+        datos.mostrar_grafico_tkinter()
         print("Se ha hecho clic en Registro")
 
     # Crear la ventana principal
@@ -45,7 +47,7 @@ def menu_principal():
 
     registro_button = tk.Button(
         menu,
-        command=lambda: [mostrar_registro()],
+        command=lambda: [menu.destroy(),mostrar_registro()],
         image=imagen_registro, width=40, height=40
     )
     registro_button.pack(side=tk.TOP)
