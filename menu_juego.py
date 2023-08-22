@@ -27,8 +27,15 @@ def menu_juego(alfabetoUsado):
     menu.iconbitmap("menu_imagenes/icono.ico")
 
     # Cargar las imágenes
-    imagen_japones_a_español = PhotoImage(file="menu_imagenes/japones.png")
-    imagen_español_a_japones = PhotoImage(file="menu_imagenes/español.png")
+    if alfabetoUsado:
+        imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesHiragana.png")
+    else:
+        imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesKatakana.png")
+
+    if alfabetoUsado:
+        imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
+    else:
+        imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
 
     # Crear los botones
     hiragana_button = tk.Button(
