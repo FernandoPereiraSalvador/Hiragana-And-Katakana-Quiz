@@ -3,61 +3,79 @@ from tkinter import PhotoImage
 import menu_juego
 import datos
 
-def menu_principal():
-    def decision_hiragana():
-        menu_juego.menu_juego(True)
-        print("Se ha hecho clic en Hiragana")
 
-    def decision_katakana():
-        menu_juego.menu_juego(False)
-        print("Se ha hecho clic en Katakana")
+# Definición de la clase MenuPrincipal
+class MenuPrincipal:
+    def __init__(self, root):
+        # Inicialización de la ventana principal
+        self.root = root
+        self.root.geometry("900x550+300+100")
+        self.root.resizable(False, False)
+        self.root.title("Menu")
+        self.root.iconbitmap("menu_imagenes/icono.ico")
 
-    def mostrar_registro():
+        # Carga de las imágenes
+        self.imagen_hiragana = PhotoImage(file="menu_imagenes/hiragana.png")
+        self.imagen_katakana = PhotoImage(file="menu_imagenes/katakana.png")
+        self.imagen_registro = PhotoImage(file="menu_imagenes/registro.png")
+
+        # Creación de los botones en la ventana
+        self.crear_botones()
+
+    def decision_hiragana(self):
+        # Llamada a función de otro módulo
+        menu_juego.MenuJuego(True)
+
+    def decision_katakana(self):
+        # Llamada a función de otro módulo
+        menu_juego.MenuJuego(False)
+
+    def mostrar_registro(self):
+        # Llamada a función de otro módulo
         datos.mostrar_grafico_tkinter()
-        print("Se ha hecho clic en Registro")
 
-    # Crear la ventana principal
-    menu = tk.Tk()
-    menu.geometry("900x550+300+100")
-    menu.resizable(False, False)
-    menu.title("Menu")
-    menu.iconbitmap("menu_imagenes/icono.ico")
+    def crear_botones(self):
+        # Creación del botón para seleccionar Hiragana
+        hiragana_button = tk.Button(
+            self.root,
+            command=lambda: [self.root.destroy(), self.decision_hiragana()],
+            width=325, height=325, image=self.imagen_hiragana
+        )
+        hiragana_button.place(x=65, y=50)
 
-    # Cargar las imágenes
-    imagen_hiragana = PhotoImage(file="menu_imagenes/hiragana.png")
-    imagen_katakana = PhotoImage(file="menu_imagenes/katakana.png")
-    imagen_registro = PhotoImage(file="menu_imagenes/registro.png")
+        # Creación del botón para seleccionar Katakana
+        katakana_button = tk.Button(
+            self.root,
+            command=lambda: [self.root.destroy(), self.decision_katakana()],
+            width=325, height=325, image=self.imagen_katakana
+        )
+        katakana_button.place(x=500, y=50)
 
-    # Crear los botones
-    hiragana_button = tk.Button(
-        menu,
-        command=lambda: [menu.destroy(), decision_hiragana()],
-        width=325, height=325, image=imagen_hiragana
-    )
-    hiragana_button.place(x=65, y=50)
-
-    katakana_button = tk.Button(
-        menu,
-        command=lambda: [menu.destroy(), decision_katakana()],
-        width=325, height=325, image=imagen_katakana
-    )
-    katakana_button.place(x=500, y=50)
-
-    registro_button = tk.Button(
-        menu,
-        command=lambda: [menu.destroy(),mostrar_registro()],
-        image=imagen_registro, width=40, height=40
-    )
-    registro_button.pack(side=tk.TOP)
-
-    # Iniciar el bucle principal de la ventana
-    menu.mainloop()
+        # Creación del botón para mostrar el registro
+        registro_button = tk.Button(
+            self.root,
+            command=lambda: [self.root.destroy(), self.mostrar_registro()],
+            image=self.imagen_registro, width=40, height=40
+        )
+        registro_button.pack(side=tk.TOP)
 
 
+# Función principal para iniciar la aplicación
+def main():
+    # Crear la ventana principal de Tkinter
+    root = tk.Tk()
+
+    # Crear una instancia de la clase MenuPrincipal
+    menu = MenuPrincipal(root)
+
+    # Iniciar el bucle principal de la aplicación
+    root.mainloop()
+
+
+# Verificar si este módulo es el programa principal
 if __name__ == "__main__":
-
-    menu_principal()
-
-
+    # Llamar a la función principal
+    main()
 else:
+    # En caso de que el módulo sea importado
     print("Error")

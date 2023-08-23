@@ -1,5 +1,71 @@
 [
     {
+        "fecha": "2023-08-23 22:28:51.211587",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 22:23:32.475690",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-23 22:21:30.863620",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-23 22:21:26.207010",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-23 22:04:03.966032",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": false
+    },
+    {
+        "fecha": "2023-08-23 21:58:41.942991",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 21:58:29.509336",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 21:56:33.667744",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 21:50:00.000718",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 21:49:28.187862",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-23 21:45:09.774259",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-23 14:44:09.439583",
         "numeroErrores": 0,
         "errores": {},

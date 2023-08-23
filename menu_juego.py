@@ -6,7 +6,7 @@ import alfabeto.katakana
 import juego
 
 
-def menu_juego(alfabetoUsado):
+def MenuJuego(alfabetoUsado):
     decision = None
 
     def japones_a_español():
