@@ -96,6 +96,8 @@ def español_a_japones(caracteres,alfabeto_elegido):
     numeroErrores = 0
     errores = {}
 
+    copia_caracteres_juego = caracteres.copy()
+
     while caracteres:
 
         def boton_salida():
@@ -112,15 +114,39 @@ def español_a_japones(caracteres,alfabeto_elegido):
         menu.title("Japones")
         menu.iconbitmap("menu_imagenes/icono.ico")
 
-        caracter_al_azar = random.choice(list(caracteres.items()))
-        v = caracter_al_azar[1]
+        # Hacer una copia del diccionario caracteres
+        copia_caracteres = copia_caracteres_juego.copy()
 
-        opcion_1 = random.choice(list(caracteres.items()))
-        opcion_2 = random.choice(list(caracteres.items()))
-        opcion_3 = random.choice(list(caracteres.items()))
+        # Elegir la opción correcta aleatoriamente
+        opcion_correcta_key = random.choice(list(caracteres.keys()))
+        opcion_correcta_value = caracteres[opcion_correcta_key]
+        opcion_escogida = (opcion_correcta_key, opcion_correcta_value)
 
-        opciones_posibles = dict([opcion_1] + [opcion_2] + [opcion_3])
-        opcion_escogida = random.choice(list(opciones_posibles.items()))
+        # Eliminar la opción correcta de la copia para que no se elija nuevamente
+        del copia_caracteres[opcion_correcta_key]
+
+        # Elegir una opción posible aleatoriamente de la copia
+        opcion_posible1_key, opcion_posible1_value = random.choice(list(copia_caracteres.items()))
+        print("Hola")
+
+        del copia_caracteres[opcion_posible1_key]
+
+        # Elegir la otra opción posible aleatoriamente de la copia
+        opcion_posible2_key, opcion_posible2_value = random.choice(list(copia_caracteres.items()))
+
+        # Crear las tres opciones (correcta y posibles)
+        opciones_posibles = [
+            opcion_escogida,
+            (opcion_posible1_key, opcion_posible1_value),
+            (opcion_posible2_key, opcion_posible2_value)
+        ]
+
+        # Mezclar todas las opciones y mostrarlas
+        random.shuffle(opciones_posibles)
+
+        opcion_1 = opciones_posibles[0]
+        opcion_2 = opciones_posibles[1]
+        opcion_3 = opciones_posibles[2]
 
         def respuesta_comprobar():
             global respuesta, numeroErrores
