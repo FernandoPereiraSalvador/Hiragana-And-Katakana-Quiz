@@ -4,19 +4,19 @@ import random
 import datos
 
 class Juego:
-    def __init__(self):
+    def __init__(self,menu_principal):
         self.numeroErrores = 0
         self.errores = {}
         self.salida = True
+        self.menu_principal = menu_principal
 
     def boton_salida(self):
         self.salida = False
         self.caracteres = {}
         self.menu.destroy()
-        from main import main
-        main()
+        self.menu_principal.deiconify()
 
-    def jugar(self, caracteres, modoJuego, alfabeto_elegido):
+    def jugar(self, caracteres, modoJuego, alfabeto_elegido,menu_principal):
         self.keys = list(caracteres.keys())
         self.index = 0
 
@@ -27,13 +27,13 @@ class Juego:
             self.index += 1
 
         if modoJuego:
-            self.japones_a_español(caracteres, alfabeto_elegido)
+            self.japones_a_español(caracteres, alfabeto_elegido,menu_principal)
         else:
-            self.español_a_japones(caracteres, alfabeto_elegido)
+            self.español_a_japones(caracteres, alfabeto_elegido,menu_principal)
 
-    def japones_a_español(self, caracteres, alfabeto_elegido):
+    def japones_a_español(self, caracteres, alfabeto_elegido,menu_principal):
         while caracteres and self.salida:
-            self.menu = tk.Tk()
+            self.menu = tk.Toplevel(menu_principal)
             self.menu.geometry("900x550+300+100")
             self.menu.resizable(False, False)
             self.menu.title("Japones")
@@ -50,6 +50,7 @@ class Juego:
 
                 if respuesta == e:
                     del caracteres[e]
+                    self.menu.withdraw()
                 else:
                     ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
                     self.numeroErrores += 1
@@ -70,15 +71,16 @@ class Juego:
             sub_btn.place(x=400, y=440)
             salida_button.pack()
 
-            self.menu.mainloop()
+            self.menu.wait_window()
+
 
         datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
 
-    def español_a_japones(self, caracteres, alfabeto_elegido):
+    def español_a_japones(self, caracteres, alfabeto_elegido,menu_principal):
         respuesta = None
 
         while caracteres and self.salida:
-            self.menu = tk.Tk()
+            self.menu = tk.Toplevel(menu_principal)
             self.menu.geometry("900x550+300+100")
             self.menu.resizable(False, False)
             self.menu.title("Japones")
@@ -124,8 +126,7 @@ class Juego:
                 opcion_buttons[i].place(x=x_positions[i], y=250)
 
             salida_button.pack()
-
-            self.menu.mainloop()
+            self.menu.wait_window()
 
         datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
 
@@ -142,9 +143,9 @@ class Juego:
         random.shuffle(opciones_posibles)
         return opciones_posibles
 
-def main(caracteres, modoJuego, alfabeto_elegido):
-    juego = Juego()
-    juego.jugar(caracteres, modoJuego, alfabeto_elegido)
+def main(caracteres, modoJuego, alfabeto_elegido,menu_principal):
+    juego = Juego(menu_principal)
+    juego.jugar(caracteres, modoJuego, alfabeto_elegido,menu_principal)
 
 if __name__ == "__main__":
     caracteres = {...}  # Define your character dictionary here

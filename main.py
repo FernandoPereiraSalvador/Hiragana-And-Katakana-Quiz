@@ -24,11 +24,13 @@ class MenuPrincipal:
 
     def decision_hiragana(self):
         # Llamada a función de otro módulo
-        menu_juego.main(True)
+        self.root.withdraw()
+        menu_juego.main(True,self.root)
 
     def decision_katakana(self):
         # Llamada a función de otro módulo
-        menu_juego.main(False)
+        self.root.withdraw()
+        menu_juego.main(False,self.root)
 
     def mostrar_registro(self):
         # Llamada a función de otro módulo
@@ -40,7 +42,7 @@ class MenuPrincipal:
         # Creación del botón para seleccionar Hiragana
         hiragana_button = tk.Button(
             self.root,
-            command=lambda: [self.root.destroy(), self.decision_hiragana()],
+            command=lambda: [self.decision_hiragana()],
             width=325, height=325, image=self.imagen_hiragana
         )
         hiragana_button.place(x=65, y=50)
@@ -48,7 +50,7 @@ class MenuPrincipal:
         # Creación del botón para seleccionar Katakana
         katakana_button = tk.Button(
             self.root,
-            command=lambda: [self.root.destroy(), self.decision_katakana()],
+            command=lambda: [self.decision_katakana()],
             width=325, height=325, image=self.imagen_katakana
         )
         katakana_button.place(x=500, y=50)

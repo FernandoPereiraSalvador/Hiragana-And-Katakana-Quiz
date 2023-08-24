@@ -1,5 +1,171 @@
 [
     {
+        "fecha": "2023-08-24 20:56:27.318887",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:56:18.510344",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:53:57.323753",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:53:52.048685",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:53:45.414896",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:47:22.048280",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:47:10.202303",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:45:15.423702",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:43:27.630179",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:43:06.617645",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:35:05.372097",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:33:46.423858",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:25:02.355167",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:24:56.607197",
+        "numeroErrores": 1,
+        "errores": {
+            "a": "\u3042"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:24:26.235122",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:24:23.311118",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:22:17.702442",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:22:13.785019",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:20:31.430527",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:19:12.842243",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:18:04.361532",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:17:17.398245",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:11:55.949800",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 20:07:14.569432",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 19:56:34.009799",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 19:55:28.556767",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 19:54:20.859449",
+        "numeroErrores": 1,
+        "errores": {
+            "e": "\u3048"
+        },
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-24 17:28:02.756795",
         "numeroErrores": 0,
         "errores": {},
