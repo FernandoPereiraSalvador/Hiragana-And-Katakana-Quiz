@@ -130,7 +130,7 @@ class CaracteresSelector:
         self.iniciar_juego()
 
     def iniciar_juego(self):
-        juego.jugar(self.caracteres, self.decisionModo, self.decisionAlfabeto)
+        juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto)
 
 def main(alfabetoUsado):
     modo_selector = MenuJuego(alfabetoUsado)

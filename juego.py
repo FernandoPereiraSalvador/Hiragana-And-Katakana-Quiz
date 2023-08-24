@@ -1,207 +1,153 @@
 import tkinter as tk
-from tkinter import PhotoImage, messagebox
+from tkinter import messagebox
 import random
-
-# japones a español: true
-# español a japones: false
 import datos
-import main
 
+class Juego:
+    def __init__(self):
+        self.numeroErrores = 0
+        self.errores = {}
+        self.salida = True
 
-def jugar(caracteres, modoJuego,alfabeto_elegido):
-    keys = list(caracteres.keys())
-    index = 0
+    def boton_salida(self):
+        self.salida = False
+        self.caracteres = {}
+        self.menu.destroy()
+        from main import main
+        main()
 
-    while index < len(keys):
-        key = keys[index]
-        value = caracteres[key]
-        print(key, ":", value)
-        index += 1
+    def jugar(self, caracteres, modoJuego, alfabeto_elegido):
+        self.keys = list(caracteres.keys())
+        self.index = 0
 
-    if modoJuego:
-        japones_a_español(caracteres,alfabeto_elegido)
-    else:
-        español_a_japones(caracteres,alfabeto_elegido)
+        while self.index < len(self.keys):
+            key = self.keys[self.index]
+            value = caracteres[key]
+            print(key, ":", value)
+            self.index += 1
 
+        if modoJuego:
+            self.japones_a_español(caracteres, alfabeto_elegido)
+        else:
+            self.español_a_japones(caracteres, alfabeto_elegido)
 
-def japones_a_español(caracteres,alfabeto_elegido):
-    numeroErrores = 0
-    errores = {}
+    def japones_a_español(self, caracteres, alfabeto_elegido):
+        while caracteres and self.salida:
+            self.menu = tk.Tk()
+            self.menu.geometry("900x550+300+100")
+            self.menu.resizable(False, False)
+            self.menu.title("Japones")
+            self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-    while caracteres:
+            caracter_al_azar = random.choice(list(caracteres.items()))
+            v = caracter_al_azar[1]
+            e = caracter_al_azar[0]
 
-        print('hola')
-        menu = tk.Tk()
-        menu.geometry("900x550+300+100")
-        menu.resizable(False, False)
-        menu.title("Japones")
-        menu.iconbitmap("menu_imagenes/icono.ico")
+            respuesta_var = tk.StringVar()
 
-        def boton_salida():
-            global salida, caracteres
-            salida = "salir"
-            caracteres = {}
-            menu.destroy()
-            main.main()
-            breakpoint()
+            def submit():
+                respuesta = respuesta_var.get()
 
-        caracter_al_azar = random.choice(list(caracteres.items()))
+                if respuesta == e:
+                    del caracteres[e]
+                else:
+                    ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
+                    self.numeroErrores += 1
+                    self.errores[e] = v
 
-        print(caracter_al_azar)
-        v = caracter_al_azar[1]
-        e = caracter_al_azar[0]
+                self.menu.destroy()
+                respuesta_var.set("")
 
-        respuesta_var = tk.StringVar()
+            respuesta_label = tk.Label(self.menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
+            letra_elegida = tk.Label(self.menu, text=f"{v}", font=("Arial", 175))
+            respuesta_entry = tk.Entry(self.menu, textvariable=respuesta_var, width=30)
+            salida_button = tk.Button(self.menu, text="Salir", command=self.boton_salida)
+            sub_btn = tk.Button(self.menu, text="Submit", command=submit)
 
-        def submit():
-            nonlocal numeroErrores, errores
+            respuesta_label.place(x=250, y=50)
+            letra_elegida.place(x=300, y=125)
+            respuesta_entry.place(x=335, y=400)
+            sub_btn.place(x=400, y=440)
+            salida_button.pack()
 
-            respuesta = respuesta_var.get()
+            self.menu.mainloop()
 
-            print("La respuesta es: " + respuesta)
-            if (respuesta == e):
+        datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
 
-                print("Has acertado")
-                del caracteres[e]
+    def español_a_japones(self, caracteres, alfabeto_elegido):
+        respuesta = None
 
-            else:
-                ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
-                numeroErrores += 1
-                errores[e] = v
+        while caracteres and self.salida:
+            self.menu = tk.Tk()
+            self.menu.geometry("900x550+300+100")
+            self.menu.resizable(False, False)
+            self.menu.title("Japones")
+            self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-            menu.destroy()
+            opciones_posibles = self.generar_opciones(caracteres)
 
-            respuesta_var.set("")
+            opcion_escogida = opciones_posibles[0]
 
-        respuesta_label = tk.Label(menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
-        letra_elegida = tk.Label(menu, text=f"{v}", font=("Arial", 175))
-        respuesta_entry = tk.Entry(menu, textvariable=respuesta_var, width=30)
-        salida_button = tk.Button(menu, text="Salir", command=lambda: [boton_salida(), menu.destroy()])
-        salida_button.pack()
-        sub_btn = tk.Button(menu, text="Submit", command=submit)
-
-        respuesta_label.place(x=250, y=50)
-        letra_elegida.place(x=300, y=125)
-        respuesta_entry.place(x=335, y=400)
-        sub_btn.place(x=400, y=440)
-        menu.mainloop()
-
-    datos.guardar(numeroErrores,errores,alfabeto_elegido)
-
-
-def español_a_japones(caracteres,alfabeto_elegido):
-    respuesta = None
-
-    global numeroErrores, errores
-    numeroErrores = 0
-    errores = {}
-
-    copia_caracteres_juego = caracteres.copy()
-
-    while caracteres:
-
-        def boton_salida():
-            global salida, caracteres, respuesta
-            salida = "salir"
-            caracteres = {}
-            menu.destroy()
-            main.main()
-            breakpoint()
-
-        menu = tk.Tk()
-        menu.geometry("900x550+300+100")
-        menu.resizable(False, False)
-        menu.title("Japones")
-        menu.iconbitmap("menu_imagenes/icono.ico")
-
-        # Hacer una copia del diccionario caracteres
-        copia_caracteres = copia_caracteres_juego.copy()
-
-        # Elegir la opción correcta aleatoriamente
-        opcion_correcta_key = random.choice(list(caracteres.keys()))
-        opcion_correcta_value = caracteres[opcion_correcta_key]
-        opcion_escogida = (opcion_correcta_key, opcion_correcta_value)
-
-        # Eliminar la opción correcta de la copia para que no se elija nuevamente
-        del copia_caracteres[opcion_correcta_key]
-
-        # Elegir una opción posible aleatoriamente de la copia
-        opcion_posible1_key, opcion_posible1_value = random.choice(list(copia_caracteres.items()))
-        print("Hola")
-
-        del copia_caracteres[opcion_posible1_key]
-
-        # Elegir la otra opción posible aleatoriamente de la copia
-        opcion_posible2_key, opcion_posible2_value = random.choice(list(copia_caracteres.items()))
-
-        # Crear las tres opciones (correcta y posibles)
-        opciones_posibles = [
-            opcion_escogida,
-            (opcion_posible1_key, opcion_posible1_value),
-            (opcion_posible2_key, opcion_posible2_value)
-        ]
-
-        # Mezclar todas las opciones y mostrarlas
-        random.shuffle(opciones_posibles)
-
-        opcion_1 = opciones_posibles[0]
-        opcion_2 = opciones_posibles[1]
-        opcion_3 = opciones_posibles[2]
-
-        def respuesta_comprobar():
-            global respuesta, numeroErrores
-            e = opcion_escogida[1]
-            v = opcion_escogida[0]
-            if respuesta == opcion_escogida:
+            def respuesta_comprobar():
                 e = opcion_escogida[1]
-                del caracteres[v]
-            else:
-                ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
-                numeroErrores += 1
-                errores[e] = v
-            menu.destroy()
+                v = opcion_escogida[0]
+                if respuesta == opcion_escogida:
+                    e = opcion_escogida[1]
+                    del caracteres[v]
+                else:
+                    ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
+                    self.numeroErrores += 1
+                    self.errores[e] = v
+                self.menu.destroy()
 
-        def opcion_1_eleccion():
-            global respuesta
-            respuesta = opcion_1
-            print(f"La respuesta es {respuesta}")
-            respuesta_comprobar()
+            def opcion_eleccion(opcion):
+                nonlocal respuesta
+                respuesta = opcion
+                respuesta_comprobar()
 
-        def opcion_2_eleccion():
-            global respuesta
-            respuesta = opcion_2
-            print(f"La respuesta es {respuesta}")
-            respuesta_comprobar()
+            titulo_label = tk.Label(self.menu, text=f"Introduce el caracter correcto", font=("Arial", 20))
+            opcion_escogida_label = tk.Label(self.menu, text=opcion_escogida[0], font=("Arial", 40))
 
-        def opcion_3_eleccion():
-            global respuesta
-            respuesta = opcion_3
-            print(f"La respuesta es {respuesta}")
-            respuesta_comprobar()
+            opcion_buttons = []
+            for opcion in opciones_posibles:
+                button = tk.Button(self.menu, text=opcion[1], font=("Arial", 30), height=2, width=4,
+                                   command=lambda o=opcion: opcion_eleccion(o))
+                opcion_buttons.append(button)
 
-        # imagen_salida = PhotoImage(file="menu_imagenes/salida.png")
+            salida_button = tk.Button(self.menu, text="Salir", command=self.boton_salida)
 
-        titulo_label = tk.Label(menu, text=f"Introduce el caracter correcto", font=("Arial", 20))
-        opcion_escogida_label = tk.Label(menu, text=opcion_escogida[0], font=("Arial", 40))
+            titulo_label.place(x=275, y=50)
+            opcion_escogida_label.place(x=425, y=125)
 
-        opcion_1_button = tk.Button(menu, text=opcion_1[1], font=("Arial", 30), height=2, width=4,
-                                    command=lambda: [opcion_1_eleccion()])
-        opcion_2_button = tk.Button(menu, text=opcion_2[1], font=("Arial", 30), height=2, width=4,
-                                    command=lambda: [opcion_2_eleccion()])
-        opcion_3_button = tk.Button(menu, text=opcion_3[1], font=("Arial", 30), height=2, width=4,
-                                    command=lambda: [opcion_3_eleccion()])
-        salida_button = tk.Button(menu, text="Salir", command=lambda: [boton_salida(), menu.destroy()])
+            x_positions = [100, 400, 700]
+            for i in range(3):
+                opcion_buttons[i].place(x=x_positions[i], y=250)
 
-        titulo_label.place(x=275, y=50)
-        opcion_escogida_label.place(x=425, y=125)
-        opcion_1_button.place(x=100, y=250)
-        opcion_2_button.place(x=400, y=250)
-        opcion_3_button.place(x=700, y=250)
-        salida_button.pack()
+            salida_button.pack()
 
-        print(f"La respuesta era {respuesta} y la opcion elegida {opcion_escogida}")
-        print(caracteres)
+            self.menu.mainloop()
 
-        menu.mainloop()
+        datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
 
-    datos.guardar(numeroErrores, errores, alfabeto_elegido)
+    def generar_opciones(self, caracteres):
+        copia_caracteres_juego = caracteres.copy()
+        opciones_posibles = []
+
+        while len(opciones_posibles) < 3:
+            opcion_key = random.choice(list(copia_caracteres_juego.keys()))
+            opcion_value = copia_caracteres_juego[opcion_key]
+            opciones_posibles.append((opcion_key, opcion_value))
+            del copia_caracteres_juego[opcion_key]
+
+        random.shuffle(opciones_posibles)
+        return opciones_posibles
+
+def main(caracteres, modoJuego, alfabeto_elegido):
+    juego = Juego()
+    juego.jugar(caracteres, modoJuego, alfabeto_elegido)
+
+if __name__ == "__main__":
+    caracteres = {...}  # Define your character dictionary here
+    modoJuego = True  # Set to True or False based on game mode
+    alfabeto_elegido = "hiragana"  # Set the alphabet choice
+    main(caracteres, modoJuego, alfabeto_elegido)

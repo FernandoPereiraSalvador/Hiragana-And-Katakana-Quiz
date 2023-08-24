@@ -1,5 +1,23 @@
 [
     {
+        "fecha": "2023-08-24 09:01:32.397490",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 09:01:08.943377",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 09:00:26.742090",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-24 08:20:05.964238",
         "numeroErrores": 3,
         "errores": {
