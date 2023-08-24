@@ -1,5 +1,34 @@
 [
     {
+        "fecha": "2023-08-24 08:20:05.964238",
+        "numeroErrores": 3,
+        "errores": {
+            "\u3046": "u",
+            "\u3042": "a"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 08:19:21.337725",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 08:18:57.030417",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-24 08:18:20.612868",
+        "numeroErrores": 1,
+        "errores": {
+            "i": "\u30a4"
+        },
+        "alfabeto_elegido": false
+    },
+    {
         "fecha": "2023-08-23 22:28:51.211587",
         "numeroErrores": 0,
         "errores": {},

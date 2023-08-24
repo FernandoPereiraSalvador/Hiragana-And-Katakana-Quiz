@@ -5,7 +5,7 @@ import alfabeto.katakana
 import juego
 
 class MenuJuego:
-    def __init__(self):
+    def __init__(self,alfabetoUsado):
         self.decision = None
 
         self.menu = tk.Tk()
@@ -13,7 +13,7 @@ class MenuJuego:
         self.menu.resizable(False, False)
         self.menu.title("Modo")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
-
+        self.alfabeto = alfabetoUsado
         self.crear_interfaz()
 
     def japones_a_español(self):
@@ -25,8 +25,15 @@ class MenuJuego:
         self.menu.destroy()
 
     def crear_interfaz(self):
-        imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesHiragana.png")
-        imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
+        if self.alfabeto:
+            imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesHiragana.png")
+        else:
+            imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesKatakana.png")
+
+        if self.alfabeto:
+            imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
+        else:
+            imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
 
         hiragana_button = tk.Button(
             self.menu,
@@ -126,7 +133,7 @@ class CaracteresSelector:
         juego.jugar(self.caracteres, self.decisionModo, self.decisionAlfabeto)
 
 def main(alfabetoUsado):
-    modo_selector = MenuJuego()
+    modo_selector = MenuJuego(alfabetoUsado)
     caracteres_selector = CaracteresSelector(alfabetoUsado, modo_selector.decision)
 
 if __name__ == "__main__":
