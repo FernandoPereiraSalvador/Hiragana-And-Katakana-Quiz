@@ -32,7 +32,9 @@ class MenuPrincipal:
 
     def mostrar_registro(self):
         # Llamada a función de otro módulo
-        datos.mostrar_grafico_tkinter()
+        self.root.withdraw()
+        datos.mostrar_grafico_tkinter(self.root)
+
 
     def crear_botones(self):
         # Creación del botón para seleccionar Hiragana
@@ -54,7 +56,7 @@ class MenuPrincipal:
         # Creación del botón para mostrar el registro
         registro_button = tk.Button(
             self.root,
-            command=lambda: [self.root.destroy(), self.mostrar_registro()],
+            command=lambda: [self.mostrar_registro()],
             image=self.imagen_registro, width=40, height=40
         )
         registro_button.pack(side=tk.TOP)

@@ -60,8 +60,8 @@ def generar_grafico():
 
     return fig
 
-def mostrar_grafico_tkinter():
-    root = tk.Tk()
+def mostrar_grafico_tkinter(menu_principal):
+    root = tk.Toplevel(menu_principal)
     root.title("Gráfico de Progreso")
     root.geometry("900x550+300+100")
     root.resizable(False, False)
@@ -73,4 +73,8 @@ def mostrar_grafico_tkinter():
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-    root.mainloop()
+    root.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana_registro(root, menu_principal))
+
+def cerrar_ventana_registro(ventana_registro, ventana_principal):
+    ventana_registro.destroy()
+    ventana_principal.deiconify()
