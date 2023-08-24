@@ -24,11 +24,11 @@ class MenuPrincipal:
 
     def decision_hiragana(self):
         # Llamada a función de otro módulo
-        menu_juego.MenuJuego(True)
+        menu_juego.main(True)
 
     def decision_katakana(self):
         # Llamada a función de otro módulo
-        menu_juego.MenuJuego(False)
+        menu_juego.main(False)
 
     def mostrar_registro(self):
         # Llamada a función de otro módulo

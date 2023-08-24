@@ -1,141 +1,133 @@
 import tkinter as tk
 from tkinter import PhotoImage
-
 import alfabeto.hiragana
 import alfabeto.katakana
 import juego
 
+class MenuJuego:
+    def __init__(self):
+        self.decision = None
 
-def MenuJuego(alfabetoUsado):
-    decision = None
+        self.menu = tk.Tk()
+        self.menu.geometry("900x550+300+100")
+        self.menu.resizable(False, False)
+        self.menu.title("Modo")
+        self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-    def japones_a_español():
-        print("Japones a español")
-        nonlocal decision
-        decision = True
+        self.crear_interfaz()
 
-    def español_a_japones():
-        print("Español a japones")
-        nonlocal decision
-        decision = False
+    def japones_a_español(self):
+        self.decision = True
+        self.menu.destroy()
 
-    # Crear la ventana principal
-    menu = tk.Tk()
-    menu.geometry("900x550+300+100")
-    menu.resizable(False, False)
-    menu.title("Modo")
-    menu.iconbitmap("menu_imagenes/icono.ico")
+    def español_a_japones(self):
+        self.decision = False
+        self.menu.destroy()
 
-    # Cargar las imágenes
-    if alfabetoUsado:
+    def crear_interfaz(self):
         imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesHiragana.png")
-    else:
-        imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesKatakana.png")
-
-    if alfabetoUsado:
         imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
-    else:
-        imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
 
-    # Crear los botones
-    hiragana_button = tk.Button(
-        menu,
-        command=lambda: [menu.destroy(), japones_a_español()],
-        width=325, height=325, image=imagen_japones_a_español
-    )
-    hiragana_button.place(x=65, y=50)
+        hiragana_button = tk.Button(
+            self.menu,
+            command=self.japones_a_español,
+            width=325, height=325, image=imagen_japones_a_español
+        )
+        hiragana_button.place(x=65, y=50)
 
-    katakana_button = tk.Button(
-        menu,
-        command=lambda: [menu.destroy(), español_a_japones()],
-        width=325, height=325, image=imagen_español_a_japones
-    )
-    katakana_button.place(x=500, y=50)
+        katakana_button = tk.Button(
+            self.menu,
+            command=self.español_a_japones,
+            width=325, height=325, image=imagen_español_a_japones
+        )
+        katakana_button.place(x=500, y=50)
 
-    # Iniciar el bucle principal de la ventana
-    menu.mainloop()
+        self.menu.mainloop()
 
-    caracteres = seleccionar_caracteres(alfabetoUsado)
-    juego.jugar(caracteres,decision,alfabetoUsado)
+class CaracteresSelector:
+    def __init__(self, decisionAlfabeto, decisionModo):
+        self.opcion_vocales = False
+        self.opcion_basico = False
+        self.opcion_compuesto = False
+        self.opcion_combinado1 = False
+        self.opcion_combinado2 = False
 
+        self.decisionAlfabeto = decisionAlfabeto
+        self.decisionModo = decisionModo
+        self.caracteres = {}
 
-def seleccionar_caracteres(decisionAlfabeto):
-    opcion_vocales = False
-    opcion_basico = False
-    opcion_compuesto = False
-    opcion_combinado1 = False
-    opcion_combinado2 = False
+        self.menu = tk.Tk()
+        self.menu.title("Caracteres")
+        self.menu.geometry("900x550+300+100")
+        self.menu.resizable(False, False)
+        self.menu.title("Menu")
+        self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-    def toggle_opcion(opcion):
-        nonlocal opcion_vocales, opcion_basico, opcion_compuesto, opcion_combinado1, opcion_combinado2
+        self.crear_interfaz()
+
+    def toggle_opcion(self, opcion):
         if opcion == "Vocales":
-            opcion_vocales = not opcion_vocales
+            self.opcion_vocales = not self.opcion_vocales
         if opcion == "Basico":
-            opcion_basico = not opcion_basico
+            self.opcion_basico = not self.opcion_basico
         if opcion == "Compuesto":
-            opcion_compuesto = not opcion_compuesto
+            self.opcion_compuesto = not self.opcion_compuesto
         if opcion == "Combinado 1":
-            opcion_combinado1 = not opcion_combinado1
+            self.opcion_combinado1 = not self.opcion_combinado1
         if opcion == "Combinado 2":
-            opcion_combinado2 = not opcion_combinado2
+            self.opcion_combinado2 = not self.opcion_combinado2
 
-    def continuar():
-        print("Continuar")
-        print(opcion_combinado2)
-        print(opcion_vocales)
-        menu.destroy()
+    def continuar(self):
+        self.menu.destroy()
+        self.seleccionar_caracteres()
 
-    # Crear la ventana principal
-    menu = tk.Tk()
-    menu.title("Caracteres")
-    menu.geometry("900x550+300+100")
-    menu.resizable(False, False)
-    menu.title("Menu")
-    menu.iconbitmap("menu_imagenes/icono.ico")
+    def crear_interfaz(self):
+        opciones_frame = tk.Frame(self.menu)
+        opciones_frame.pack(pady=20)
 
-    # Crear los widgets de las opciones
-    opciones_frame = tk.Frame(menu)
-    opciones_frame.pack(pady=20)
+        opciones = ["Vocales", "Basico", "Compuesto", "Combinado 1", "Combinado 2"]
+        checkbuttons = []
 
-    vocales = tk.Checkbutton(opciones_frame, text="Vocales", command=lambda: toggle_opcion("Vocales"), font=("Arial", 14))
-    basico = tk.Checkbutton(opciones_frame, text="Basico", command=lambda: toggle_opcion("Basico"), font=("Arial", 14))
-    compuesto = tk.Checkbutton(opciones_frame, text="Compuesto", command=lambda: toggle_opcion("Compuesto"), font=("Arial", 14))
-    combinado1 = tk.Checkbutton(opciones_frame, text="Combinado 1", command=lambda: toggle_opcion("Combinado 1"), font=("Arial", 14))
-    combinado2 = tk.Checkbutton(opciones_frame, text="Combinado 2", command=lambda: toggle_opcion("Combinado 2"), font=("Arial", 14))
+        for opcion in opciones:
+            checkbutton = tk.Checkbutton(
+                opciones_frame, text=opcion, command=lambda op=opcion: self.toggle_opcion(op),
+                font=("Arial", 14)
+            )
+            checkbutton.pack(pady=5)
+            checkbuttons.append(checkbutton)
 
-    vocales.pack(pady=5)
-    basico.pack(pady=5)
-    compuesto.pack(pady=5)
-    combinado1.pack(pady=5)
-    combinado2.pack(pady=5)
+        boton_frame = tk.Frame(self.menu)
+        boton_frame.pack(pady=20)
 
-    # Crear el botón de continuar
-    boton_frame = tk.Frame(menu)
-    boton_frame.pack(pady=20)
+        boton_continuar = tk.Button(
+            boton_frame, text="Continuar", command=self.continuar, font=("Arial", 16), padx=20, pady=10
+        )
+        boton_continuar.pack()
 
-    boton_continuar = tk.Button(boton_frame, text="Continuar", command=continuar, font=("Arial", 16), padx=20, pady=10)
-    boton_continuar.pack()
+        self.menu.update_idletasks()
+        self.menu.geometry("900x550+300+100")
+        self.menu.mainloop()
 
-    # Centrar la ventana en la pantalla
-    menu.update_idletasks()
-    menu.geometry("900x550+300+100")
+    def seleccionar_caracteres(self):
+        if self.decisionAlfabeto:
+            caracteres_usados = alfabeto.hiragana
+        else:
+            caracteres_usados = alfabeto.katakana
 
-    # Iniciar el bucle principal de la ventana
-    menu.mainloop()
+        if self.opcion_vocales: self.caracteres |= caracteres_usados.vocales
+        if self.opcion_basico: self.caracteres |= caracteres_usados.basico
+        if self.opcion_compuesto: self.caracteres |= caracteres_usados.compuesto
+        if self.opcion_combinado1: self.caracteres |= caracteres_usados.combinado_1
+        if self.opcion_combinado2: self.caracteres |= caracteres_usados.combinado_2
 
-    caracteres = {}
+        self.iniciar_juego()
 
-    if decisionAlfabeto:
-        if opcion_vocales: caracteres |= alfabeto.hiragana.vocales
-        if opcion_basico: caracteres |= alfabeto.hiragana.basico
-        if opcion_compuesto: caracteres |= alfabeto.hiragana.compuesto
-        if opcion_combinado1: caracteres |= alfabeto.hiragana.combinado_1
-        if opcion_combinado2: caracteres |= alfabeto.hiragana.combinado_2
-    else:
-        if opcion_vocales: caracteres |= alfabeto.katakana.vocales
-        if opcion_basico: caracteres |= alfabeto.katakana.basico
-        if opcion_compuesto: caracteres |= alfabeto.katakana.compuesto
-        if opcion_combinado1: caracteres |= alfabeto.katakana.combinado_1
-        if opcion_combinado2: caracteres |= alfabeto.katakana.combinado_2
+    def iniciar_juego(self):
+        juego.jugar(self.caracteres, self.decisionModo, self.decisionAlfabeto)
 
-    return caracteres
+def main(alfabetoUsado):
+    modo_selector = MenuJuego()
+    caracteres_selector = CaracteresSelector(alfabetoUsado, modo_selector.decision)
+
+if __name__ == "__main__":
+    main()
