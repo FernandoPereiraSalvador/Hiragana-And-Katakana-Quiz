@@ -42,7 +42,7 @@ def japones_a_español(caracteres,alfabeto_elegido):
             salida = "salir"
             caracteres = {}
             menu.destroy()
-            main.menu_principal()
+            main.main()
             breakpoint()
 
         caracter_al_azar = random.choice(list(caracteres.items()))
@@ -105,7 +105,7 @@ def español_a_japones(caracteres,alfabeto_elegido):
             salida = "salir"
             caracteres = {}
             menu.destroy()
-            main.menu_principal()
+            main.main()
             breakpoint()
 
         menu = tk.Tk()
