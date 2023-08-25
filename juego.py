@@ -66,7 +66,12 @@ class Juego:
             sub_btn = tk.Button(self.menu, text="Submit", command=submit)
 
             respuesta_label.place(x=250, y=50)
-            letra_elegida.place(x=300, y=125)
+
+            if len(v) == 1:
+                letra_elegida.place(x=300, y=125)
+            else:
+                letra_elegida.place(x=200, y=125)
+
             respuesta_entry.place(x=335, y=400)
             sub_btn.place(x=400, y=440)
             salida_button.pack()

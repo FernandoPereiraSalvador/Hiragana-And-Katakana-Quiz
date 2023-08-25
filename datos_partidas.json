@@ -1,5 +1,53 @@
 [
     {
+        "fecha": "2023-08-25 08:48:11.110550",
+        "numeroErrores": 2,
+        "errores": {
+            "gya": "\u304e\u3083",
+            "dja": "\u3062\u3083"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:47:53.843867",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:47:06.989051",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:44:56.189782",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:39:05.490464",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:38:49.106790",
+        "numeroErrores": 2,
+        "errores": {
+            "\u306b\u3087": "nyo",
+            "\u308a\u3087": "ryo"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-25 08:38:26.958372",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-24 20:56:27.318887",
         "numeroErrores": 0,
         "errores": {},
