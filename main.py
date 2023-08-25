@@ -18,6 +18,7 @@ class MenuPrincipal:
         self.imagen_hiragana = PhotoImage(file="menu_imagenes/hiragana.png")
         self.imagen_katakana = PhotoImage(file="menu_imagenes/katakana.png")
         self.imagen_registro = PhotoImage(file="menu_imagenes/registro.png")
+        self.configuracion = PhotoImage(file="menu_imagenes/configuracion.png")
 
         # Creación de los botones en la ventana
         self.crear_botones()
@@ -61,7 +62,14 @@ class MenuPrincipal:
             command=lambda: [self.mostrar_registro()],
             image=self.imagen_registro, width=40, height=40
         )
-        registro_button.pack(side=tk.TOP)
+        registro_button.place(x=395, y=0)
+
+        configuracion_button = tk.Button(
+            self.root,
+            # command=self.configuracion,
+            image=self.configuracion,width=40,height=40
+        )
+        configuracion_button.place(x=455, y=0)
 
 
 # Función principal para iniciar la aplicación
