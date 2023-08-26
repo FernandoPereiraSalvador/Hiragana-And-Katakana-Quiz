@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import PhotoImage
+
+import configuracion
 import menu_juego
 import datos
 
@@ -26,17 +28,22 @@ class MenuPrincipal:
     def decision_hiragana(self):
         # Llamada a función de otro módulo
         self.root.withdraw()
-        menu_juego.main(True,self.root)
+        menu_juego.main(True, self.root)
 
     def decision_katakana(self):
         # Llamada a función de otro módulo
         self.root.withdraw()
-        menu_juego.main(False,self.root)
+        menu_juego.main(False, self.root)
 
     def mostrar_registro(self):
         # Llamada a función de otro módulo
         self.root.withdraw()
         datos.mostrar_grafico_tkinter(self.root)
+
+    def abrir_configuracion(self):
+        self.root.withdraw()
+        configuracion.main(self.root)
+
 
 
     def crear_botones(self):
@@ -66,8 +73,8 @@ class MenuPrincipal:
 
         configuracion_button = tk.Button(
             self.root,
-            # command=self.configuracion,
-            image=self.configuracion,width=40,height=40
+            command=lambda: [self.abrir_configuracion()],
+            image=self.configuracion, width=40, height=40
         )
         configuracion_button.place(x=455, y=0)
 

@@ -1,10 +1,12 @@
 import tkinter as tk
+from datetime import datetime
 from tkinter import messagebox
 import random
 import datos
 
+
 class Juego:
-    def __init__(self,menu_principal):
+    def __init__(self, menu_principal):
         self.numeroErrores = 0
         self.errores = {}
         self.salida = True
@@ -16,7 +18,7 @@ class Juego:
         self.menu.destroy()
         self.menu_principal.deiconify()
 
-    def jugar(self, caracteres, modoJuego, alfabeto_elegido,menu_principal):
+    def jugar(self, caracteres, modoJuego, alfabeto_elegido, menu_principal):
         self.keys = list(caracteres.keys())
         self.index = 0
 
@@ -27,19 +29,20 @@ class Juego:
             self.index += 1
 
         if modoJuego:
-            self.japones_a_español(caracteres, alfabeto_elegido,menu_principal)
+            self.japones_a_español(caracteres, alfabeto_elegido, menu_principal)
         else:
-            self.español_a_japones(caracteres, alfabeto_elegido,menu_principal)
+            self.español_a_japones(caracteres, alfabeto_elegido, menu_principal)
 
-    def japones_a_español(self, caracteres, alfabeto_elegido,menu_principal):
-        while caracteres and self.salida:
+    def japones_a_español(self, caracteres, alfabeto_elegido, menu_principal):
+        caracteres_copia = caracteres.copy()
+        while caracteres_copia and self.salida:
             self.menu = tk.Toplevel(menu_principal)
             self.menu.geometry("900x550+300+100")
             self.menu.resizable(False, False)
             self.menu.title("Japones")
             self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-            caracter_al_azar = random.choice(list(caracteres.items()))
+            caracter_al_azar = random.choice(list(caracteres_copia.items()))
             v = caracter_al_azar[1]
             e = caracter_al_azar[0]
 
@@ -49,7 +52,7 @@ class Juego:
                 respuesta = respuesta_var.get()
 
                 if respuesta == e:
-                    del caracteres[e]
+                    del caracteres_copia[e]
                     self.menu.withdraw()
                 else:
                     ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
@@ -78,11 +81,13 @@ class Juego:
 
             self.menu.wait_window()
 
+        if self.salida:
+            datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
+            self.repetir(caracteres, alfabeto_elegido, menu_principal, True, self.numeroErrores)
 
-        datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
-
-    def español_a_japones(self, caracteres, alfabeto_elegido,menu_principal):
+    def español_a_japones(self, caracteres, alfabeto_elegido, menu_principal):
         respuesta = None
+        caracteres_copia = caracteres.copy()
 
         while caracteres and self.salida:
             self.menu = tk.Toplevel(menu_principal)
@@ -91,9 +96,11 @@ class Juego:
             self.menu.title("Japones")
             self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-            opciones_posibles = self.generar_opciones(caracteres)
+            opciones_posibles = self.generar_opciones(caracteres_copia,caracteres)
 
-            opcion_escogida = opciones_posibles[0]
+            opcion_escogida = random.choice(opciones_posibles)
+            while opcion_escogida[0] not in caracteres:
+                opcion_escogida = random.choice(opciones_posibles)
 
             def respuesta_comprobar():
                 e = opcion_escogida[1]
@@ -133,24 +140,65 @@ class Juego:
             salida_button.pack()
             self.menu.wait_window()
 
-        datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
+        if self:
+            datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
+            self.repetir(caracteres, alfabeto_elegido, menu_principal, False, self.numeroErrores)
 
-    def generar_opciones(self, caracteres):
-        copia_caracteres_juego = caracteres.copy()
+    def generar_opciones(self, caracteres_copia, caracteres_originales):
         opciones_posibles = []
 
-        while len(opciones_posibles) < 3:
-            opcion_key = random.choice(list(copia_caracteres_juego.keys()))
-            opcion_value = copia_caracteres_juego[opcion_key]
-            opciones_posibles.append((opcion_key, opcion_value))
-            del copia_caracteres_juego[opcion_key]
+        # Elegir un valor al azar de caracteres originales
+        opcion_original = random.choice(list(caracteres_originales.items()))
 
+        # Elegir dos valores al azar de caracteres copia que sean diferentes de la opción original
+        opciones_copia = random.sample([item for item in caracteres_copia.items() if item != opcion_original], 2)
+
+        opciones_posibles.extend(opciones_copia)
+        opciones_posibles.append(opcion_original)
+
+        # Mezclar las opciones
         random.shuffle(opciones_posibles)
-        return opciones_posibles
 
-def main(caracteres, modoJuego, alfabeto_elegido,menu_principal):
+        return opciones_posibles
+    def repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores):
+        self.menu = tk.Toplevel(menu_principal)
+        self.menu.geometry("900x550+300+100")
+        self.menu.resizable(False, False)
+        self.menu.title("¿Quieres repetir?")
+        self.menu.iconbitmap("menu_imagenes/icono.ico")
+
+        # Agregar los botones "Sí" y "No"
+        boton_si = tk.Button(self.menu, text="Sí", command=lambda: self.repetir_si(caracteres,alfabeto_elegido,menu_principal,modo))
+        boton_si.pack(pady=20)
+        boton_no = tk.Button(self.menu, text="No", command=lambda: self.repetir_no(menu_principal))
+        boton_no.pack()
+
+        # Mostrar número de errores
+        errores_label = tk.Label(self.menu, text="Número de errores: " + str(numero_errores))
+        errores_label.pack(pady=10)
+
+        # Mostrar la fecha actual
+        fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        fecha_label = tk.Label(self.menu, text="Fecha actual: " + fecha_actual)
+        fecha_label.pack(pady=10)
+
+    def repetir_si(self, caracteres, alfabeto_elegido, menu_principal, modo):
+        if modo:
+            self.menu.destroy()
+            self.japones_a_español(caracteres, alfabeto_elegido, menu_principal)
+        else:
+            self.menu.destroy()
+            self.español_a_japones(caracteres, alfabeto_elegido, menu_principal)
+
+    def repetir_no(self, menu_principal):
+        self.menu.destroy()
+        menu_principal.deiconify()
+
+
+def main(caracteres, modoJuego, alfabeto_elegido, menu_principal):
     juego = Juego(menu_principal)
-    juego.jugar(caracteres, modoJuego, alfabeto_elegido,menu_principal)
+    juego.jugar(caracteres, modoJuego, alfabeto_elegido, menu_principal)
+
 
 if __name__ == "__main__":
     caracteres = {...}  # Define your character dictionary here

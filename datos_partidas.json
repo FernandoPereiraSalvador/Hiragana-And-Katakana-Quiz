@@ -1,651 +1,70 @@
 [
     {
-        "fecha": "2023-08-25 08:48:11.110550",
-        "numeroErrores": 2,
-        "errores": {
-            "gya": "\u304e\u3083",
-            "dja": "\u3062\u3083"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-25 08:47:53.843867",
+        "fecha": "2023-08-26 19:41:09.005027",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-25 08:47:06.989051",
+        "fecha": "2023-08-26 19:37:17.925154",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-25 08:44:56.189782",
+        "fecha": "2023-08-26 19:26:32.290170",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-25 08:39:05.490464",
+        "fecha": "2023-08-26 19:15:18.857240",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-25 08:38:49.106790",
-        "numeroErrores": 2,
-        "errores": {
-            "\u306b\u3087": "nyo",
-            "\u308a\u3087": "ryo"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-25 08:38:26.958372",
+        "fecha": "2023-08-26 18:59:47.235239",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:56:27.318887",
+        "fecha": "2023-08-26 18:58:31.115511",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:56:18.510344",
+        "fecha": "2023-08-26 18:55:31.653492",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:53:57.323753",
+        "fecha": "2023-08-26 18:50:07.548299",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:53:52.048685",
+        "fecha": "2023-08-26 18:49:50.368564",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:53:45.414896",
+        "fecha": "2023-08-26 18:45:41.123462",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
     },
     {
-        "fecha": "2023-08-24 20:47:22.048280",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:47:10.202303",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:45:15.423702",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:43:27.630179",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:43:06.617645",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:35:05.372097",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:33:46.423858",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:25:02.355167",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:24:56.607197",
+        "fecha": "2023-08-26 18:35:05.305146",
         "numeroErrores": 1,
         "errores": {
             "a": "\u3042"
         },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:24:26.235122",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:24:23.311118",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:22:17.702442",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:22:13.785019",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:20:31.430527",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:19:12.842243",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:18:04.361532",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:17:17.398245",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:11:55.949800",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 20:07:14.569432",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 19:56:34.009799",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 19:55:28.556767",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 19:54:20.859449",
-        "numeroErrores": 1,
-        "errores": {
-            "e": "\u3048"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 17:28:02.756795",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 09:01:32.397490",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 09:01:08.943377",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 09:00:26.742090",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 08:20:05.964238",
-        "numeroErrores": 3,
-        "errores": {
-            "\u3046": "u",
-            "\u3042": "a"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 08:19:21.337725",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 08:18:57.030417",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-24 08:18:20.612868",
-        "numeroErrores": 1,
-        "errores": {
-            "i": "\u30a4"
-        },
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-23 22:28:51.211587",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 22:23:32.475690",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-23 22:21:30.863620",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-23 22:21:26.207010",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-23 22:04:03.966032",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-23 21:58:41.942991",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 21:58:29.509336",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 21:56:33.667744",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 21:50:00.000718",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 21:49:28.187862",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 21:45:09.774259",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 14:44:09.439583",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 14:39:57.620374",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-23 14:39:19.192681",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-22 23:24:56.587889",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-22 22:52:12.524114",
-        "numeroErrores": 3,
-        "errores": {
-            "e": "\u30a8",
-            "o": "\u30aa",
-            "a": "\u30a2"
-        },
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-22 16:51:56.653039",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-22 16:50:56.152372",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-22 16:49:57.360384",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:11:28.576620",
-        "numeroErrores": 3,
-        "errores": {
-            "\u30a2": "a",
-            "\u30a4": "i",
-            "\u30aa": "o"
-        },
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:10:14.283204",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:13.552848",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:12.647385",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:11.622060",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:10.134188",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:08.946440",
-        "numeroErrores": 5,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:07.285496",
-        "numeroErrores": 4,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e",
-            "\u304a": "o"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:05.688806",
-        "numeroErrores": 3,
-        "errores": {
-            "\u3046": "u",
-            "\u3048": "e"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:10:03.658725",
-        "numeroErrores": 2,
-        "errores": {
-            "\u3046": "u"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:09:59.924446",
-        "numeroErrores": 1,
-        "errores": {
-            "\u3046": "u"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:06:39.868721",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:06:38.978771",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:06:37.897480",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:06:35.292325",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:06:33.700360",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:06:31.543723",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-21 20:05:55.243148",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:54.243938",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:52.302613",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:51.057141",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:48.750799",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:47.829058",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:45.473007",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:43.336797",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:27.497048",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:26.195747",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:24.720281",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:22.951281",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:20.881571",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:04.556660",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:03.134861",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:01.869847",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:05:00.419261",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 20:04:54.663425",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-21 19:54:56.959298",
-        "numeroErrores": 3,
-        "errores": {
-            "i": "\u3044",
-            "a": "\u3042"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-20 17:35:39.783168",
-        "numeroErrores": 0,
-        "errores": {},
         "alfabeto_elegido": true
     }
 ]
