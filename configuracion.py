@@ -3,6 +3,7 @@ import webbrowser
 from tkinter import messagebox
 from datos import borrar_datos
 
+
 class Configuracion:
     def __init__(self, root, menu_principal):
         # Inicialización de la ventana principal
@@ -34,10 +35,9 @@ class Configuracion:
         confirmacion = messagebox.askyesno("Confirmación", "¿Estás seguro de borrar los datos de progreso?")
         if confirmacion:
             self.borrar_progreso()
-        else:
-            print("Cancelado")
 
-    def borrar_progreso(self):
+    @staticmethod
+    def borrar_progreso():
         borrar_datos()
         messagebox.showinfo("Borrado Exitoso", "Datos de progreso borrados exitosamente.")
 
@@ -45,9 +45,11 @@ class Configuracion:
         self.menu_principal.deiconify()  # Vuelve a mostrar la ventana principal
         self.root.destroy()  # Cierra la ventana de configuración
 
-    def abrir_repositorio(self):
+    @staticmethod
+    def abrir_repositorio():
         url = "https://www.google.com"
         webbrowser.open(url)
+
 
 def main(menu_principal):
     root = tk.Toplevel(menu_principal)

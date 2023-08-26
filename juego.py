@@ -3,10 +3,12 @@ from datetime import datetime
 from tkinter import messagebox
 import random
 import datos
+from custom_message_box import custom_message_box
 
 
 class Juego:
     def __init__(self, menu_principal):
+        self.menu = None
         self.numeroErrores = 0
         self.errores = {}
         self.salida = True
@@ -14,26 +16,22 @@ class Juego:
 
     def boton_salida(self):
         self.salida = False
-        self.caracteres = {}
         self.menu.destroy()
         self.menu_principal.deiconify()
 
-    def jugar(self, caracteres, modoJuego, alfabeto_elegido, menu_principal):
-        self.keys = list(caracteres.keys())
-        self.index = 0
+    def jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal):
+        keys = list(caracteres.keys())
+        index = 0
 
-        while self.index < len(self.keys):
-            key = self.keys[self.index]
-            value = caracteres[key]
-            print(key, ":", value)
-            self.index += 1
+        while index < len(keys):
+            index += 1
 
-        if modoJuego:
-            self.japones_a_español(caracteres, alfabeto_elegido, menu_principal)
+        if modo_juego:
+            self.japones_a_espanol(caracteres, alfabeto_elegido, menu_principal)
         else:
-            self.español_a_japones(caracteres, alfabeto_elegido, menu_principal)
+            self.espanol_a_japones(caracteres, alfabeto_elegido, menu_principal)
 
-    def japones_a_español(self, caracteres, alfabeto_elegido, menu_principal):
+    def japones_a_espanol(self, caracteres, alfabeto_elegido, menu_principal):
         caracteres_copia = caracteres.copy()
         while caracteres_copia and self.salida:
             self.menu = tk.Toplevel(menu_principal)
@@ -55,7 +53,7 @@ class Juego:
                     del caracteres_copia[e]
                     self.menu.withdraw()
                 else:
-                    ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
+                    messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
                     self.numeroErrores += 1
                     self.errores[e] = v
 
@@ -83,9 +81,9 @@ class Juego:
 
         if self.salida:
             datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
-            self.repetir(caracteres, alfabeto_elegido, menu_principal, True, self.numeroErrores)
+            self.repetir(caracteres, alfabeto_elegido, menu_principal, True, self.numeroErrores, self.errores)
 
-    def español_a_japones(self, caracteres, alfabeto_elegido, menu_principal):
+    def espanol_a_japones(self, caracteres, alfabeto_elegido, menu_principal):
         respuesta = None
         caracteres_copia = caracteres.copy()
 
@@ -96,7 +94,7 @@ class Juego:
             self.menu.title("Japones")
             self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-            opciones_posibles = self.generar_opciones(caracteres_copia,caracteres)
+            opciones_posibles = self.generar_opciones(caracteres_copia, caracteres)
 
             opcion_escogida = random.choice(opciones_posibles)
             while opcion_escogida[0] not in caracteres:
@@ -106,17 +104,16 @@ class Juego:
                 e = opcion_escogida[1]
                 v = opcion_escogida[0]
                 if respuesta == opcion_escogida:
-                    e = opcion_escogida[1]
                     del caracteres[v]
                 else:
-                    ventana_error = messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
+                    messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
                     self.numeroErrores += 1
                     self.errores[e] = v
                 self.menu.destroy()
 
-            def opcion_eleccion(opcion):
+            def opcion_eleccion(eleccion):
                 nonlocal respuesta
-                respuesta = opcion
+                respuesta = eleccion
                 respuesta_comprobar()
 
             titulo_label = tk.Label(self.menu, text=f"Introduce el caracter correcto", font=("Arial", 20))
@@ -140,11 +137,12 @@ class Juego:
             salida_button.pack()
             self.menu.wait_window()
 
-        if self:
+        if self.salida:
             datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
-            self.repetir(caracteres, alfabeto_elegido, menu_principal, False, self.numeroErrores)
+            self.repetir(caracteres_copia, alfabeto_elegido, menu_principal, False, self.numeroErrores, self.errores)
 
-    def generar_opciones(self, caracteres_copia, caracteres_originales):
+    @staticmethod
+    def generar_opciones(caracteres_copia, caracteres_originales):
         opciones_posibles = []
 
         # Elegir un valor al azar de caracteres originales
@@ -160,48 +158,66 @@ class Juego:
         random.shuffle(opciones_posibles)
 
         return opciones_posibles
-    def repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores):
+
+    def repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores, errores):
         self.menu = tk.Toplevel(menu_principal)
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
         self.menu.title("¿Quieres repetir?")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-        # Agregar los botones "Sí" y "No"
-        boton_si = tk.Button(self.menu, text="Sí", command=lambda: self.repetir_si(caracteres,alfabeto_elegido,menu_principal,modo))
-        boton_si.pack(pady=20)
-        boton_no = tk.Button(self.menu, text="No", command=lambda: self.repetir_no(menu_principal))
-        boton_no.pack()
+        # Agregar texto "¿Quieres repetir?" arriba del contenido con un tamaño de fuente más grande
+        titulo_label = tk.Label(self.menu, text="¿Quieres repetir?", font=("Helvetica", 20))
+        titulo_label.pack(pady=30)
 
-        # Mostrar número de errores
-        errores_label = tk.Label(self.menu, text="Número de errores: " + str(numero_errores))
-        errores_label.pack(pady=10)
+        # Colocar los botones "Sí" y "No" en el centro uno al lado del otro
+        botones_frame = tk.Frame(self.menu)
+        botones_frame.pack()
 
-        # Mostrar la fecha actual
+        boton_si = tk.Button(botones_frame, text="Sí", width=15, height=2,
+                             command=lambda: self.repetir_si(caracteres, alfabeto_elegido, menu_principal, modo),
+                             font=("Helvetica", 14))
+        boton_si.pack(side="left", padx=20)
+
+        boton_no = tk.Button(botones_frame, text="No", width=15, height=2,
+                             command=lambda: self.repetir_no(menu_principal),
+                             font=("Helvetica", 14))
+        boton_no.pack(side="right", padx=20)
+
+        # Mostrar número de errores en un tamaño de fuente más grande
+        errores_label = tk.Label(self.menu, text="Número de errores: " + str(numero_errores), font=("Helvetica", 16))
+        errores_label.pack(pady=15)
+
+        # Mostrar la fecha actual en un tamaño de fuente más grande
         fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        fecha_label = tk.Label(self.menu, text="Fecha actual: " + fecha_actual)
-        fecha_label.pack(pady=10)
+        fecha_label = tk.Label(self.menu, text="Fecha actual: " + fecha_actual, font=("Helvetica", 16))
+        fecha_label.pack(pady=15)
 
-    def repetir_si(self, caracteres, alfabeto_elegido, menu_principal, modo):
+        # Agregar botón para ver los errores en forma de cuadro de mensaje
+        def ver_errores():
+            if not errores:
+                custom_message_box("Errores", "No hay errores", 16)
+            else:
+                mensaje_errores = "\n".join([f"{clave}: {valor}" for clave, valor in errores.items()])
+                custom_message_box("Errores", mensaje_errores, 16)
+
+        boton_errores = tk.Button(self.menu, text="Ver Errores", width=20, height=2,
+                                  command=ver_errores, font=("Helvetica", 14))
+        boton_errores.pack(pady=30)
+
+    def repetir_si(self, letras, alfabeto, menu_principal, modo):
         if modo:
             self.menu.destroy()
-            self.japones_a_español(caracteres, alfabeto_elegido, menu_principal)
+            self.japones_a_espanol(letras, alfabeto, menu_principal)
         else:
             self.menu.destroy()
-            self.español_a_japones(caracteres, alfabeto_elegido, menu_principal)
+            self.espanol_a_japones(letras, alfabeto, menu_principal)
 
     def repetir_no(self, menu_principal):
         self.menu.destroy()
         menu_principal.deiconify()
 
 
-def main(caracteres, modoJuego, alfabeto_elegido, menu_principal):
+def main(letras, modo_juego, alfabeto, menu_principal):
     juego = Juego(menu_principal)
-    juego.jugar(caracteres, modoJuego, alfabeto_elegido, menu_principal)
-
-
-if __name__ == "__main__":
-    caracteres = {...}  # Define your character dictionary here
-    modoJuego = True  # Set to True or False based on game mode
-    alfabeto_elegido = "hiragana"  # Set the alphabet choice
-    main(caracteres, modoJuego, alfabeto_elegido)
+    juego.jugar(letras, modo_juego, alfabeto, menu_principal)

@@ -4,56 +4,57 @@ import alfabeto.hiragana
 import alfabeto.katakana
 import juego
 
+
 class MenuJuego:
-    def __init__(self,alfabetoUsado,menu_principal):
+    def __init__(self, alfabeto_usado, menu_principal):
         self.decision = None
         self.menu_principal = menu_principal
 
         self.menu = tk.Toplevel(menu_principal)
 
-        if alfabetoUsado:
-            self.imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesHiragana.png")
-            self.imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
+        if alfabeto_usado:
+            self.imagen_japones_a_espanol = PhotoImage(file="menu_imagenes/japonesHiragana.png")
+            self.imagen_espanol_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
         else:
-            self.imagen_japones_a_español = PhotoImage(file="menu_imagenes/japonesKatakana.png")
-            self.imagen_español_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
+            self.imagen_japones_a_espanol = PhotoImage(file="menu_imagenes/japonesKatakana.png")
+            self.imagen_espanol_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
 
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
         self.menu.title("Modo")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
-        self.alfabeto = alfabetoUsado
+        self.alfabeto = alfabeto_usado
         self.crear_interfaz()
 
-    def japones_a_español(self):
+    def japones_a_espanol(self):
         self.decision = True
         self.menu.destroy()
-        caracteres_selector = CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
+        CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
 
-    def español_a_japones(self):
+    def espanol_a_japones(self):
         self.decision = False
         self.menu.destroy()
-        caracteres_selector = CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
+        CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
 
     def crear_interfaz(self):
 
         hiragana_button = tk.Button(
             self.menu,
-            command=self.japones_a_español,
-            width=325, height=325, image=self.imagen_japones_a_español
+            command=self.japones_a_espanol,
+            width=325, height=325, image=self.imagen_japones_a_espanol
         )
         hiragana_button.place(x=65, y=50)
 
         katakana_button = tk.Button(
             self.menu,
-            command=self.español_a_japones,
-            width=325, height=325, image=self.imagen_español_a_japones
+            command=self.espanol_a_japones,
+            width=325, height=325, image=self.imagen_espanol_a_japones
         )
         katakana_button.place(x=500, y=50)
 
 
 class CaracteresSelector:
-    def __init__(self, decisionAlfabeto, decisionModo,menu_principal):
+    def __init__(self, decision_alfabeto, decision_modo, menu_principal):
         self.opcion_vocales = False
         self.opcion_basico = False
         self.opcion_compuesto = False
@@ -68,8 +69,8 @@ class CaracteresSelector:
 
         self.menu_principal = menu_principal
 
-        self.decisionAlfabeto = decisionAlfabeto
-        self.decisionModo = decisionModo
+        self.decisionAlfabeto = decision_alfabeto
+        self.decisionModo = decision_modo
         self.caracteres = {}
 
         self.menu = tk.Toplevel(menu_principal)
@@ -114,7 +115,7 @@ class CaracteresSelector:
         for opcion, var in opciones:
             checkbutton = tk.Checkbutton(
                 opciones_frame, text=opcion, command=lambda op=opcion: self.toggle_opcion(op),
-                font=("Arial", 14),variable=var
+                font=("Arial", 14), variable=var
             )
             checkbutton.pack(pady=5)
             checkbuttons.append(checkbutton)
@@ -135,23 +136,23 @@ class CaracteresSelector:
         else:
             caracteres_usados = alfabeto.katakana
 
-        if self.opcion_vocales: self.caracteres |= caracteres_usados.vocales
-        if self.opcion_basico: self.caracteres |= caracteres_usados.basico
-        if self.opcion_compuesto: self.caracteres |= caracteres_usados.compuesto
-        if self.opcion_combinado1: self.caracteres |= caracteres_usados.combinado_1
-        if self.opcion_combinado2: self.caracteres |= caracteres_usados.combinado_2
+        if self.opcion_vocales:
+            self.caracteres |= caracteres_usados.vocales
+        if self.opcion_basico:
+            self.caracteres |= caracteres_usados.basico
+        if self.opcion_compuesto:
+            self.caracteres |= caracteres_usados.compuesto
+        if self.opcion_combinado1:
+            self.caracteres |= caracteres_usados.combinado_1
+        if self.opcion_combinado2:
+            self.caracteres |= caracteres_usados.combinado_2
 
         self.iniciar_juego()
 
     def iniciar_juego(self):
         self.menu.destroy()
-        juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto,self.menu_principal)
-
-def main(alfabetoUsado,menu_principal):
-    modo_selector = MenuJuego(alfabetoUsado,menu_principal)
+        juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto, self.menu_principal)
 
 
-if __name__ == "__main__":
-    main()
-else:
-    print("error")
+def main(alfabeto_usado, menu_principal):
+    MenuJuego(alfabeto_usado, menu_principal)

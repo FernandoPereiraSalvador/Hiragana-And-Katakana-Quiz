@@ -1,9 +1,9 @@
 import tkinter as tk
-from tkinter import PhotoImage
+from tkinter import PhotoImage, messagebox
 
 import configuracion
-import menu_juego
 import datos
+import menu_juego
 
 
 # Definición de la clase MenuPrincipal
@@ -44,8 +44,6 @@ class MenuPrincipal:
         self.root.withdraw()
         configuracion.main(self.root)
 
-
-
     def crear_botones(self):
         # Creación del botón para seleccionar Hiragana
         hiragana_button = tk.Button(
@@ -85,7 +83,7 @@ def main():
     root = tk.Tk()
 
     # Crear una instancia de la clase MenuPrincipal
-    menu = MenuPrincipal(root)
+    MenuPrincipal(root)
 
     # Iniciar el bucle principal de la aplicación
     root.mainloop()
@@ -93,8 +91,7 @@ def main():
 
 # Verificar si este módulo es el programa principal
 if __name__ == "__main__":
-    # Llamar a la función principal
-    main()
-else:
-    # En caso de que el módulo sea importado
-    print("Error")
+    try:
+        main()
+    except Exception as e:
+        messagebox.showinfo("Error", "No se ha podido iniciar el programa. Intentelo de nuevo.\nError: " + str(e))
