@@ -14,11 +14,6 @@ class Juego:
         self.salida = True
         self.menu_principal = menu_principal
 
-    def boton_salida(self):
-        self.salida = False
-        self.menu.destroy()
-        self.menu_principal.deiconify()
-
     def jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal):
         keys = list(caracteres.keys())
         index = 0
@@ -35,6 +30,7 @@ class Juego:
         caracteres_copia = caracteres.copy()
         while caracteres_copia and self.salida:
             self.menu = tk.Toplevel(menu_principal)
+            self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
             self.menu.geometry("900x550+300+100")
             self.menu.resizable(False, False)
             self.menu.title("Japones")
@@ -63,7 +59,6 @@ class Juego:
             respuesta_label = tk.Label(self.menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
             letra_elegida = tk.Label(self.menu, text=f"{v}", font=("Arial", 175))
             respuesta_entry = tk.Entry(self.menu, textvariable=respuesta_var, width=30)
-            salida_button = tk.Button(self.menu, text="Salir", command=self.boton_salida)
             sub_btn = tk.Button(self.menu, text="Submit", command=submit)
 
             respuesta_label.place(x=250, y=50)
@@ -75,7 +70,6 @@ class Juego:
 
             respuesta_entry.place(x=335, y=400)
             sub_btn.place(x=400, y=440)
-            salida_button.pack()
 
             self.menu.wait_window()
 
@@ -90,6 +84,7 @@ class Juego:
 
         while caracteres and self.salida:
             self.menu = tk.Toplevel(menu_principal)
+            self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
             self.menu.geometry("900x550+300+100")
             self.menu.resizable(False, False)
             self.menu.title("Japones")
@@ -126,8 +121,6 @@ class Juego:
                                    command=lambda o=opcion: opcion_eleccion(o))
                 opcion_buttons.append(button)
 
-            salida_button = tk.Button(self.menu, text="Salir", command=self.boton_salida)
-
             titulo_label.place(x=275, y=50)
             opcion_escogida_label.place(x=425, y=125)
 
@@ -135,7 +128,6 @@ class Juego:
             for i in range(3):
                 opcion_buttons[i].place(x=x_positions[i], y=250)
 
-            salida_button.pack()
             self.menu.wait_window()
 
         if self.salida:
@@ -218,6 +210,12 @@ class Juego:
     def repetir_no(self, menu_principal):
         self.menu.destroy()
         menu_principal.deiconify()
+
+    def cerrar_ventana(self):
+        self.salida = False
+        self.menu.withdraw()
+        self.menu.destroy()
+        self.menu_principal.deiconify()
 
 
 def main(letras, modo_juego, alfabeto, menu_principal):

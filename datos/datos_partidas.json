@@ -1,5 +1,11 @@
 [
     {
+        "fecha": "2023-08-26 22:49:02.197016",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-26 22:10:23.356561",
         "numeroErrores": 3,
         "errores": {

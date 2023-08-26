@@ -20,6 +20,7 @@ class MenuJuego:
             self.imagen_espanol_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
 
         self.menu.geometry("900x550+300+100")
+        self.menu.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana(self.menu, self.menu_principal))
         self.menu.resizable(False, False)
         self.menu.title("Modo")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
@@ -75,6 +76,7 @@ class CaracteresSelector:
 
         self.menu = tk.Toplevel(menu_principal)
         self.menu.title("Caracteres")
+        self.menu.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana(self.menu, self.menu_principal))
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
         self.menu.title("Menu")
@@ -152,6 +154,12 @@ class CaracteresSelector:
     def iniciar_juego(self):
         self.menu.destroy()
         juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto, self.menu_principal)
+
+
+def cerrar_ventana(menu, menu_principal):
+    menu.withdraw()
+    menu.destroy()
+    menu_principal.deiconify()
 
 
 def main(alfabeto_usado, menu_principal):
