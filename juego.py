@@ -2,7 +2,7 @@ import tkinter as tk
 from datetime import datetime
 from tkinter import messagebox
 import random
-import datos
+from datos import GestionDatos
 from custom_message_box import custom_message_box
 
 
@@ -80,6 +80,7 @@ class Juego:
             self.menu.wait_window()
 
         if self.salida:
+            datos = GestionDatos()
             datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
             self.repetir(caracteres, alfabeto_elegido, menu_principal, True, self.numeroErrores, self.errores)
 
@@ -138,6 +139,7 @@ class Juego:
             self.menu.wait_window()
 
         if self.salida:
+            datos = GestionDatos()
             datos.guardar(self.numeroErrores, self.errores, alfabeto_elegido)
             self.repetir(caracteres_copia, alfabeto_elegido, menu_principal, False, self.numeroErrores, self.errores)
 

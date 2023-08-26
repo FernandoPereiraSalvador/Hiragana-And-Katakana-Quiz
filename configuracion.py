@@ -1,7 +1,7 @@
 import tkinter as tk
 import webbrowser
 from tkinter import messagebox
-from datos import borrar_datos
+from datos import GestionDatos
 
 
 class Configuracion:
@@ -38,7 +38,8 @@ class Configuracion:
 
     @staticmethod
     def borrar_progreso():
-        borrar_datos()
+        borrar = GestionDatos()
+        borrar.borrar_datos()
         messagebox.showinfo("Borrado Exitoso", "Datos de progreso borrados exitosamente.")
 
     def cerrar_ventana(self):

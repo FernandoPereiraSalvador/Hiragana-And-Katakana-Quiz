@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import PhotoImage, messagebox
 
 import configuracion
-import datos
+from datos import GestionDatos
 import menu_juego
 
 
@@ -38,7 +38,8 @@ class MenuPrincipal:
     def mostrar_registro(self):
         # Llamada a función de otro módulo
         self.root.withdraw()
-        datos.mostrar_grafico_tkinter(self.root)
+        registro = GestionDatos()
+        registro.mostrar_grafico_tkinter(self.root)
 
     def abrir_configuracion(self):
         self.root.withdraw()
