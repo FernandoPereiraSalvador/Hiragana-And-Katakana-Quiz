@@ -59,7 +59,7 @@ class Juego:
             respuesta_label = tk.Label(self.menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
             letra_elegida = tk.Label(self.menu, text=f"{v}", font=("Arial", 175))
             respuesta_entry = tk.Entry(self.menu, textvariable=respuesta_var, width=30)
-            sub_btn = tk.Button(self.menu, text="Submit", command=submit)
+            sub_btn = tk.Button(self.menu, text="Continuar", command=submit)
 
             respuesta_label.place(x=250, y=50)
 

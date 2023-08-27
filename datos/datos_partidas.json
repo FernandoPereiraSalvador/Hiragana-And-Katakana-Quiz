@@ -1,5 +1,37 @@
 [
     {
+        "fecha": "2023-08-26 23:20:35.688859",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-26 23:17:47.383305",
+        "numeroErrores": 0,
+        "errores": {},
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-26 23:17:03.318638",
+        "numeroErrores": 13,
+        "errores": {
+            "u": "\u3046",
+            "i": "\u3044",
+            "o": "\u304a",
+            "e": "\u3048"
+        },
+        "alfabeto_elegido": true
+    },
+    {
+        "fecha": "2023-08-26 23:14:45.916332",
+        "numeroErrores": 3,
+        "errores": {
+            "u": "\u3046",
+            "i": "\u3044"
+        },
+        "alfabeto_elegido": true
+    },
+    {
         "fecha": "2023-08-26 22:49:02.197016",
         "numeroErrores": 0,
         "errores": {},

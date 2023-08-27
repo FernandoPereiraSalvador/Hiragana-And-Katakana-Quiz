@@ -82,7 +82,7 @@ class CaracteresSelector:
         self.menu.title("Menu")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
 
-        self.crear_interfaz()
+        self.crear_interfaz(decision_alfabeto)
 
     def toggle_opcion(self, opcion):
         if opcion == "Vocales":
@@ -100,25 +100,42 @@ class CaracteresSelector:
         self.menu.withdraw()
         self.seleccionar_caracteres()
 
-    def crear_interfaz(self):
+    def crear_interfaz(self, alfabeto_usado):
         opciones_frame = tk.Frame(self.menu)
         opciones_frame.pack(pady=20)
 
+        print(alfabeto.hiragana.vocales)
+
+        if alfabeto_usado:
+            vocales = alfabeto.hiragana.vocales
+            basico = alfabeto.hiragana.basico
+            compuesto = alfabeto.hiragana.compuesto
+            combinado_1 = alfabeto.hiragana.combinado_1
+            combinado_2 = alfabeto.hiragana.combinado_2
+        else:
+            vocales = alfabeto.hiragana.vocales
+            basico = alfabeto.hiragana.basico
+            compuesto = alfabeto.hiragana.compuesto
+            combinado_1 = alfabeto.hiragana.combinado_1
+            combinado_2 = alfabeto.hiragana.combinado_2
+
         opciones = [
-            ("Vocales", self.opcion_vocales_var),
-            ("Basico", self.opcion_basico_var),
-            ("Compuesto", self.opcion_compuesto_var),
-            ("Combinado 1", self.opcion_combinado1_var),
-            ("Combinado 2", self.opcion_combinado2_var)
+            ("Vocales", self.opcion_vocales_var, vocales),
+            ("Basico", self.opcion_basico_var, basico),
+            ("Compuesto", self.opcion_compuesto_var, compuesto),
+            ("Combinado 1", self.opcion_combinado1_var, combinado_1),
+            ("Combinado 2", self.opcion_combinado2_var, combinado_2)
         ]
 
         checkbuttons = []
 
-        for opcion, var in opciones:
+        for opcion, var, tooltip_text in opciones:
             checkbutton = tk.Checkbutton(
                 opciones_frame, text=opcion, command=lambda op=opcion: self.toggle_opcion(op),
                 font=("Arial", 14), variable=var
             )
+            checkbutton.bind("<Enter>", lambda event, text=tooltip_text: self.mostrar_tooltip(checkbutton, text))
+            checkbutton.bind("<Leave>", lambda event: self.ocultar_tooltip())
             checkbutton.pack(pady=5)
             checkbuttons.append(checkbutton)
 
@@ -131,6 +148,36 @@ class CaracteresSelector:
         boton_continuar.pack()
 
         self.menu.geometry("900x550+300+100")
+
+    def mostrar_tooltip(self, widget, text_dict):
+        x, y, _, _ = widget.bbox("insert")
+        x += widget.winfo_rootx() + 25
+        y += widget.winfo_rooty() + 25
+
+        x_mouse = widget.winfo_pointerx()
+        y_mouse = widget.winfo_pointery()
+
+        self.tooltip = tk.Toplevel(widget)
+        self.tooltip.wm_overrideredirect(True)
+
+        # Divide el diccionario en grupos de 5 elementos para cada fila
+        items = list(text_dict.items())
+        rows = [", ".join([f"{key}: {value}" for key, value in items[i:i + 5]]) for i in range(0, len(items), 5)]
+
+        # Crea un widget Label en lugar de Text para el tooltip
+        tooltip_label = tk.Label(self.tooltip, text="\n".join(rows), wraplength=300, justify='left', background="white",
+                                 relief="solid", borderwidth=1)
+        tooltip_label.pack()
+
+        # Ajusta el tamaño del tooltip automáticamente según el contenido y el tamaño de la pantalla
+        tooltip_width = min(tooltip_label.winfo_reqwidth(), 300)  # Cambia 300 según lo que consideres apropiado
+        tooltip_height = min(tooltip_label.winfo_reqheight(), 200)  # Cambia 200 según lo que consideres apropiado
+
+        self.tooltip.geometry(f"{tooltip_width}x{tooltip_height}+{x_mouse}+{y_mouse}")
+
+    def ocultar_tooltip(self):
+        if hasattr(self, 'tooltip'):
+            self.tooltip.destroy()
 
     def seleccionar_caracteres(self):
         if self.decisionAlfabeto:

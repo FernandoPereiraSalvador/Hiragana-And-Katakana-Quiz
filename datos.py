@@ -1,6 +1,5 @@
 # Importar librerías de manejo de datos y visualización
 import json
-
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -72,7 +71,7 @@ class GestionDatos:
         min_error_value = df['numeroErrores'].min()
         max_error_value = df['numeroErrores'].max()
 
-        y_ticks = np.arange(0, max_error_value + 1, 1)
+        y_ticks = np.arange(min_error_value, max_error_value + 1, 1)
         ax.set_yticks(y_ticks)
 
         return fig
