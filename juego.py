@@ -13,13 +13,14 @@ class Juego:
         self.errores = {}
         self.salida = True
         self.menu_principal = menu_principal
+        self.num_letras_conseguidas = 0
 
     def jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal):
         keys = list(caracteres.keys())
-        index = 0
+        indice_clave_actual = 0
 
-        while index < len(keys):
-            index += 1
+        while indice_clave_actual < len(keys):
+            indice_clave_actual += 1
 
         if modo_juego:
             self.japones_a_espanol(caracteres, alfabeto_elegido, menu_principal)
@@ -28,42 +29,40 @@ class Juego:
 
     def japones_a_espanol(self, caracteres, alfabeto_elegido, menu_principal):
         caracteres_copia = caracteres.copy()
+        self.num_letras_conseguidas = 1
+
         while caracteres_copia and self.salida:
-            self.menu = tk.Toplevel(menu_principal)
-            self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
-            self.menu.geometry("900x550+300+100")
-            self.menu.resizable(False, False)
-            self.menu.title("Japones")
-            self.menu.iconbitmap("menu_imagenes/icono.ico")
+            self.crear_ventana(caracteres)
 
             caracter_al_azar = random.choice(list(caracteres_copia.items()))
-            v = caracter_al_azar[1]
-            e = caracter_al_azar[0]
+            caracter_japones = caracter_al_azar[1]
+            caracter_espanol = caracter_al_azar[0]
 
             respuesta_var = tk.StringVar()
 
             def submit():
                 respuesta = respuesta_var.get()
 
-                if respuesta == e:
-                    del caracteres_copia[e]
+                if respuesta == caracter_espanol:
+                    del caracteres_copia[caracter_espanol]
+                    self.num_letras_conseguidas += 1
                     self.menu.withdraw()
                 else:
-                    messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
+                    messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {caracter_espanol}")
                     self.numeroErrores += 1
-                    self.errores[e] = v
+                    self.errores[caracter_espanol] = caracter_japones
 
                 self.menu.destroy()
                 respuesta_var.set("")
 
             respuesta_label = tk.Label(self.menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
-            letra_elegida = tk.Label(self.menu, text=f"{v}", font=("Arial", 175))
+            letra_elegida = tk.Label(self.menu, text=f"{caracter_japones}", font=("Arial", 175))
             respuesta_entry = tk.Entry(self.menu, textvariable=respuesta_var, width=30)
             sub_btn = tk.Button(self.menu, text="Continuar", command=submit)
 
             respuesta_label.place(x=250, y=50)
 
-            if len(v) == 1:
+            if len(caracter_japones) == 1:
                 letra_elegida.place(x=300, y=125)
             else:
                 letra_elegida.place(x=200, y=125)
@@ -81,14 +80,11 @@ class Juego:
     def espanol_a_japones(self, caracteres, alfabeto_elegido, menu_principal):
         respuesta = None
         caracteres_copia = caracteres.copy()
+        self.num_letras_conseguidas = 1
 
         while caracteres and self.salida:
-            self.menu = tk.Toplevel(menu_principal)
-            self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
-            self.menu.geometry("900x550+300+100")
-            self.menu.resizable(False, False)
-            self.menu.title("Japones")
-            self.menu.iconbitmap("menu_imagenes/icono.ico")
+
+            self.crear_ventana(caracteres_copia)
 
             opciones_posibles = self.generar_opciones(caracteres_copia, caracteres)
 
@@ -101,6 +97,7 @@ class Juego:
                 v = opcion_escogida[0]
                 if respuesta == opcion_escogida:
                     del caracteres[v]
+                    self.num_letras_conseguidas += 1
                 else:
                     messagebox.showerror("Te has equivocado", f"La respuesta correcta era: {e}")
                     self.numeroErrores += 1
@@ -156,6 +153,7 @@ class Juego:
     def repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores, errores):
         self.menu = tk.Toplevel(menu_principal)
         self.menu.geometry("900x550+300+100")
+        self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         self.menu.resizable(False, False)
         self.menu.title("¿Quieres repetir?")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
@@ -216,6 +214,26 @@ class Juego:
         self.menu.withdraw()
         self.menu.destroy()
         self.menu_principal.deiconify()
+
+    def crear_contador(self, num_letras_conseguidas, num_letras_faltantes):
+        contador_frame = tk.Frame(self.menu, bg="white")
+        contador_frame.place(x=750, y=20)
+
+        contador_label = tk.Label(contador_frame,
+                                  text=f"{num_letras_conseguidas} / {num_letras_faltantes}",
+                                  font=("Arial", 20))
+        contador_label.pack()
+
+        return contador_label
+
+    def crear_ventana(self, num_letras_faltantes):
+        self.menu = tk.Toplevel(self.menu_principal)
+        self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
+        self.menu.geometry("900x550+300+100")
+        self.menu.resizable(False, False)
+        self.menu.title("Japones")
+        self.menu.iconbitmap("menu_imagenes/icono.ico")
+        self.crear_contador(self.num_letras_conseguidas, len(num_letras_faltantes))
 
 
 def main(letras, modo_juego, alfabeto, menu_principal):

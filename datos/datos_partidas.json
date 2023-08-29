@@ -1,86 +1,12 @@
 [
     {
-        "fecha": "2023-08-27 11:38:29.388842",
+        "fecha": "2023-08-29 15:31:18.869473",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": false
     },
     {
-        "fecha": "2023-08-27 11:38:08.935388",
-        "numeroErrores": 1,
-        "errores": {
-            "a": "\u3042"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 23:20:35.688859",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 23:17:47.383305",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 23:17:03.318638",
-        "numeroErrores": 13,
-        "errores": {
-            "u": "\u3046",
-            "i": "\u3044",
-            "o": "\u304a",
-            "e": "\u3048"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 23:14:45.916332",
-        "numeroErrores": 3,
-        "errores": {
-            "u": "\u3046",
-            "i": "\u3044"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 22:49:02.197016",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 22:10:23.356561",
-        "numeroErrores": 3,
-        "errores": {
-            "\u3044": "i"
-        },
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 22:10:08.660781",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 22:09:59.134474",
-        "numeroErrores": 2,
-        "errores": {
-            "i": "\u30a4"
-        },
-        "alfabeto_elegido": false
-    },
-    {
-        "fecha": "2023-08-26 22:00:31.200482",
-        "numeroErrores": 0,
-        "errores": {},
-        "alfabeto_elegido": true
-    },
-    {
-        "fecha": "2023-08-26 21:36:40.624473",
+        "fecha": "2023-08-29 15:30:14.116687",
         "numeroErrores": 0,
         "errores": {},
         "alfabeto_elegido": true
