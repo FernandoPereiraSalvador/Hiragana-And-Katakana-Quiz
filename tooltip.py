@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class Tooltip:
     def __init__(self):
         self.tooltip = None
@@ -30,5 +31,3 @@ class Tooltip:
     def ocultar_tooltip(self):
         if self.tooltip is not None:
             self.tooltip.destroy()
-
-
