@@ -8,6 +8,28 @@ import menu_juego
 
 # Definición de la clase MenuPrincipal
 class MenuPrincipal:
+    """
+    Clase que representa la ventana principal del menú de la aplicación.
+
+    Esta clase se encarga de crear y gestionar la interfaz del menú principal de la aplicación. Proporciona opciones
+    para seleccionar modos de juego, mostrar el registro de progreso del jugador y acceder a la configuración de la
+    aplicación.
+
+    Atributos:
+        root (Tk): La ventana principal de la aplicación.
+        imagen_hiragana (PhotoImage): Imagen para el botón de selección de modo Hiragana.
+        imagen_katakana (PhotoImage): Imagen para el botón de selección de modo Katakana.
+        imagen_registro (PhotoImage): Imagen para el botón de mostrar registro.
+        configuracion (PhotoImage): Imagen para el botón de acceso a configuración.
+
+    Métodos:
+        __init__(self, root): Inicializa la ventana principal, carga imágenes y crea los botones.
+        decision_hiragana(self): Abre el menú de selección de modo Hiragana.
+        decision_katakana(self): Abre el menú de selección de modo Katakana.
+        mostrar_registro(self): Muestra un gráfico de progreso del jugador a lo largo del tiempo.
+        abrir_configuracion(self): Abre la ventana de configuración.
+        crear_botones(self): Crea los botones en la ventana principal.
+    """
 
     def __init__(self, root):
         """
