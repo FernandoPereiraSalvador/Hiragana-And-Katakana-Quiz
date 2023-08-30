@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>juego &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=4936afed"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para juego</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">datos</span> <span class="kn">import</span> <span class="n">GestionDatos</span>
+<span class="kn">from</span> <span class="nn">custom_message_box</span> <span class="kn">import</span> <span class="n">custom_message_box</span>
+
+
+<div class="viewcode-block" id="Juego">
+<a class="viewcode-back" href="../juego.html#juego.Juego">[documentos]</a>
+<span class="k">class</span> <span class="nc">Juego</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que representa el juego de aprendizaje de caracteres japoneses.</span>
+
+<span class="sd">    Esta clase implementa el juego de aprendizaje de caracteres japoneses. Los caracteres se presentan al jugador,</span>
+<span class="sd">    quien debe adivinar su significado en diferentes modos de juego: &#39;japonés a español&#39; o &#39;español a japonés&#39;.</span>
+
+<span class="sd">    Atributos:</span>
+<span class="sd">    - menu (None or Tkinter object): Almacena la ventana de juego en la que se mostrarán los caracteres y respuestas.</span>
+<span class="sd">    - numeroErrores (int): Contador del número de errores cometidos durante la partida actual.</span>
+<span class="sd">    - errores (dict): Diccionario que registra los errores cometidos, donde las claves son los caracteres japoneses</span>
+<span class="sd">    equivocados y los valores son sus significados.</span>
+<span class="sd">    - salida (bool): Indica si el juego ha terminado. Si es True, el juego continúa; si es False, el juego se detiene.</span>
+<span class="sd">    - menu_principal (Tkinter object): Objeto Tkinter de la ventana principal del programa desde la cual se invocó el</span>
+<span class="sd">    juego.</span>
+<span class="sd">    - num_letras_conseguidas (int): Número de letras acertadas por el jugador en la partida actual, utilizado para</span>
+<span class="sd">    el seguimiento del progreso.</span>
+
+<span class="sd">    Métodos:</span>
+<span class="sd">    - __init__(self, menu_principal): Inicializa una nueva instancia del juego.</span>
+<span class="sd">    - jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal): Inicia el juego de aprendizaje.</span>
+<span class="sd">    - japones_a_espanol(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo japonés a</span>
+<span class="sd">    español.</span>
+<span class="sd">    - espanol_a_japones(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo español a</span>
+<span class="sd">    japonés.</span>
+<span class="sd">    - generar_opciones(caracteres_copia, caracteres_originales): Genera una lista de opciones posibles para el juego de</span>
+<span class="sd">    traducción.</span>
+<span class="sd">    - repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores, errores): Muestra una ventana</span>
+<span class="sd">    emergente que pregunta al jugador si desea repetir el juego.</span>
+<span class="sd">    - repetir_si(self, letras, alfabeto, menu_principal, modo): Reinicia el juego para continuar jugando.</span>
+<span class="sd">    - repetir_no(self, menu_principal): Finaliza el juego y muestra el menú principal.</span>
+<span class="sd">    - cerrar_ventana(self): Cierra la ventana de juego y restaura la ventana principal.</span>
+<span class="sd">    - crear_contador(self, num_letras_conseguidas, num_letras_faltantes): Crea y muestra un contador de progreso en la</span>
+<span class="sd">    ventana de juego.</span>
+<span class="sd">    - crear_ventana(self, num_letras_faltantes): Crea y muestra una nueva ventana de juego.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicia una nueva instancia del juego.</span>
+
+<span class="sd">        Esta función inicializa una nueva instancia del juego con los valores y atributos iniciales necesarios para</span>
+<span class="sd">        el funcionamiento del juego.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa desde la cual se está</span>
+<span class="sd">        invocando el juego.</span>
+
+<span class="sd">        Atributos:</span>
+<span class="sd">        - menu (None or Tkinter object): Almacena la ventana de juego en la que se mostrarán los caracteres y</span>
+<span class="sd">        respuestas.</span>
+<span class="sd">        - numeroErrores (int): Contador del número de errores cometidos durante la partida actual.</span>
+<span class="sd">        - errores (dict): Diccionario que registra los errores cometidos, donde las claves son los caracteres japoneses</span>
+<span class="sd">        equivocados y los valores son sus significados.</span>
+<span class="sd">        - salida (bool): Indica si el juego ha terminado o no. Si es True, el juego continúa; si es False, el juego se</span>
+<span class="sd">        detiene.</span>
+<span class="sd">        - menu_principal (Tkinter object): Objeto Tkinter de la ventana principal del programa desde la cual se invocó</span>
+<span class="sd">        el juego.</span>
+<span class="sd">        - num_letras_conseguidas (int): Número de letras acertadas por el jugador en la partida actual, utilizado para</span>
+<span class="sd">        el seguimiento del progreso.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función establece los atributos iniciales para rastrear el estado del juego. El atributo &#39;menu&#39;</span>
+<span class="sd">        se utiliza para almacenar la ventana de juego. &#39;numeroErrores&#39; y &#39;errores&#39; se utilizan para llevar un</span>
+<span class="sd">        registro de los errores cometidos. &#39;salida&#39; se utiliza para controlar si el juego está en curso.</span>
+<span class="sd">        &#39;menu_principal&#39; se guarda para restaurar la ventana principal cuando se cierre la ventana del juego.</span>
+<span class="sd">        &#39;num_letras_conseguidas&#39; se utiliza para rastrear el progreso del jugador durante la partida.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errores</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">salida</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span> <span class="o">=</span> <span class="n">menu_principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="Juego.jugar">
+<a class="viewcode-back" href="../juego.html#juego.Juego.jugar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">jugar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">caracteres</span><span class="p">,</span> <span class="n">modo_juego</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicia el juego de aprendizaje de caracteres japoneses.</span>
+
+<span class="sd">        Esta función inicia el juego de aprendizaje de caracteres japoneses. Los caracteres se presentan al jugador,</span>
+<span class="sd">        quien debe adivinar su significado cos dos modos: &#39;modo japonés a español&#39; o &#39;modo español a japonés&#39;.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param caracteres: Un diccionario de caracteres japoneses como claves y sus significados o</span>
+<span class="sd">        pronunciaciones como valores.</span>
+<span class="sd">        :param modo_juego: Un valor booleano que indica si el juego se ejecuta en modo</span>
+<span class="sd">        japonés a español (True) o español a japonés (False).</span>
+<span class="sd">        :param alfabeto_elegido: El alfabeto elegido para el</span>
+<span class="sd">        juego, como hiragana o katakana.</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función recibe el diccionario &#39;caracteres&#39; que contiene los caracteres japoneses y sus</span>
+<span class="sd">        significados o pronunciaciones. &#39;modo_juego&#39; determina el modo de juego (japonés a español o español a</span>
+<span class="sd">        japonés). &#39;alfabeto_elegido&#39; especifica el alfabeto seleccionado para el juego.</span>
+
+<span class="sd">        La función itera a través de los caracteres presentados en el diccionario &#39;caracteres&#39;, mostrando cada uno al</span>
+<span class="sd">        jugador. Dependiendo del modo de juego, llama a la función &#39;japones_a_espanol&#39; o &#39;espanol_a_japones&#39; para</span>
+<span class="sd">        manejar la interacción y la validación de respuestas.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Obtener las claves (caracteres) del diccionario de caracteres</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">caracteres</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">indice_clave_actual</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Iterar a través de las claves (caracteres)</span>
+        <span class="k">while</span> <span class="n">indice_clave_actual</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+            <span class="n">indice_clave_actual</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Dependiendo del modo de juego, llamar a la función correspondiente</span>
+        <span class="k">if</span> <span class="n">modo_juego</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">japones_a_espanol</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">espanol_a_japones</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Juego.japones_a_espanol">
+<a class="viewcode-back" href="../juego.html#juego.Juego.japones_a_espanol">[documentos]</a>
+    <span class="k">def</span> <span class="nf">japones_a_espanol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicia el juego en el modo japonés a español.</span>
+
+<span class="sd">        Donde se muestran caracteres japoneses y el jugador debe adivinar su significado en español.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param caracteres: Un diccionario de caracteres japoneses como claves y sus significados como valores.</span>
+<span class="sd">        :param alfabeto_elegido: El alfabeto elegido para el juego, como hiragana o katakana.</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función recibe el diccionario &#39;caracteres&#39; que contiene caracteres japoneses y sus significados</span>
+<span class="sd">        en español. &#39;alfabeto_elegido&#39; especifica el alfabeto seleccionado para el juego, y &#39;menu_principal&#39; es el</span>
+<span class="sd">        objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        La función itera a través de los caracteres presentados en el diccionario &#39;caracteres&#39;, mostrando cada uno al</span>
+<span class="sd">        jugador. El jugador debe adivinar el significado en español del carácter japonés presentado. Si la respuesta</span>
+<span class="sd">        es correcta, el carácter se elimina del diccionario y el jugador avanza al siguiente. Si la respuesta es</span>
+<span class="sd">        incorrecta, se muestra un mensaje de error y se almacena la respuesta incorrecta en el diccionario de errores.</span>
+
+<span class="sd">        Luego de completar todos los caracteres o si el jugador decide salir, se guardan los datos de progreso</span>
+<span class="sd">        utilizando la instancia de la clase &#39;GestionDatos&#39; y se ofrece la opción de repetir el juego o volver al menú</span>
+<span class="sd">        principal.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">caracteres_copia</span> <span class="o">=</span> <span class="n">caracteres</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">submit</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Procesa la respuesta del jugador y maneja la lógica del juego.</span>
+
+<span class="sd">            Esta función se activa cuando el jugador hace clic en el botón &quot;Continuar&quot; para enviar su respuesta.</span>
+<span class="sd">            Procesa la respuesta ingresada por el jugador y determina si es correcta o incorrecta. En caso de</span>
+<span class="sd">            respuesta incorrecta, se muestra un mensaje de error con la respuesta correcta. En caso de respuesta</span>
+<span class="sd">            correcta, se actualiza el juego, eliminando el carácter actual del diccionario de caracteres a</span>
+<span class="sd">            adivinar.</span>
+
+<span class="sd">            Detalles: La función obtiene la respuesta ingresada por el jugador utilizando la variable</span>
+<span class="sd">            `respuesta_var`. Luego, compara la respuesta con el significado en español del carácter japonés</span>
+<span class="sd">            presentado (`caracter_espanol`). Si la respuesta es correcta, se elimina el carácter del diccionario</span>
+<span class="sd">            de caracteres a adivinar (`caracteres_copia`), se actualiza el número de letras conseguidas y se</span>
+<span class="sd">            oculta la ventana del juego actual (`self.menu`).</span>
+
+<span class="sd">            Si la respuesta es incorrecta, se muestra un mensaje de error utilizando la función</span>
+<span class="sd">            `messagebox.showerror`, indicando la respuesta correcta en español. Además, se incrementa el número</span>
+<span class="sd">            de errores y se agrega el carácter japonés a la lista de errores (`self.errores`).</span>
+
+<span class="sd">            Finalmente, se destruye la ventana del juego actual y se restablece la variable `respuesta_var` a una</span>
+<span class="sd">            cadena vacía.</span>
+
+<span class="sd">            :return: None</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="c1"># Obtener la respuesta ingresada por el jugador desde la variable respuesta_var</span>
+            <span class="n">respuesta</span> <span class="o">=</span> <span class="n">respuesta_var</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+            <span class="c1"># Comprobar si la respuesta del jugador es correcta</span>
+            <span class="k">if</span> <span class="n">respuesta</span> <span class="o">==</span> <span class="n">caracter_espanol</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">caracteres_copia</span><span class="p">[</span><span class="n">caracter_espanol</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Te has equivocado&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;La respuesta correcta era: </span><span class="si">{</span><span class="n">caracter_espanol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">[</span><span class="n">caracter_espanol</span><span class="p">]</span> <span class="o">=</span> <span class="n">caracter_japones</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+            <span class="n">respuesta_var</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Bucle principal del juego</span>
+        <span class="k">while</span> <span class="n">caracteres_copia</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">salida</span><span class="p">:</span>
+            <span class="c1"># Crear la ventana del juego y mostrar el carácter japonés</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">crear_ventana</span><span class="p">(</span><span class="n">caracteres</span><span class="p">)</span>
+
+            <span class="c1"># Elegir un carácter al azar para adivinar</span>
+            <span class="n">caracter_al_azar</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">caracteres_copia</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+            <span class="n">caracter_japones</span> <span class="o">=</span> <span class="n">caracter_al_azar</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">caracter_espanol</span> <span class="o">=</span> <span class="n">caracter_al_azar</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">respuesta_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">StringVar</span><span class="p">()</span>
+
+            <span class="c1"># Crear elementos de la ventana: etiquetas, entrada y botón &quot;Continuar&quot;</span>
+            <span class="n">respuesta_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;¿Cuál es el siguiente carácter?&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+            <span class="n">letra_elegida</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">caracter_japones</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">175</span><span class="p">))</span>
+            <span class="n">respuesta_entry</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">respuesta_var</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+            <span class="n">sub_btn</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Continuar&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">submit</span><span class="p">)</span>
+
+            <span class="n">respuesta_label</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">caracter_japones</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">letra_elegida</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">125</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">letra_elegida</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">125</span><span class="p">)</span>
+
+            <span class="n">respuesta_entry</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">335</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+            <span class="n">sub_btn</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">440</span><span class="p">)</span>
+
+            <span class="c1"># Esperar hasta que el jugador responda o cierre la ventana</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">wait_window</span><span class="p">()</span>
+
+        <span class="c1"># Si el juego no ha sido detenido y no quedan caracteres por adivinar</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">salida</span><span class="p">:</span>
+            <span class="c1"># Guardar datos y dar la opción de repetir el juego</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="n">GestionDatos</span><span class="p">()</span>
+            <span class="n">datos</span><span class="o">.</span><span class="n">guardar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repetir</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Juego.espanol_a_japones">
+<a class="viewcode-back" href="../juego.html#juego.Juego.espanol_a_japones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">espanol_a_japones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicia el modo de juego de traducción de español a japonés.</span>
+
+<span class="sd">        Esta función implementa el modo de juego en el que el jugador debe traducir palabras o frases del</span>
+<span class="sd">        español al japonés. Muestra una ventana con una palabra o frase en español y varias opciones en japonés,</span>
+<span class="sd">        de las cuales el jugador debe elegir la traducción correcta.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param caracteres: Un diccionario de palabras/frases en español y sus traducciones en japonés.</span>
+<span class="sd">        :param alfabeto_elegido: El alfabeto elegido para el juego (hiragana o katakana).</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función inicializa variables y ajusta la configuración para el modo de juego.</span>
+<span class="sd">        Luego, inicia un ciclo en el cual se presentan palabras/frases en español junto con varias opciones</span>
+<span class="sd">        en japonés. El jugador debe seleccionar la opción correcta y se verifica su respuesta.</span>
+
+<span class="sd">        Si el jugador elige correctamente, se elimina la palabra/frase del diccionario de caracteres a adivinar</span>
+<span class="sd">        (`caracteres`). Si elige incorrectamente, se muestra un mensaje de error con la respuesta correcta.</span>
+
+<span class="sd">        Al finalizar el juego, se guardan los datos de progreso y se ofrece al jugador la opción de repetir el juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">respuesta_comprobar</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Comprueba la respuesta del jugador y actualiza el juego en consecuencia.</span>
+
+<span class="sd">            Esta función se activa cuando el jugador selecciona una opción en japonés como su respuesta.</span>
+<span class="sd">            Verifica si la respuesta es correcta y realiza las actualizaciones necesarias en función del resultado.</span>
+
+<span class="sd">            Detalles:</span>
+<span class="sd">            La función toma la opción elegida por el jugador (`opcion_escogida`) y extrae la traducción</span>
+<span class="sd">            en español (`caracter_espanol`) y la traducción en japonés (`caracter_japones`). Luego, compara la</span>
+<span class="sd">            respuesta del jugador con la opción escogida para determinar si es correcta.</span>
+
+<span class="sd">            Si la respuesta es correcta, se elimina la palabra/frase del diccionario de caracteres (`caracteres`),</span>
+<span class="sd">            se incrementa el contador de letras conseguidas y se cierra la ventana de juego (`menu`).</span>
+
+<span class="sd">            Si la respuesta es incorrecta, se muestra un mensaje de error con la respuesta correcta en español y se</span>
+<span class="sd">            actualizan las estadísticas de errores. Luego, se cierra la ventana de juego.</span>
+
+<span class="sd">            :return: None</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="c1"># Extraer la traducción en español y la traducción en japonés de la opción escogida</span>
+            <span class="n">caracter_espanol</span> <span class="o">=</span> <span class="n">opcion_escogida</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">caracter_japones</span> <span class="o">=</span> <span class="n">opcion_escogida</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Verificar si la respuesta del jugador es correcta</span>
+            <span class="k">if</span> <span class="n">respuesta</span> <span class="o">==</span> <span class="n">opcion_escogida</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">caracteres</span><span class="p">[</span><span class="n">caracter_japones</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Te has equivocado&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;La respuesta correcta era: </span><span class="si">{</span><span class="n">caracter_espanol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">[</span><span class="n">caracter_espanol</span><span class="p">]</span> <span class="o">=</span> <span class="n">caracter_japones</span>
+
+            <span class="c1"># Cerrar la ventana del juego actual</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">opcion_eleccion</span><span class="p">(</span><span class="n">eleccion</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Procesa la elección del jugador y llama a la función para comprobar la respuesta.</span>
+
+<span class="sd">            Esta función se activa cuando el jugador elige una opción en español como su respuesta.</span>
+<span class="sd">            Captura la opción seleccionada y llama a la función `respuesta_comprobar()` para verificar la respuesta.</span>
+
+<span class="sd">            Parámetros:</span>
+<span class="sd">            :param eleccion: La opción elegida por el jugador.</span>
+
+<span class="sd">            Detalles:</span>
+<span class="sd">            La función toma la opción elegida por el jugador como parámetro (`eleccion`) y la asigna</span>
+<span class="sd">            a la variable no local `respuesta`. Luego, llama a la función `respuesta_comprobar()` para</span>
+<span class="sd">            realizar la comprobación y actualización del juego en función de la respuesta.</span>
+
+<span class="sd">            :return: None</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">nonlocal</span> <span class="n">respuesta</span>  <span class="c1"># Acceder a la variable &#39;respuesta&#39; fuera del ámbito de la función</span>
+            <span class="n">respuesta</span> <span class="o">=</span> <span class="n">eleccion</span>  <span class="c1"># Asignar la opción elegida como respuesta</span>
+            <span class="n">respuesta_comprobar</span><span class="p">()</span>  <span class="c1"># Llamar a la función para comprobar la respuesta del jugador</span>
+
+        <span class="n">respuesta</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">caracteres_copia</span> <span class="o">=</span> <span class="n">caracteres</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Inicializa el contador de letras conseguidas en 1, ya que el jugador aún no ha adivinado ninguna.</span>
+        <span class="c1"># Se inicia en 1 en lugar de 0 para que el marcador de letras actual esté adelantado por 1,</span>
+        <span class="c1"># de manera que coincida con la primera letra que se presenta al jugador.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="n">caracteres</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">salida</span><span class="p">:</span>
+
+            <span class="c1"># Crea la ventana de juego y presenta las opciones</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">crear_ventana</span><span class="p">(</span><span class="n">caracteres_copia</span><span class="p">)</span>
+
+            <span class="c1"># Genera las opciones posibles para la traducción en japonés</span>
+            <span class="n">opciones_posibles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generar_opciones</span><span class="p">(</span><span class="n">caracteres_copia</span><span class="p">,</span> <span class="n">caracteres</span><span class="p">)</span>
+
+            <span class="c1"># Elige una opción al azar para presentar al jugador</span>
+            <span class="n">opcion_escogida</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">opciones_posibles</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">opcion_escogida</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">caracteres</span><span class="p">:</span>
+                <span class="n">opcion_escogida</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">opciones_posibles</span><span class="p">)</span>
+
+            <span class="c1"># Configuración de la ventana de juego y opciones</span>
+            <span class="n">titulo_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Introduce el carácter correcto&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+            <span class="n">opcion_escogida_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">opcion_escogida</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+
+            <span class="n">opcion_buttons</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">opcion</span> <span class="ow">in</span> <span class="n">opciones_posibles</span><span class="p">:</span>
+                <span class="n">button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">opcion</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                   <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="n">o</span><span class="o">=</span><span class="n">opcion</span><span class="p">:</span> <span class="n">opcion_eleccion</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
+                <span class="n">opcion_buttons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+
+            <span class="c1"># Posicionamiento de elementos en la ventana de juego</span>
+            <span class="n">titulo_label</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">275</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+            <span class="n">opcion_escogida_label</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">425</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">125</span><span class="p">)</span>
+
+            <span class="n">x_positions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">700</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="n">opcion_buttons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_positions</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">wait_window</span><span class="p">()</span>
+
+        <span class="c1"># Si el juego no ha sido detenido y no quedan caracteres por adivinar</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">salida</span><span class="p">:</span>
+            <span class="c1"># Guardar datos y ofrecer repetir el juego</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="n">GestionDatos</span><span class="p">()</span>
+            <span class="n">datos</span><span class="o">.</span><span class="n">guardar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repetir</span><span class="p">(</span><span class="n">caracteres_copia</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errores</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Juego.generar_opciones">
+<a class="viewcode-back" href="../juego.html#juego.Juego.generar_opciones">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generar_opciones</span><span class="p">(</span><span class="n">caracteres_copia</span><span class="p">,</span> <span class="n">caracteres_originales</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Genera una lista de opciones posibles para el juego de traducción.</span>
+
+<span class="sd">        Esta función crea una lista de opciones posibles para que el jugador elija durante el juego</span>
+<span class="sd">        de traducción de español a japonés. Estas opciones incluyen dos caracteres seleccionados al azar</span>
+<span class="sd">        de los caracteres copia y uno de los caracteres originales.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param caracteres_copia: Un diccionario que contiene los caracteres disponibles para el juego.</span>
+<span class="sd">        :param caracteres_originales: Un diccionario que contiene todos los caracteres originales.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función elige al azar una opción original del diccionario de caracteres originales.</span>
+<span class="sd">        Luego, selecciona dos opciones al azar del diccionario de caracteres copia, asegurándose de que</span>
+<span class="sd">        sean diferentes de la opción original. Estas opciones se combinan en una lista llamada `opciones_copia`.</span>
+
+<span class="sd">        Finalmente, la opción original se agrega a la lista `opciones_copia`, y la lista resultante se</span>
+<span class="sd">        mezcla al azar utilizando `random.shuffle()` para asegurar que las opciones no estén en un orden predecible.</span>
+
+<span class="sd">        :return: Una lista de opciones posibles para que el jugador elija durante el juego.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">opciones_posibles</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Elegir un valor al azar de caracteres originales</span>
+        <span class="n">opcion_original</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">caracteres_originales</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+        <span class="c1"># Elegir dos valores al azar de caracteres copia que sean diferentes de la opción original</span>
+        <span class="n">opciones_copia</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">caracteres_copia</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="n">opcion_original</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">opciones_posibles</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">opciones_copia</span><span class="p">)</span>
+        <span class="n">opciones_posibles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opcion_original</span><span class="p">)</span>
+
+        <span class="c1"># Mezclar las opciones</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">opciones_posibles</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">opciones_posibles</span></div>
+
+
+<div class="viewcode-block" id="Juego.repetir">
+<a class="viewcode-back" href="../juego.html#juego.Juego.repetir">[documentos]</a>
+    <span class="k">def</span> <span class="nf">repetir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">,</span> <span class="n">modo</span><span class="p">,</span> <span class="n">numero_errores</span><span class="p">,</span> <span class="n">errores</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Muestra una ventana emergente que pregunta al jugador si desea repetir el juego.</span>
+
+<span class="sd">        Esta función crea una ventana emergente que pregunta al jugador si desea repetir el juego</span>
+<span class="sd">        con los mismos caracteres y configuración. El jugador puede elegir &quot;Sí&quot; o &quot;No&quot; en función</span>
+<span class="sd">        de su elección.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param caracteres: Un diccionario que contiene los caracteres para el juego.</span>
+<span class="sd">        :param alfabeto_elegido: El alfabeto elegido para el juego (hiragana o katakana).</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+<span class="sd">        :param modo: Un valor booleano que indica el modo de juego (True para japonés a español, False para español a</span>
+<span class="sd">        japonés).</span>
+<span class="sd">        :param numero_errores: El número de errores cometidos durante el juego.</span>
+<span class="sd">        :param errores: Un diccionario que contiene los errores cometidos y sus valores.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función crea una nueva ventana emergente utilizando `Toplevel`, con el título &quot;¿Quieres repetir?&quot;</span>
+<span class="sd">        y un tamaño fijo. Se agregan etiquetas para mostrar el texto &quot;¿Quieres repetir?&quot;, el número de errores</span>
+<span class="sd">        cometidos y la fecha actual. Luego, se colocan dos botones &quot;Sí&quot; y &quot;No&quot; en el centro de la ventana.</span>
+
+<span class="sd">        Los botones &quot;Sí&quot; y &quot;No&quot; están asociados a las funciones `repetir_si()` y `repetir_no()` respectivamente,</span>
+<span class="sd">        que manejan la lógica de repetir el juego o regresar al menú principal.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">ver_errores</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Muestra una ventana emergente con los errores cometidos durante el juego.</span>
+
+<span class="sd">            Esta función crea una ventana emergente que muestra los errores cometidos durante el juego.</span>
+<span class="sd">            Si no hay errores, se muestra un mensaje indicando que no hay errores. Si hay errores, se</span>
+<span class="sd">            muestra una lista de errores en formato clave-valor.</span>
+
+<span class="sd">            Detalles:</span>
+<span class="sd">            La función verifica si hay errores en el diccionario `errores`. Si no hay errores,</span>
+<span class="sd">            se muestra un cuadro de mensaje con el título &quot;Errores&quot; y el mensaje &quot;No hay errores&quot;.</span>
+
+<span class="sd">            Si hay errores, se genera un mensaje con el formato &quot;clave: valor&quot; para cada par clave-valor</span>
+<span class="sd">            en el diccionario de errores. Luego, se muestra un cuadro de mensaje con el título &quot;Errores&quot;</span>
+<span class="sd">            y el mensaje que contiene la lista de errores formateados.</span>
+
+<span class="sd">            :return: None</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">errores</span><span class="p">:</span>
+                <span class="n">custom_message_box</span><span class="p">(</span><span class="s2">&quot;Errores&quot;</span><span class="p">,</span> <span class="s2">&quot;No hay errores&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Generar un mensaje con los errores en formato clave: valor</span>
+                <span class="n">mensaje_errores</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">clave</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">valor</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">clave</span><span class="p">,</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">errores</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+                <span class="n">custom_message_box</span><span class="p">(</span><span class="s2">&quot;Errores&quot;</span><span class="p">,</span> <span class="n">mensaje_errores</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cerrar_ventana</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;¿Quieres repetir?&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Agregar texto &quot;¿Quieres repetir?&quot; arriba del contenido con un tamaño de fuente más grande</span>
+        <span class="n">titulo_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;¿Quieres repetir?&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="n">titulo_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+        <span class="c1"># Colocar los botones &quot;Sí&quot; y &quot;No&quot; en el centro uno al lado del otro</span>
+        <span class="n">botones_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
+        <span class="n">botones_frame</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="n">boton_si</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">botones_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Sí&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                             <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repetir_si</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span> <span class="n">alfabeto_elegido</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">,</span> <span class="n">modo</span><span class="p">),</span>
+                             <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+        <span class="n">boton_si</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="n">boton_no</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">botones_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                             <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repetir_no</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">),</span>
+                             <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+        <span class="n">boton_no</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Mostrar número de errores en un tamaño de fuente más grande</span>
+        <span class="n">errores_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Número de errores: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">numero_errores</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+        <span class="n">errores_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="c1"># Mostrar la fecha actual en un tamaño de fuente más grande</span>
+        <span class="n">fecha_actual</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="n">fecha_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Fecha actual: &quot;</span> <span class="o">+</span> <span class="n">fecha_actual</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+        <span class="n">fecha_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="c1"># Agregar botón para ver los errores en forma de cuadro de mensaje</span>
+
+        <span class="n">boton_errores</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Ver Errores&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                  <span class="n">command</span><span class="o">=</span><span class="n">ver_errores</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+        <span class="n">boton_errores</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Juego.repetir_si">
+<a class="viewcode-back" href="../juego.html#juego.Juego.repetir_si">[documentos]</a>
+    <span class="k">def</span> <span class="nf">repetir_si</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">letras</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">,</span> <span class="n">modo</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reinicia el juego para continuar jugando.</span>
+
+<span class="sd">        Esta función reinicia el juego para continuar jugando con los mismos parámetros que</span>
+<span class="sd">        se utilizaron en la partida anterior. Puede reiniciar el juego en modo japonés-español</span>
+<span class="sd">        o español-japonés, según el modo en que se estaba jugando.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param letras: El diccionario de letras o caracteres a utilizar en el juego.</span>
+<span class="sd">        :param alfabeto: El alfabeto elegido para el juego (hiragana o katakana).</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+<span class="sd">        :param modo: Indicador del modo de juego (True para japonés-español, False para español-japonés).</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función destruye la ventana actual del juego utilizando el método `destroy()`, lo que</span>
+<span class="sd">        cierra la ventana emergente del juego actual.</span>
+
+<span class="sd">        Luego, si el modo es japonés-español (`True`), llama a la función `japones_a_espanol` para</span>
+<span class="sd">        iniciar un nuevo juego en modo japonés-español. Si el modo es español-japonés (`False`),</span>
+<span class="sd">        llama a la función `espanol_a_japones` para iniciar un nuevo juego en modo español-japonés.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">modo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">japones_a_espanol</span><span class="p">(</span><span class="n">letras</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">espanol_a_japones</span><span class="p">(</span><span class="n">letras</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Juego.repetir_no">
+<a class="viewcode-back" href="../juego.html#juego.Juego.repetir_no">[documentos]</a>
+    <span class="k">def</span> <span class="nf">repetir_no</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finaliza el juego y muestra el menú principal.</span>
+
+<span class="sd">        Esta función finaliza el juego y muestra nuevamente el menú principal del programa.</span>
+<span class="sd">        Se invoca cuando el jugador decide no repetir el juego y regresar al menú principal.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función destruye la ventana actual del juego utilizando el método `destroy()`, lo que</span>
+<span class="sd">        cierra la ventana emergente del juego actual.</span>
+
+<span class="sd">        Luego, utiliza el método `deiconify()` en el objeto `menu_principal` para restaurar la</span>
+<span class="sd">        visibilidad y el enfoque en la ventana principal del programa.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Juego.cerrar_ventana">
+<a class="viewcode-back" href="../juego.html#juego.Juego.cerrar_ventana">[documentos]</a>
+    <span class="k">def</span> <span class="nf">cerrar_ventana</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cierra la ventana de juego y restaura la ventana principal.</span>
+
+<span class="sd">        Esta función se invoca cuando el jugador decide cerrar la ventana de juego en medio de una partida.</span>
+<span class="sd">        Cierra la ventana del juego actual, restaura la visibilidad de la ventana principal y detiene la partida.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función establece el atributo `salida` en `False`, lo que detiene la partida actual. Luego, utiliza</span>
+<span class="sd">        los métodos `withdraw()` y `destroy()` en el objeto `menu` para cerrar la ventana de juego actual.</span>
+
+<span class="sd">        Finalmente, utiliza `deiconify()` en el objeto `menu_principal` para restaurar la visibilidad de la</span>
+<span class="sd">        ventana principal que pudo haber sido ocultada cuando se abrió la ventana de juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">salida</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Juego.crear_contador">
+<a class="viewcode-back" href="../juego.html#juego.Juego.crear_contador">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear_contador</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_letras_conseguidas</span><span class="p">,</span> <span class="n">num_letras_faltantes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crea y muestra un contador de progreso en la ventana de juego.</span>
+
+<span class="sd">        Esta función crea y muestra un contador de progreso en la ventana de juego actual.</span>
+<span class="sd">        El contador muestra la cantidad de letras conseguidas y el total de letras faltantes</span>
+<span class="sd">        en el juego.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param num_letras_conseguidas: El número de letras conseguidas hasta el momento.</span>
+<span class="sd">        :param num_letras_faltantes: El número total de letras faltantes en el juego.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función crea un marco (`contador_frame`) en la ventana de juego donde se mostrará</span>
+<span class="sd">        el contador. Luego, crea una etiqueta (`contador_label`) en el marco para mostrar</span>
+<span class="sd">        la información del contador en el formato &quot;letras_conseguidas / letras_faltantes&quot;.</span>
+
+<span class="sd">        Los parámetros `num_letras_conseguidas` y `num_letras_faltantes` se utilizan para</span>
+<span class="sd">        mostrar los valores actuales en el contador.</span>
+
+<span class="sd">        :return: La etiqueta del contador creada.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">contador_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+        <span class="n">contador_frame</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="n">contador_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">contador_frame</span><span class="p">,</span>
+                                  <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num_letras_conseguidas</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">num_letras_faltantes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                  <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="n">contador_label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">contador_label</span></div>
+
+
+<div class="viewcode-block" id="Juego.crear_ventana">
+<a class="viewcode-back" href="../juego.html#juego.Juego.crear_ventana">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear_ventana</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_letras_faltantes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crea y muestra una nueva ventana de juego.</span>
+
+<span class="sd">        Esta función crea y muestra una nueva ventana de juego utilizando la librería Tkinter.</span>
+<span class="sd">        La ventana muestra la interfaz gráfica del juego, incluyendo letras o caracteres</span>
+<span class="sd">        que el jugador debe identificar y una barra de progreso.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param num_letras_faltantes: El número total de letras faltantes en el juego.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función utiliza la clase Toplevel para crear una nueva ventana secundaria que</span>
+<span class="sd">        contendrá la interfaz gráfica del juego. Se configuran varias propiedades de la ventana,</span>
+<span class="sd">        como su tamaño, posición, título y el ícono que se muestra en la barra de título.</span>
+
+<span class="sd">        Luego, se llama a la función `crear_contador` para crear y mostrar un contador de progreso</span>
+<span class="sd">        en la ventana de juego. El contador mostrará la cantidad de letras conseguidas y el total</span>
+<span class="sd">        de letras faltantes.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cerrar_ventana</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Japones&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crear_contador</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_letras_faltantes</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../juego.html#juego.main">[documentos]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">letras</span><span class="p">,</span> <span class="n">modo_juego</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función principal que inicia el juego.</span>
+
+<span class="sd">    Esta función crea una instancia de la clase Juego y la utiliza para iniciar</span>
+<span class="sd">    y controlar el flujo del juego. El juego se juega de acuerdo al modo especificado</span>
+<span class="sd">    (japonés a español o español a japonés) y utiliza las letras y el alfabeto</span>
+<span class="sd">    proporcionados.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param letras: Un diccionario que contiene las letras o caracteres del juego.</span>
+<span class="sd">    :param modo_juego: Un valor booleano que indica el modo de juego (japonés a español o español a japonés).</span>
+<span class="sd">    :param alfabeto: El alfabeto elegido para el juego (hiragana o katakana).</span>
+<span class="sd">    :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">    Detalles:</span>
+<span class="sd">    La función crea una instancia de la clase Juego llamada &#39;juego&#39; y luego invoca el método</span>
+<span class="sd">    &#39;jugar&#39; de la instancia creada. Este método controlará el flujo del juego y lo jugará según</span>
+<span class="sd">    el modo y los datos proporcionados.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">juego</span> <span class="o">=</span> <span class="n">Juego</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">)</span>
+    <span class="n">juego</span><span class="o">.</span><span class="n">jugar</span><span class="p">(</span><span class="n">letras</span><span class="p">,</span> <span class="n">modo_juego</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

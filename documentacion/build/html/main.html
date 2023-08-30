@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>main module &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=4936afed"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="menu_juego module" href="menu_juego.html" />
+    <link rel="prev" title="juego module" href="juego.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-main">
+<span id="main-module"></span><h1>main module<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.MenuPrincipal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">MenuPrincipal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que representa la ventana principal del menú de la aplicación.</p>
+<p>Esta clase se encarga de crear y gestionar la interfaz del menú principal de la aplicación. Proporciona opciones
+para seleccionar modos de juego, mostrar el registro de progreso del jugador y acceder a la configuración de la
+aplicación.</p>
+<dl class="simple">
+<dt>Atributos:</dt><dd><p>root (Tk): La ventana principal de la aplicación.
+imagen_hiragana (PhotoImage): Imagen para el botón de selección de modo Hiragana.
+imagen_katakana (PhotoImage): Imagen para el botón de selección de modo Katakana.
+imagen_registro (PhotoImage): Imagen para el botón de mostrar registro.
+configuracion (PhotoImage): Imagen para el botón de acceso a configuración.</p>
+</dd>
+<dt>Métodos:</dt><dd><p>__init__(self, root): Inicializa la ventana principal, carga imágenes y crea los botones.
+decision_hiragana(self): Abre el menú de selección de modo Hiragana.
+decision_katakana(self): Abre el menú de selección de modo Katakana.
+mostrar_registro(self): Muestra un gráfico de progreso del jugador a lo largo del tiempo.
+abrir_configuracion(self): Abre la ventana de configuración.
+crear_botones(self): Crea los botones en la ventana principal.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="main.MenuPrincipal.abrir_configuracion">
+<span class="sig-name descname"><span class="pre">abrir_configuracion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.abrir_configuracion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.abrir_configuracion" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta la ventana principal y abre la ventana de configuración.</p>
+<p>Detalles:
+Esta función oculta la ventana principal actual utilizando el método “withdraw” y luego llama a la
+función “main” del módulo “configuracion” para abrir la ventana de configuración. La instancia actual de la
+ventana principal, “self.root”, se pasa a la función “main” para asegurarse de que la configuración se
+realice en la misma ventana principal después de ocultarla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.MenuPrincipal.crear_botones">
+<span class="sig-name descname"><span class="pre">crear_botones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.crear_botones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.crear_botones" title="Link to this definition">¶</a></dt>
+<dd><p>Crea los botones para seleccionar modos de juego y acceder a funciones adicionales.</p>
+<p>Esta función crea varios botones en la ventana principal para interactuar con el programa. Los botones
+incluyen opciones para seleccionar el alfabeto para el juego (Hiragana o Katakana), mostrar el registro de
+progreso del jugador y acceder a la configuración de la aplicación.</p>
+<p>Detalles:
+Esta función utiliza la librería Tkinter para crear y posicionar los botones en la ventana principal. Cada
+botón está asociado a una función específica (como “decision_hiragana”, “decision_katakana”, “mostrar_registro”,
+y “abrir_configuracion”) y se configura para llamar a la función correspondiente cuando se hace clic en él.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.MenuPrincipal.decision_hiragana">
+<span class="sig-name descname"><span class="pre">decision_hiragana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.decision_hiragana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.decision_hiragana" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</p>
+<p>Detalles:
+Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
+menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
+seleccionado es Hiragana (True).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.MenuPrincipal.decision_katakana">
+<span class="sig-name descname"><span class="pre">decision_katakana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.decision_katakana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.decision_katakana" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</p>
+<p>Detalles:
+Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
+menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
+seleccionado es Katakana (False).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.MenuPrincipal.mostrar_registro">
+<span class="sig-name descname"><span class="pre">mostrar_registro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.mostrar_registro"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.mostrar_registro" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo
+utilizando la función “mostrar_grafico_tkinter” de la clase “GestionDatos”.</p>
+<p>Detalles:
+Esta función utiliza la clase “GestionDatos” para mostrar un gráfico del progreso del jugador a lo
+largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana
+principal actual y luego crea una instancia de la clase “GestionDatos” para acceder a la función
+“mostrar_grafico_tkinter”. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El
+parámetro “self.root” se pasa a la función “mostrar_grafico_tkinter” para asegurarse de que el gráfico se
+muestre en la misma ventana principal después de ocultarla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.main">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#main"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.main" title="Link to this definition">¶</a></dt>
+<dd><p>Inicia la aplicación del menú principal.</p>
+<p>Esta función es el punto de entrada de la aplicación. Crea una ventana principal de Tkinter, instancia la clase
+“MenuPrincipal” para gestionar el menú y luego inicia el bucle principal de la aplicación, que se encarga de
+mostrar la interfaz y responder a eventos del usuario.</p>
+<p>Detalles:
+Esta función crea la ventana principal utilizando la librería Tkinter y luego crea una instancia de la clase
+“MenuPrincipal”, que se encarga de gestionar la interfaz del menú. Después de configurar todo, inicia el bucle
+principal de la aplicación llamando al método “mainloop” de la ventana. Esto permite que la aplicación se ejecute
+y responda a eventos de manera interactiva.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="juego.html">juego module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main.MenuPrincipal"><code class="docutils literal notranslate"><span class="pre">MenuPrincipal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="juego.html" title="capítulo anterior">juego module</a></li>
+      <li>Next: <a href="menu_juego.html" title="próximo capítulo">menu_juego module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/main.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

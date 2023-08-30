@@ -206,4 +206,4 @@ if __name__ == "__main__":
         main()
     except Exception as e:
         messagebox.showinfo(
-            "Error", "No se ha podido iniciar el programa. Intentelo de nuevo.\nError: " + str(e))
+            "Error", "No se ha podido iniciar el programa. Inténtelo de nuevo.\nError: " + str(e))

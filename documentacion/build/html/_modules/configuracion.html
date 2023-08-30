@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>configuracion &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=4936afed"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para configuracion</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
+<span class="kn">from</span> <span class="nn">datos</span> <span class="kn">import</span> <span class="n">GestionDatos</span>
+
+
+<div class="viewcode-block" id="Configuracion">
+<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion">[documentos]</a>
+<span class="k">class</span> <span class="nc">Configuracion</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase para gestionar la ventana de configuración.</span>
+
+<span class="sd">    Esta clase define una ventana de configuración que permite al usuario borrar</span>
+<span class="sd">    los datos de progreso del juego o abrir el repositorio en línea del proyecto.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param root: Objeto Tkinter representando la ventana principal.</span>
+<span class="sd">    :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">    Detalles:</span>
+<span class="sd">    La ventana contiene dos opciones: una para borrar los datos de progreso del jugador</span>
+<span class="sd">    y otra para abrir un enlace al repositorio de GitHub del proyecto.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicializa la ventana de configuración.</span>
+
+<span class="sd">        Esta función realiza la configuración inicial de la ventana de configuración,</span>
+<span class="sd">        estableciendo su apariencia y elementos interactivos.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param root: Objeto Tkinter representando la ventana principal.</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles: Contiene dos opciones. La primera borrara los datos del progreso del jugador y la segunda abrira un</span>
+<span class="sd">        link al repositorio de github del proyecto.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Inicialización de la ventana principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cerrar_ventana</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Configuración&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span> <span class="o">=</span> <span class="n">menu_principal</span>  <span class="c1"># Ventana principal</span>
+
+        <span class="c1"># Crear el título</span>
+        <span class="n">titulo</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Configuración&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="n">titulo</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Crear el botón &quot;Borrar Datos de Progreso&quot;</span>
+        <span class="n">borrar_bot</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Borrar datos&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mostrar_confirmacion</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+                               <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="n">borrar_bot</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Crear el botón &quot;Repositorio&quot;</span>
+        <span class="n">repositorio_bot</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Repositorio&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">abrir_repositorio</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+                                    <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+        <span class="n">repositorio_bot</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Configuracion.mostrar_confirmacion">
+<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion.mostrar_confirmacion">[documentos]</a>
+    <span class="k">def</span> <span class="nf">mostrar_confirmacion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Muestra una ventana emergente de confirmación para borrar los datos de progreso.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función muestra una ventana emergente de confirmación con un mensaje preguntando</span>
+<span class="sd">        al usuario si está seguro de borrar los datos de progreso. Si el usuario confirma,</span>
+<span class="sd">        se llama al método `borrar_progreso` para realizar la acción de borrado.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Mostrar ventana emergente de confirmación</span>
+        <span class="n">confirmacion</span> <span class="o">=</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askyesno</span><span class="p">(</span><span class="s2">&quot;Confirmación&quot;</span><span class="p">,</span> <span class="s2">&quot;¿Estás seguro de borrar los datos de progreso?&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">confirmacion</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">borrar_progreso</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Configuracion.borrar_progreso">
+<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion.borrar_progreso">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">borrar_progreso</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Borra los datos de progreso.</span>
+
+<span class="sd">        Detalles: Esta función crea una instancia de la clase `GestionDatos` para borrar los datos de progreso</span>
+<span class="sd">        almacenados y llama a la función `borrar_datos`. Luego, muestra una ventana informativa para indicar que el</span>
+<span class="sd">        borrado se realizó exitosamente.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">borrar</span> <span class="o">=</span> <span class="n">GestionDatos</span><span class="p">()</span>
+        <span class="n">borrar</span><span class="o">.</span><span class="n">borrar_datos</span><span class="p">()</span>
+        <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="s2">&quot;Borrado Exitoso&quot;</span><span class="p">,</span> <span class="s2">&quot;Datos de progreso borrados exitosamente.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Configuracion.cerrar_ventana">
+<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion.cerrar_ventana">[documentos]</a>
+    <span class="k">def</span> <span class="nf">cerrar_ventana</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cierra la ventana actual y restaura la ventana principal.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función restaura la ventana principal del programa al invocar el método</span>
+<span class="sd">        `deiconify()` en el objeto `menu_principal`. Luego, cierra la ventana actual</span>
+<span class="sd">        de configuración al invocar el método `destroy()` en el objeto `root`.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>  <span class="c1"># Vuelve a mostrar la ventana principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># Cierra la ventana de configuración</span></div>
+
+
+<div class="viewcode-block" id="Configuracion.abrir_repositorio">
+<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion.abrir_repositorio">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">abrir_repositorio</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Abre un navegador web para mostrar el repositorio en línea.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función utiliza la biblioteca `webbrowser` para abrir un navegador web</span>
+<span class="sd">        y mostrar la URL proporcionada. En este caso, la URL es para un repositorio</span>
+<span class="sd">        en línea. La URL puede ser modificada según se desee.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.google.com&quot;</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../configuracion.html#configuracion.main">[documentos]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función principal para iniciar la ventana de configuración.</span>
+
+<span class="sd">    Esta función crea una nueva ventana secundaria (`Toplevel`) utilizando</span>
+<span class="sd">    la instancia `menu_principal`. Luego, instancia la clase `Configuracion`</span>
+<span class="sd">    para crear y mostrar la ventana de configuración en la nueva ventana.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+<span class="sd">    </span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">)</span>
+    <span class="n">Configuracion</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

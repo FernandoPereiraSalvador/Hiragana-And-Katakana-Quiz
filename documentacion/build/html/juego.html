@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>juego module &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=4936afed"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="main module" href="main.html" />
+    <link rel="prev" title="datos module" href="datos.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-juego">
+<span id="juego-module"></span><h1>juego module<a class="headerlink" href="#module-juego" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="juego.Juego">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">juego.</span></span><span class="sig-name descname"><span class="pre">Juego</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que representa el juego de aprendizaje de caracteres japoneses.</p>
+<p>Esta clase implementa el juego de aprendizaje de caracteres japoneses. Los caracteres se presentan al jugador,
+quien debe adivinar su significado en diferentes modos de juego: “japonés a español” o “español a japonés”.</p>
+<p>Atributos:
+- menu (None or Tkinter object): Almacena la ventana de juego en la que se mostrarán los caracteres y respuestas.
+- numeroErrores (int): Contador del número de errores cometidos durante la partida actual.
+- errores (dict): Diccionario que registra los errores cometidos, donde las claves son los caracteres japoneses
+equivocados y los valores son sus significados.
+- salida (bool): Indica si el juego ha terminado. Si es True, el juego continúa; si es False, el juego se detiene.
+- menu_principal (Tkinter object): Objeto Tkinter de la ventana principal del programa desde la cual se invocó el
+juego.
+- num_letras_conseguidas (int): Número de letras acertadas por el jugador en la partida actual, utilizado para
+el seguimiento del progreso.</p>
+<p>Métodos:
+- __init__(self, menu_principal): Inicializa una nueva instancia del juego.
+- jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal): Inicia el juego de aprendizaje.
+- japones_a_espanol(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo japonés a
+español.
+- espanol_a_japones(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo español a
+japonés.
+- generar_opciones(caracteres_copia, caracteres_originales): Genera una lista de opciones posibles para el juego de
+traducción.
+- repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores, errores): Muestra una ventana
+emergente que pregunta al jugador si desea repetir el juego.
+- repetir_si(self, letras, alfabeto, menu_principal, modo): Reinicia el juego para continuar jugando.
+- repetir_no(self, menu_principal): Finaliza el juego y muestra el menú principal.
+- cerrar_ventana(self): Cierra la ventana de juego y restaura la ventana principal.
+- crear_contador(self, num_letras_conseguidas, num_letras_faltantes): Crea y muestra un contador de progreso en la
+ventana de juego.
+- crear_ventana(self, num_letras_faltantes): Crea y muestra una nueva ventana de juego.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.cerrar_ventana">
+<span class="sig-name descname"><span class="pre">cerrar_ventana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.cerrar_ventana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.cerrar_ventana" title="Link to this definition">¶</a></dt>
+<dd><p>Cierra la ventana de juego y restaura la ventana principal.</p>
+<p>Esta función se invoca cuando el jugador decide cerrar la ventana de juego en medio de una partida.
+Cierra la ventana del juego actual, restaura la visibilidad de la ventana principal y detiene la partida.</p>
+<p>Detalles:
+La función establece el atributo <cite>salida</cite> en <cite>False</cite>, lo que detiene la partida actual. Luego, utiliza
+los métodos <cite>withdraw()</cite> y <cite>destroy()</cite> en el objeto <cite>menu</cite> para cerrar la ventana de juego actual.</p>
+<p>Finalmente, utiliza <cite>deiconify()</cite> en el objeto <cite>menu_principal</cite> para restaurar la visibilidad de la
+ventana principal que pudo haber sido ocultada cuando se abrió la ventana de juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.crear_contador">
+<span class="sig-name descname"><span class="pre">crear_contador</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_letras_conseguidas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_letras_faltantes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.crear_contador"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.crear_contador" title="Link to this definition">¶</a></dt>
+<dd><p>Crea y muestra un contador de progreso en la ventana de juego.</p>
+<p>Esta función crea y muestra un contador de progreso en la ventana de juego actual.
+El contador muestra la cantidad de letras conseguidas y el total de letras faltantes
+en el juego.</p>
+<p>Parámetros:
+:param num_letras_conseguidas: El número de letras conseguidas hasta el momento.
+:param num_letras_faltantes: El número total de letras faltantes en el juego.</p>
+<p>Detalles:
+La función crea un marco (<cite>contador_frame</cite>) en la ventana de juego donde se mostrará
+el contador. Luego, crea una etiqueta (<cite>contador_label</cite>) en el marco para mostrar
+la información del contador en el formato «letras_conseguidas / letras_faltantes».</p>
+<p>Los parámetros <cite>num_letras_conseguidas</cite> y <cite>num_letras_faltantes</cite> se utilizan para
+mostrar los valores actuales en el contador.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>La etiqueta del contador creada.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.crear_ventana">
+<span class="sig-name descname"><span class="pre">crear_ventana</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_letras_faltantes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.crear_ventana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.crear_ventana" title="Link to this definition">¶</a></dt>
+<dd><p>Crea y muestra una nueva ventana de juego.</p>
+<p>Esta función crea y muestra una nueva ventana de juego utilizando la librería Tkinter.
+La ventana muestra la interfaz gráfica del juego, incluyendo letras o caracteres
+que el jugador debe identificar y una barra de progreso.</p>
+<p>Parámetros:
+:param num_letras_faltantes: El número total de letras faltantes en el juego.</p>
+<p>Detalles:
+La función utiliza la clase Toplevel para crear una nueva ventana secundaria que
+contendrá la interfaz gráfica del juego. Se configuran varias propiedades de la ventana,
+como su tamaño, posición, título y el ícono que se muestra en la barra de título.</p>
+<p>Luego, se llama a la función <cite>crear_contador</cite> para crear y mostrar un contador de progreso
+en la ventana de juego. El contador mostrará la cantidad de letras conseguidas y el total
+de letras faltantes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.espanol_a_japones">
+<span class="sig-name descname"><span class="pre">espanol_a_japones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caracteres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto_elegido</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.espanol_a_japones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.espanol_a_japones" title="Link to this definition">¶</a></dt>
+<dd><p>Inicia el modo de juego de traducción de español a japonés.</p>
+<p>Esta función implementa el modo de juego en el que el jugador debe traducir palabras o frases del
+español al japonés. Muestra una ventana con una palabra o frase en español y varias opciones en japonés,
+de las cuales el jugador debe elegir la traducción correcta.</p>
+<p>Parámetros:
+:param caracteres: Un diccionario de palabras/frases en español y sus traducciones en japonés.
+:param alfabeto_elegido: El alfabeto elegido para el juego (hiragana o katakana).
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La función inicializa variables y ajusta la configuración para el modo de juego.
+Luego, inicia un ciclo en el cual se presentan palabras/frases en español junto con varias opciones
+en japonés. El jugador debe seleccionar la opción correcta y se verifica su respuesta.</p>
+<p>Si el jugador elige correctamente, se elimina la palabra/frase del diccionario de caracteres a adivinar
+(<cite>caracteres</cite>). Si elige incorrectamente, se muestra un mensaje de error con la respuesta correcta.</p>
+<p>Al finalizar el juego, se guardan los datos de progreso y se ofrece al jugador la opción de repetir el juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.generar_opciones">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generar_opciones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caracteres_copia</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caracteres_originales</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.generar_opciones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.generar_opciones" title="Link to this definition">¶</a></dt>
+<dd><p>Genera una lista de opciones posibles para el juego de traducción.</p>
+<p>Esta función crea una lista de opciones posibles para que el jugador elija durante el juego
+de traducción de español a japonés. Estas opciones incluyen dos caracteres seleccionados al azar
+de los caracteres copia y uno de los caracteres originales.</p>
+<p>Parámetros:
+:param caracteres_copia: Un diccionario que contiene los caracteres disponibles para el juego.
+:param caracteres_originales: Un diccionario que contiene todos los caracteres originales.</p>
+<p>Detalles:
+La función elige al azar una opción original del diccionario de caracteres originales.
+Luego, selecciona dos opciones al azar del diccionario de caracteres copia, asegurándose de que
+sean diferentes de la opción original. Estas opciones se combinan en una lista llamada <cite>opciones_copia</cite>.</p>
+<p>Finalmente, la opción original se agrega a la lista <cite>opciones_copia</cite>, y la lista resultante se
+mezcla al azar utilizando <cite>random.shuffle()</cite> para asegurar que las opciones no estén en un orden predecible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Una lista de opciones posibles para que el jugador elija durante el juego.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.japones_a_espanol">
+<span class="sig-name descname"><span class="pre">japones_a_espanol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caracteres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto_elegido</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.japones_a_espanol"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.japones_a_espanol" title="Link to this definition">¶</a></dt>
+<dd><p>Inicia el juego en el modo japonés a español.</p>
+<p>Donde se muestran caracteres japoneses y el jugador debe adivinar su significado en español.</p>
+<p>Parámetros:
+:param caracteres: Un diccionario de caracteres japoneses como claves y sus significados como valores.
+:param alfabeto_elegido: El alfabeto elegido para el juego, como hiragana o katakana.
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La función recibe el diccionario “caracteres” que contiene caracteres japoneses y sus significados
+en español. “alfabeto_elegido” especifica el alfabeto seleccionado para el juego, y “menu_principal” es el
+objeto Tkinter de la ventana principal del programa.</p>
+<p>La función itera a través de los caracteres presentados en el diccionario “caracteres”, mostrando cada uno al
+jugador. El jugador debe adivinar el significado en español del carácter japonés presentado. Si la respuesta
+es correcta, el carácter se elimina del diccionario y el jugador avanza al siguiente. Si la respuesta es
+incorrecta, se muestra un mensaje de error y se almacena la respuesta incorrecta en el diccionario de errores.</p>
+<p>Luego de completar todos los caracteres o si el jugador decide salir, se guardan los datos de progreso
+utilizando la instancia de la clase “GestionDatos” y se ofrece la opción de repetir el juego o volver al menú
+principal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.jugar">
+<span class="sig-name descname"><span class="pre">jugar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caracteres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modo_juego</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto_elegido</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.jugar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.jugar" title="Link to this definition">¶</a></dt>
+<dd><p>Inicia el juego de aprendizaje de caracteres japoneses.</p>
+<p>Esta función inicia el juego de aprendizaje de caracteres japoneses. Los caracteres se presentan al jugador,
+quien debe adivinar su significado cos dos modos: “modo japonés a español” o “modo español a japonés”.</p>
+<p>Parámetros:
+:param caracteres: Un diccionario de caracteres japoneses como claves y sus significados o
+pronunciaciones como valores.
+:param modo_juego: Un valor booleano que indica si el juego se ejecuta en modo
+japonés a español (True) o español a japonés (False).
+:param alfabeto_elegido: El alfabeto elegido para el
+juego, como hiragana o katakana.
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La función recibe el diccionario “caracteres” que contiene los caracteres japoneses y sus
+significados o pronunciaciones. “modo_juego” determina el modo de juego (japonés a español o español a
+japonés). “alfabeto_elegido” especifica el alfabeto seleccionado para el juego.</p>
+<p>La función itera a través de los caracteres presentados en el diccionario “caracteres”, mostrando cada uno al
+jugador. Dependiendo del modo de juego, llama a la función “japones_a_espanol” o “espanol_a_japones” para
+manejar la interacción y la validación de respuestas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.repetir">
+<span class="sig-name descname"><span class="pre">repetir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caracteres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto_elegido</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numero_errores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errores</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.repetir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.repetir" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra una ventana emergente que pregunta al jugador si desea repetir el juego.</p>
+<p>Esta función crea una ventana emergente que pregunta al jugador si desea repetir el juego
+con los mismos caracteres y configuración. El jugador puede elegir «Sí» o «No» en función
+de su elección.</p>
+<p>Parámetros:
+:param caracteres: Un diccionario que contiene los caracteres para el juego.
+:param alfabeto_elegido: El alfabeto elegido para el juego (hiragana o katakana).
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.
+:param modo: Un valor booleano que indica el modo de juego (True para japonés a español, False para español a
+japonés).
+:param numero_errores: El número de errores cometidos durante el juego.
+:param errores: Un diccionario que contiene los errores cometidos y sus valores.</p>
+<p>Detalles:
+La función crea una nueva ventana emergente utilizando <cite>Toplevel</cite>, con el título «¿Quieres repetir?»
+y un tamaño fijo. Se agregan etiquetas para mostrar el texto «¿Quieres repetir?», el número de errores
+cometidos y la fecha actual. Luego, se colocan dos botones «Sí» y «No» en el centro de la ventana.</p>
+<p>Los botones «Sí» y «No» están asociados a las funciones <cite>repetir_si()</cite> y <cite>repetir_no()</cite> respectivamente,
+que manejan la lógica de repetir el juego o regresar al menú principal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.repetir_no">
+<span class="sig-name descname"><span class="pre">repetir_no</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.repetir_no"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.repetir_no" title="Link to this definition">¶</a></dt>
+<dd><p>Finaliza el juego y muestra el menú principal.</p>
+<p>Esta función finaliza el juego y muestra nuevamente el menú principal del programa.
+Se invoca cuando el jugador decide no repetir el juego y regresar al menú principal.</p>
+<p>Parámetros:
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La función destruye la ventana actual del juego utilizando el método <cite>destroy()</cite>, lo que
+cierra la ventana emergente del juego actual.</p>
+<p>Luego, utiliza el método <cite>deiconify()</cite> en el objeto <cite>menu_principal</cite> para restaurar la
+visibilidad y el enfoque en la ventana principal del programa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="juego.Juego.repetir_si">
+<span class="sig-name descname"><span class="pre">repetir_si</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">letras</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#Juego.repetir_si"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.Juego.repetir_si" title="Link to this definition">¶</a></dt>
+<dd><p>Reinicia el juego para continuar jugando.</p>
+<p>Esta función reinicia el juego para continuar jugando con los mismos parámetros que
+se utilizaron en la partida anterior. Puede reiniciar el juego en modo japonés-español
+o español-japonés, según el modo en que se estaba jugando.</p>
+<p>Parámetros:
+:param letras: El diccionario de letras o caracteres a utilizar en el juego.
+:param alfabeto: El alfabeto elegido para el juego (hiragana o katakana).
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.
+:param modo: Indicador del modo de juego (True para japonés-español, False para español-japonés).</p>
+<p>Detalles:
+La función destruye la ventana actual del juego utilizando el método <cite>destroy()</cite>, lo que
+cierra la ventana emergente del juego actual.</p>
+<p>Luego, si el modo es japonés-español (<cite>True</cite>), llama a la función <cite>japones_a_espanol</cite> para
+iniciar un nuevo juego en modo japonés-español. Si el modo es español-japonés (<cite>False</cite>),
+llama a la función <cite>espanol_a_japones</cite> para iniciar un nuevo juego en modo español-japonés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="juego.main">
+<span class="sig-prename descclassname"><span class="pre">juego.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">letras</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modo_juego</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfabeto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/juego.html#main"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#juego.main" title="Link to this definition">¶</a></dt>
+<dd><p>Función principal que inicia el juego.</p>
+<p>Esta función crea una instancia de la clase Juego y la utiliza para iniciar
+y controlar el flujo del juego. El juego se juega de acuerdo al modo especificado
+(japonés a español o español a japonés) y utiliza las letras y el alfabeto
+proporcionados.</p>
+<p>Parámetros:
+:param letras: Un diccionario que contiene las letras o caracteres del juego.
+:param modo_juego: Un valor booleano que indica el modo de juego (japonés a español o español a japonés).
+:param alfabeto: El alfabeto elegido para el juego (hiragana o katakana).
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La función crea una instancia de la clase Juego llamada “juego” y luego invoca el método
+“jugar” de la instancia creada. Este método controlará el flujo del juego y lo jugará según
+el modo y los datos proporcionados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">datos module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">juego module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#juego.Juego"><code class="docutils literal notranslate"><span class="pre">Juego</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#juego.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="datos.html" title="capítulo anterior">datos module</a></li>
+      <li>Next: <a href="main.html" title="próximo capítulo">main module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/juego.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

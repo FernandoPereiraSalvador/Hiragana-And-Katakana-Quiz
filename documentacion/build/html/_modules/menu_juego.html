@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>menu_juego &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=4936afed"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para menu_juego</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span>
+<span class="kn">import</span> <span class="nn">alfabeto.hiragana</span>
+<span class="kn">import</span> <span class="nn">alfabeto.katakana</span>
+<span class="kn">import</span> <span class="nn">juego</span>
+<span class="kn">from</span> <span class="nn">tooltip</span> <span class="kn">import</span> <span class="n">Tooltip</span>
+
+
+<div class="viewcode-block" id="MenuJuego">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.MenuJuego">[documentos]</a>
+<span class="k">class</span> <span class="nc">MenuJuego</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que representa el menú principal del juego.</span>
+
+<span class="sd">    Esta clase crea una ventana de menú donde el jugador puede elegir entre los modos</span>
+<span class="sd">    de juego &quot;Japonés a Español&quot; o &quot;Español a Japonés&quot;.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param alfabeto_usado: Booleano que indica si se usará el alfabeto hiragana (True) o katakana (False).</span>
+<span class="sd">    :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">    Métodos:</span>
+<span class="sd">    - __init__(self, alfabeto_usado, menu_principal): Constructor que inicializa la ventana y otros atributos.</span>
+<span class="sd">    - japones_a_espanol(self): Método que inicia el juego en el modo &quot;Japonés a Español&quot;.</span>
+<span class="sd">    - espanol_a_japones(self): Método que inicia el juego en el modo &quot;Español a Japonés&quot;.</span>
+<span class="sd">    - crear_interfaz(self): Método que crea la interfaz gráfica del menú.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alfabeto_usado</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor de la clase MenuJuego.</span>
+
+<span class="sd">        Este constructor inicializa una instancia de MenuJuego, creando la interfaz gráfica para que el jugador elija</span>
+<span class="sd">        entre los modos &quot;Japonés a Español&quot; y &quot;Español a Japonés&quot;.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param alfabeto_usado: Booleano que indica si se usará el alfabeto hiragana (True) o katakana (False).</span>
+<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función constructora crea una ventana secundaria (`Toplevel`) que actúa como el menú de selección de modo.</span>
+<span class="sd">        Si `alfabeto_usado` es True, se cargarán imágenes correspondientes al alfabeto hiragana para los botones.</span>
+<span class="sd">        Si es False, se cargarán imágenes para el alfabeto katakana.</span>
+
+<span class="sd">        La ventana de menú se configura con un tamaño fijo y una posición en la pantalla. Se establece la acción a</span>
+<span class="sd">        realizar cuando se intenta cerrar la ventana mediante el protocolo &quot;WM_DELETE_WINDOW&quot;, que llamará a la</span>
+<span class="sd">        función `cerrar_ventana` para ocultar y destruir la ventana de menú y restaurar la ventana principal.</span>
+
+<span class="sd">        Finalmente, se llama a la función `crear_interfaz` para generar la interfaz gráfica de selección de modo.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Atributo que almacenará la decisión del modo de juego elegido</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decision</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span> <span class="o">=</span> <span class="n">menu_principal</span>
+
+        <span class="c1"># Crear la ventana de menú como una ventana secundaria (Toplevel) de la ventana principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">)</span>
+
+        <span class="c1"># Cargar imágenes para los botones del menú según el alfabeto utilizado</span>
+        <span class="k">if</span> <span class="n">alfabeto_usado</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imagen_japones_a_espanol</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/japonesHiragana.png&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imagen_espanol_a_japones</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/españolHiragana.png&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imagen_japones_a_espanol</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/japonesKatakana.png&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imagen_espanol_a_japones</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/españolKatakana.png&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Configurar la ventana de menú</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">cerrar_ventana</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Modo&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Almacenar la decisión del alfabeto y crear la interfaz gráfica del menú</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alfabeto</span> <span class="o">=</span> <span class="n">alfabeto_usado</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crear_interfaz</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MenuJuego.japones_a_espanol">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.MenuJuego.japones_a_espanol">[documentos]</a>
+    <span class="k">def</span> <span class="nf">japones_a_espanol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cambia la decisión de modo a &quot;Japonés a Español&quot; y abre la ventana de selección de caracteres.</span>
+
+<span class="sd">        Esta función se activa cuando el jugador elige el modo &quot;Japonés a Español&quot; en el menú de selección de modo.</span>
+<span class="sd">        Cambia el atributo `decision` de la clase a `True`, indicando que se ha seleccionado el modo &quot;Japonés a</span>
+<span class="sd">        Español&quot;.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función establece `self.decision` en `True` para indicar que el modo de juego seleccionado es</span>
+<span class="sd">        &quot;Japonés a Español&quot;. Luego, utiliza el método `destroy()` en `self.menu` para cerrar la ventana actual del</span>
+<span class="sd">        menú.</span>
+
+<span class="sd">        Se crea una instancia de la clase `CaracteresSelector`, pasando los parámetros `self.alfabeto` (decisión del</span>
+<span class="sd">        alfabeto), `self.decision` (decisión de modo) y `self.menu_principal` (ventana principal del programa). Esto</span>
+<span class="sd">        abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Cambiar la decisión a &quot;Japonés a Español&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decision</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Destruir la ventana de menú actual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="c1"># Crear una instancia de la clase CaracteresSelector para la selección de caracteres</span>
+        <span class="n">CaracteresSelector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alfabeto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decision</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MenuJuego.espanol_a_japones">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.MenuJuego.espanol_a_japones">[documentos]</a>
+    <span class="k">def</span> <span class="nf">espanol_a_japones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cambia la decisión de modo a &quot;Español a Japonés&quot; y abre la ventana de selección de caracteres.</span>
+
+<span class="sd">        Esta función se activa cuando el jugador elige el modo &quot;Español a Japonés&quot; en el menú de selección de modo.</span>
+<span class="sd">        Cambia el atributo `decision` de la clase a `False`, indicando que se ha seleccionado el modo &quot;Español a</span>
+<span class="sd">        Japonés&quot;.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función establece `self.decision` en `False` para indicar que el modo de juego seleccionado es</span>
+<span class="sd">        &quot;Español a Japonés&quot;. Luego, utiliza el método `destroy()` en `self.menu` para cerrar la ventana actual del</span>
+<span class="sd">        menú.</span>
+
+<span class="sd">        Se crea una instancia de la clase `CaracteresSelector`, pasando los parámetros `self.alfabeto` (decisión del</span>
+<span class="sd">        alfabeto), `self.decision` (decisión de modo) y `self.menu_principal` (ventana principal del programa). Esto</span>
+<span class="sd">        abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Cambiar la decisión a &quot;Español a Japonés&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decision</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Destruir la ventana de menú actual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="c1"># Crear una instancia de la clase CaracteresSelector para la selección de caracteres</span>
+        <span class="n">CaracteresSelector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alfabeto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decision</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MenuJuego.crear_interfaz">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.MenuJuego.crear_interfaz">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear_interfaz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crea y muestra la interfaz gráfica para la selección de modo de juego.</span>
+
+<span class="sd">        Esta función se encarga de crear y mostrar la interfaz gráfica en la ventana de selección de modo de juego.</span>
+<span class="sd">        La interfaz incluye dos botones con imágenes correspondientes a los modos de juego disponibles: &quot;Japonés a</span>
+<span class="sd">        Español&quot; y &quot;Español a Japonés&quot;.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función crea dos botones de la clase `tk.Button` para los modos de juego &quot;Japonés a Español&quot; y</span>
+<span class="sd">        &quot;Español a Japonés&quot;. Cada botón tiene una imagen asociada (`self.imagen_japones_a_espanol` o</span>
+<span class="sd">        `self.imagen_espanol_a_japones`), un comando que se activará cuando se haga clic en el botón y dimensiones de</span>
+<span class="sd">        ancho y alto.</span>
+
+<span class="sd">        Los botones se posicionan en la ventana utilizando el método `place()` y las coordenadas `(x, y)` especificadas.</span>
+<span class="sd">        El botón &quot;Japonés a Español&quot; se coloca en la posición `(65, 50)` y el botón &quot;Español a Japonés&quot; se coloca en la</span>
+<span class="sd">        posición `(500, 50)`.</span>
+
+<span class="sd">        Cuando se hace clic en cualquiera de los botones, se ejecutará el comando correspondiente (</span>
+<span class="sd">        `self.japones_a_espanol` o `self.espanol_a_japones`) para cambiar el modo de juego y abrir la ventana de</span>
+<span class="sd">        selección de caracteres.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Crear botón para el modo &quot;Japonés a Español&quot;</span>
+        <span class="n">hiragana_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">japones_a_espanol</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imagen_japones_a_espanol</span>
+        <span class="p">)</span>
+        <span class="n">hiragana_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+        <span class="c1"># Crear botón para el modo &quot;Español a Japonés&quot;</span>
+        <span class="n">katakana_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">espanol_a_japones</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imagen_espanol_a_japones</span>
+        <span class="p">)</span>
+        <span class="n">katakana_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CaracteresSelector">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector">[documentos]</a>
+<span class="k">class</span> <span class="nc">CaracteresSelector</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que representa la ventana de selección de caracteres del juego.</span>
+
+<span class="sd">    Esta clase se encarga de manejar la ventana de selección de caracteres del juego, permitiendo al jugador</span>
+<span class="sd">    elegir diferentes conjuntos de caracteres para practicar.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param decision_alfabeto (bool): Indica si se usará el alfabeto de hiragana (True) o katakana (False).</span>
+<span class="sd">    :param decision_modo (bool): Indica el modo de juego: Japonés a Español (True) o Español a Japonés (False).</span>
+<span class="sd">    :param menu_principal: La ventana principal del menú.</span>
+
+<span class="sd">    Attributos:</span>
+<span class="sd">        opcion_vocales (bool): Indica si la opción de caracteres de vocales está seleccionada.</span>
+<span class="sd">        opcion_basico (bool): Indica si la opción de caracteres básicos está seleccionada.</span>
+<span class="sd">        opcion_compuesto (bool): Indica si la opción de caracteres compuestos está seleccionada.</span>
+<span class="sd">        opcion_combinado1 (bool): Indica si la opción de caracteres combinados tipo 1 está seleccionada.</span>
+<span class="sd">        opcion_combinado2 (bool): Indica si la opción de caracteres combinados tipo 2 está seleccionada.</span>
+<span class="sd">        opcion_vocales_var: Variable booleana asociada a la opción de vocales.</span>
+<span class="sd">        opcion_basico_var: Variable booleana asociada a la opción de caracteres básicos.</span>
+<span class="sd">        opcion_compuesto_var: Variable booleana asociada a la opción de caracteres compuestos.</span>
+<span class="sd">        opcion_combinado1_var: Variable booleana asociada a la opción de caracteres combinados tipo 1.</span>
+<span class="sd">        opcion_combinado2_var: Variable booleana asociada a la opción de caracteres combinados tipo 2.</span>
+<span class="sd">        menu_principal: La ventana principal del menú.</span>
+<span class="sd">        decisionAlfabeto (bool): La decisión sobre qué alfabeto se usará.</span>
+<span class="sd">        decisionModo (bool): La decisión sobre el modo de juego.</span>
+<span class="sd">        caracteres (dict): Un diccionario que almacenará los caracteres seleccionados.</span>
+
+<span class="sd">    Métodos:</span>
+<span class="sd">        __init__(decision_alfabeto, decision_modo, menu_principal): Inicializa la clase</span>
+<span class="sd">        toggle_opcion(opcion): Cambia el estado de una opción de caracteres.</span>
+<span class="sd">        continuar(): Oculta la ventana actual y abre la ventana de selección de caracteres.</span>
+<span class="sd">        crear_interfaz(alfabeto_usado): Crea la interfaz gráfica para la selección de opciones de caracteres.</span>
+<span class="sd">        seleccionar_caracteres(): Procesa las opciones seleccionadas y almacena los caracteres correspondientes.</span>
+<span class="sd">        iniciar_juego(): Inicia el juego con los caracteres seleccionados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decision_alfabeto</span><span class="p">,</span> <span class="n">decision_modo</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicializa la clase CaracteresSelector con las opciones y configuraciones de la ventana de selección de</span>
+<span class="sd">        caracteres.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param decision_alfabeto (bool): Indica si se usará el alfabeto de hiragana (True) o katakana (False).</span>
+<span class="sd">        :param decision_modo (bool): Indica el modo de juego: Japonés a Español (True) o Español a Japonés (False).</span>
+<span class="sd">        :param menu_principal: La ventana principal del menú.</span>
+
+<span class="sd">        Atributos:</span>
+<span class="sd">            opcion_vocales (bool): Indica si se ha seleccionado la opción de caracteres &quot;Vocales&quot;.</span>
+<span class="sd">            opcion_basico (bool): Indica si se ha seleccionado la opción de caracteres &quot;Básico&quot;.</span>
+<span class="sd">            opcion_compuesto (bool): Indica si se ha seleccionado la opción de caracteres &quot;Compuesto&quot;.</span>
+<span class="sd">            opcion_combinado1 (bool): Indica si se ha seleccionado la opción de caracteres &quot;Combinado 1&quot;.</span>
+<span class="sd">            opcion_combinado2 (bool): Indica si se ha seleccionado la opción de caracteres &quot;Combinado 2&quot;.</span>
+<span class="sd">            opcion_vocales_var: Variable booleana asociada a la opción &quot;Vocales&quot;.</span>
+<span class="sd">            opcion_basico_var: Variable booleana asociada a la opción &quot;Básico&quot;.</span>
+<span class="sd">            opcion_compuesto_var: Variable booleana asociada a la opción &quot;Compuesto&quot;.</span>
+<span class="sd">            opcion_combinado1_var: Variable booleana asociada a la opción &quot;Combinado 1&quot;.</span>
+<span class="sd">            opcion_combinado2_var: Variable booleana asociada a la opción &quot;Combinado 2&quot;.</span>
+<span class="sd">            menu_principal: La ventana principal del menú.</span>
+<span class="sd">            decisionAlfabeto (bool): El valor de la decisión sobre el alfabeto.</span>
+<span class="sd">            decisionModo (bool): El valor de la decisión sobre el modo de juego.</span>
+<span class="sd">            caracteres (dict): Diccionario para almacenar los caracteres seleccionados.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función constructora inicializa una instancia de la clase CaracteresSelector con las opciones</span>
+<span class="sd">        de configuración y las decisiones tomadas por el usuario en la ventana de selección de caracteres. Los</span>
+<span class="sd">        parámetros `decision_alfabeto` y `decision_modo` determinan el alfabeto utilizado y el modo de juego,</span>
+<span class="sd">        respectivamente. El parámetro `menu_principal` es la ventana principal del menú que llamó a esta instancia.</span>
+
+<span class="sd">        La función también crea y muestra la interfaz gráfica de la ventana de selección de caracteres, que incluye</span>
+<span class="sd">        opciones para seleccionar los tipos de caracteres a utilizar en el juego. Las variables de opción y las</span>
+<span class="sd">        imágenes asociadas a las opciones se configuran en esta función.</span>
+
+<span class="sd">        Las variables de opción (`opcion_vocales`, `opcion_basico`, etc.) se utilizan para rastrear si se ha</span>
+<span class="sd">        seleccionado cada opción de caracteres. Las variables de tipo `tk.BooleanVar` (como `opcion_vocales_var`) se</span>
+<span class="sd">        asocian a los botones de selección de opciones en la interfaz gráfica.</span>
+
+<span class="sd">        Los atributos `decisionAlfabeto` y `decisionModo` almacenan las decisiones tomadas sobre el alfabeto y el</span>
+<span class="sd">        modo de juego.</span>
+
+<span class="sd">        El diccionario `caracteres` se utilizará posteriormente para almacenar los caracteres seleccionados por el</span>
+<span class="sd">        usuario para jugar.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Inicialización de variables de opción para el tipo de caracteres</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Inicialización de variables de tipo BooleanVar para asociar a los botones de selección</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">BooleanVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">BooleanVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">BooleanVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">BooleanVar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2_var</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">BooleanVar</span><span class="p">()</span>
+
+        <span class="c1"># Asignación de la ventana principal del menú</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span> <span class="o">=</span> <span class="n">menu_principal</span>
+
+        <span class="c1"># Almacenamiento de decisiones tomadas sobre alfabeto y modo de juego</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decisionAlfabeto</span> <span class="o">=</span> <span class="n">decision_alfabeto</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decisionModo</span> <span class="o">=</span> <span class="n">decision_modo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Creación de la ventana de selección de caracteres</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Caracteres&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">cerrar_ventana</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Menu&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crear_interfaz</span><span class="p">(</span><span class="n">decision_alfabeto</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CaracteresSelector.toggle_opcion">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector.toggle_opcion">[documentos]</a>
+    <span class="k">def</span> <span class="nf">toggle_opcion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opcion</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cambia el estado de una opción de caracteres.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param opcion: (str) La opción de caracteres cuyo estado se cambiará.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función se utiliza para cambiar el estado de una opción de caracteres. Recibe como argumento una cadena que</span>
+<span class="sd">        representa la opción (&quot;Vocales&quot;, &quot;Basico&quot;, etc.) y cambia el valor correspondiente en las variables de estado</span>
+<span class="sd">        (`opcion_vocales`, `opcion_basico`, etc.).</span>
+
+<span class="sd">        Si la opción estaba en `True`, cambiará a `False`, y viceversa. Esto permite al usuario seleccionar y</span>
+<span class="sd">        deseleccionar las opciones según sea necesario para el juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Cambio del estado de la opción correspondiente</span>
+        <span class="k">if</span> <span class="n">opcion</span> <span class="o">==</span> <span class="s2">&quot;Vocales&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales</span>
+        <span class="k">if</span> <span class="n">opcion</span> <span class="o">==</span> <span class="s2">&quot;Basico&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico</span>
+        <span class="k">if</span> <span class="n">opcion</span> <span class="o">==</span> <span class="s2">&quot;Compuesto&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto</span>
+        <span class="k">if</span> <span class="n">opcion</span> <span class="o">==</span> <span class="s2">&quot;Combinado 1&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1</span>
+        <span class="k">if</span> <span class="n">opcion</span> <span class="o">==</span> <span class="s2">&quot;Combinado 2&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2</span></div>
+
+
+<div class="viewcode-block" id="CaracteresSelector.continuar">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector.continuar">[documentos]</a>
+    <span class="k">def</span> <span class="nf">continuar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Oculta la ventana actual y procede a la selección de caracteres.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función se activa cuando el botón &quot;Continuar&quot; en la ventana de selección de caracteres es presionado.</span>
+<span class="sd">        Su propósito es ocultar la ventana actual (ventana de selección de caracteres) utilizando el método `withdraw()`</span>
+<span class="sd">        y luego proceder a la selección de caracteres invocando la función `seleccionar_caracteres()`.</span>
+
+<span class="sd">        La función `seleccionar_caracteres()` es responsable de determinar qué opciones de caracteres fueron</span>
+<span class="sd">        seleccionadas y construir el conjunto final de caracteres a utilizar en el juego.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seleccionar_caracteres</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CaracteresSelector.crear_interfaz">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector.crear_interfaz">[documentos]</a>
+    <span class="k">def</span> <span class="nf">crear_interfaz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alfabeto_usado</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crea la interfaz gráfica de la ventana de selección de opciones de caracteres.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param alfabeto_usado: Indica si se usará el alfabeto de hiragana (True) o katakana (False).</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        Esta función es responsable de crear la interfaz gráfica de la ventana de selección de opciones de</span>
+<span class="sd">        caracteres. Utiliza la biblioteca tkinter para crear los elementos gráficos, como los botones de selección y</span>
+<span class="sd">        los checkbuttons. También se encarga de establecer los comandos asociados a los checkbuttons y de mostrar</span>
+<span class="sd">        tooltips informativos cuando el cursor del mouse pasa sobre ellos.</span>
+
+<span class="sd">        Después de construir la interfaz gráfica, establece las dimensiones y la posición de la ventana mediante el</span>
+<span class="sd">        método `geometry()` y empaqueta los elementos en la ventana. Finalmente, muestra la ventana con las opciones de</span>
+<span class="sd">        selección de caracteres.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Crea un frame para las opciones</span>
+        <span class="n">opciones_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
+        <span class="n">opciones_frame</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Crea una instancia de Tooltip para mostrar información adicional</span>
+        <span class="n">tooltip</span> <span class="o">=</span> <span class="n">Tooltip</span><span class="p">()</span>
+
+        <span class="c1"># Define las opciones de caracteres basándose en el alfabeto usado</span>
+        <span class="k">if</span> <span class="n">alfabeto_usado</span><span class="p">:</span>
+            <span class="n">vocales</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">vocales</span>
+            <span class="n">basico</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">basico</span>
+            <span class="n">compuesto</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">compuesto</span>
+            <span class="n">combinado_1</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">combinado_1</span>
+            <span class="n">combinado_2</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">combinado_2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vocales</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">vocales</span>
+            <span class="n">basico</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">basico</span>
+            <span class="n">compuesto</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">compuesto</span>
+            <span class="n">combinado_1</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">combinado_1</span>
+            <span class="n">combinado_2</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span><span class="o">.</span><span class="n">combinado_2</span>
+
+        <span class="c1"># Lista de opciones con sus variables asociadas y textos tooltip</span>
+        <span class="n">opciones</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;Vocales&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales_var</span><span class="p">,</span> <span class="n">vocales</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;Básico&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico_var</span><span class="p">,</span> <span class="n">basico</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;Compuesto&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto_var</span><span class="p">,</span> <span class="n">compuesto</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;Combinado 1&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1_var</span><span class="p">,</span> <span class="n">combinado_1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;Combinado 2&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2_var</span><span class="p">,</span> <span class="n">combinado_2</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">checkbuttons</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Itera sobre las opciones para crear checkbuttons y asociarles comandos y tooltips</span>
+        <span class="k">for</span> <span class="n">opcion</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">tooltip_text</span> <span class="ow">in</span> <span class="n">opciones</span><span class="p">:</span>
+            <span class="n">checkbutton</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Checkbutton</span><span class="p">(</span>
+                <span class="n">opciones_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">opcion</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span> <span class="n">op</span><span class="o">=</span><span class="n">opcion</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">toggle_opcion</span><span class="p">(</span><span class="n">op</span><span class="p">),</span>
+                <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="n">variable</span><span class="o">=</span><span class="n">var</span>
+            <span class="p">)</span>
+            <span class="c1"># Asocia tooltips a los eventos de entrada y salida del mouse</span>
+            <span class="n">checkbutton</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Enter&gt;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">event</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">tooltip_text</span><span class="p">:</span> <span class="n">tooltip</span><span class="o">.</span><span class="n">mostrar_tooltip</span><span class="p">(</span><span class="n">checkbutton</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+            <span class="n">checkbutton</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Leave&gt;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">event</span><span class="p">:</span> <span class="n">tooltip</span><span class="o">.</span><span class="n">ocultar_tooltip</span><span class="p">())</span>
+            <span class="n">checkbutton</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="n">checkbuttons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">checkbutton</span><span class="p">)</span>
+
+        <span class="c1"># Crea un frame para el botón &quot;Continuar&quot;</span>
+        <span class="n">boton_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
+        <span class="n">boton_frame</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Crea el botón &quot;Continuar&quot; y le asigna un comando</span>
+        <span class="n">boton_continuar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+            <span class="n">boton_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Continuar&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">continuar</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="n">boton_continuar</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="c1"># Establece las dimensiones y posición de la ventana</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CaracteresSelector.seleccionar_caracteres">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector.seleccionar_caracteres">[documentos]</a>
+    <span class="k">def</span> <span class="nf">seleccionar_caracteres</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Selecciona los caracteres basados en las opciones elegidas por el usuario.</span>
+
+<span class="sd">        Detalles: Esta función determina qué caracteres se incluirán en el juego en función de las opciones</span>
+<span class="sd">        seleccionadas por el usuario en la ventana de selección de caracteres. Primero, verifica si se va a utilizar</span>
+<span class="sd">        el alfabeto de hiragana o katakana según la decisión de alfabeto.</span>
+
+<span class="sd">        Luego, utiliza las variables de opción (opcion_vocales, opcion_basico, etc.) para decidir qué conjuntos de</span>
+<span class="sd">        caracteres se deben agregar al diccionario &#39;caracteres&#39;. Cada conjunto se agrega utilizando la operación de</span>
+<span class="sd">        unión (|) para combinar los conjuntos de caracteres seleccionados.</span>
+
+<span class="sd">        Una vez que se han seleccionado los caracteres, se llama a la función &#39;iniciar_juego()&#39; para comenzar el</span>
+<span class="sd">        juego con los caracteres seleccionados.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Determinar qué conjunto de caracteres utilizar según la decisión de alfabeto</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">decisionAlfabeto</span><span class="p">:</span>
+            <span class="n">caracteres_usados</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">hiragana</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">caracteres_usados</span> <span class="o">=</span> <span class="n">alfabeto</span><span class="o">.</span><span class="n">katakana</span>
+
+        <span class="c1"># Agregar conjuntos de caracteres seleccionados al diccionario &#39;caracteres&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_vocales</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">|=</span> <span class="n">caracteres_usados</span><span class="o">.</span><span class="n">vocales</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_basico</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">|=</span> <span class="n">caracteres_usados</span><span class="o">.</span><span class="n">basico</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_compuesto</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">|=</span> <span class="n">caracteres_usados</span><span class="o">.</span><span class="n">compuesto</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">|=</span> <span class="n">caracteres_usados</span><span class="o">.</span><span class="n">combinado_1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">opcion_combinado2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span> <span class="o">|=</span> <span class="n">caracteres_usados</span><span class="o">.</span><span class="n">combinado_2</span>
+
+        <span class="c1"># Iniciar el juego con los caracteres seleccionados</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iniciar_juego</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CaracteresSelector.iniciar_juego">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.CaracteresSelector.iniciar_juego">[documentos]</a>
+    <span class="k">def</span> <span class="nf">iniciar_juego</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicia el juego con las configuraciones y caracteres seleccionados.</span>
+
+<span class="sd">        Detalles: Esta función cierra la ventana actual de selección de caracteres y llama a la función &#39;main&#39; del</span>
+<span class="sd">        módulo &#39;juego&#39; para iniciar el juego con las configuraciones y caracteres seleccionados. Se pasan como</span>
+<span class="sd">        argumentos el diccionario de caracteres seleccionados, la decisión sobre el modo de juego y la decisión sobre</span>
+<span class="sd">        el alfabeto a utilizar.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Cerrar la ventana de selección de caracteres</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="c1"># Llamar a la función principal del módulo &#39;juego&#39; para iniciar el juego</span>
+        <span class="n">juego</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">caracteres</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decisionModo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decisionAlfabeto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="cerrar_ventana">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.cerrar_ventana">[documentos]</a>
+<span class="k">def</span> <span class="nf">cerrar_ventana</span><span class="p">(</span><span class="n">menu</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cierra una ventana secundaria y restaura la visibilidad de la ventana principal.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param menu: La ventana secundaria a cerrar.</span>
+<span class="sd">    :param menu_principal: La ventana principal que se restaurará a la visibilidad.</span>
+
+<span class="sd">    Detalles:</span>
+<span class="sd">    Esta función oculta la ventana secundaria (&#39;menu&#39;) utilizando el método &#39;withdraw()&#39;, luego la destruye con el</span>
+<span class="sd">    método &#39;destroy()&#39;. Posteriormente, hace visible la ventana principal (&#39;menu_principal&#39;) utilizando el método</span>
+<span class="sd">    &#39;deiconify()&#39;, lo que permite que la ventana principal sea nuevamente visible para el usuario.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Ocultar y destruir la ventana secundaria</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="c1"># Restaurar la visibilidad de la ventana principal</span>
+    <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../menu_juego.html#menu_juego.main">[documentos]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">alfabeto_usado</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Función principal para iniciar la aplicación del juego.</span>
+
+<span class="sd">    Detalles:</span>
+<span class="sd">    Esta función es el punto de entrada para iniciar la aplicación del juego. Toma dos argumentos: &#39;alfabeto_usado&#39;</span>
+<span class="sd">    que indica si se utilizará el alfabeto de hiragana o katakana, y &#39;menu_principal&#39; que es la ventana principal</span>
+<span class="sd">    del menú.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param alfabeto_usado: Un valor booleano que indica si se usará el alfabeto de hiragana (True) o katakana (False).</span>
+<span class="sd">    :param menu_principal: La ventana principal del menú.</span>
+
+<span class="sd">    La función crea una instancia de la clase &#39;MenuJuego&#39;, pasando los valores de &#39;alfabeto_usado&#39; y &#39;menu_principal&#39;</span>
+<span class="sd">    como argumentos. Esto inicia la ventana del menú del juego.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">MenuJuego</span><span class="p">(</span><span class="n">alfabeto_usado</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

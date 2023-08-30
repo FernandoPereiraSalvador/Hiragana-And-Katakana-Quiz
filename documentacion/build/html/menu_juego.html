@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>menu_juego module &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=4936afed"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="documentacion" href="modules.html" />
+    <link rel="prev" title="main module" href="main.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-menu_juego">
+<span id="menu-juego-module"></span><h1>menu_juego module<a class="headerlink" href="#module-menu_juego" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">menu_juego.</span></span><span class="sig-name descname"><span class="pre">CaracteresSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decision_alfabeto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision_modo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que representa la ventana de selección de caracteres del juego.</p>
+<p>Esta clase se encarga de manejar la ventana de selección de caracteres del juego, permitiendo al jugador
+elegir diferentes conjuntos de caracteres para practicar.</p>
+<p>Parámetros:
+:param decision_alfabeto (bool): Indica si se usará el alfabeto de hiragana (True) o katakana (False).
+:param decision_modo (bool): Indica el modo de juego: Japonés a Español (True) o Español a Japonés (False).
+:param menu_principal: La ventana principal del menú.</p>
+<dl class="simple">
+<dt>Attributos:</dt><dd><p>opcion_vocales (bool): Indica si la opción de caracteres de vocales está seleccionada.
+opcion_basico (bool): Indica si la opción de caracteres básicos está seleccionada.
+opcion_compuesto (bool): Indica si la opción de caracteres compuestos está seleccionada.
+opcion_combinado1 (bool): Indica si la opción de caracteres combinados tipo 1 está seleccionada.
+opcion_combinado2 (bool): Indica si la opción de caracteres combinados tipo 2 está seleccionada.
+opcion_vocales_var: Variable booleana asociada a la opción de vocales.
+opcion_basico_var: Variable booleana asociada a la opción de caracteres básicos.
+opcion_compuesto_var: Variable booleana asociada a la opción de caracteres compuestos.
+opcion_combinado1_var: Variable booleana asociada a la opción de caracteres combinados tipo 1.
+opcion_combinado2_var: Variable booleana asociada a la opción de caracteres combinados tipo 2.
+menu_principal: La ventana principal del menú.
+decisionAlfabeto (bool): La decisión sobre qué alfabeto se usará.
+decisionModo (bool): La decisión sobre el modo de juego.
+caracteres (dict): Un diccionario que almacenará los caracteres seleccionados.</p>
+</dd>
+<dt>Métodos:</dt><dd><p>__init__(decision_alfabeto, decision_modo, menu_principal): Inicializa la clase
+toggle_opcion(opcion): Cambia el estado de una opción de caracteres.
+continuar(): Oculta la ventana actual y abre la ventana de selección de caracteres.
+crear_interfaz(alfabeto_usado): Crea la interfaz gráfica para la selección de opciones de caracteres.
+seleccionar_caracteres(): Procesa las opciones seleccionadas y almacena los caracteres correspondientes.
+iniciar_juego(): Inicia el juego con los caracteres seleccionados.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.continuar">
+<span class="sig-name descname"><span class="pre">continuar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.continuar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.continuar" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta la ventana actual y procede a la selección de caracteres.</p>
+<p>Detalles:
+Esta función se activa cuando el botón «Continuar» en la ventana de selección de caracteres es presionado.
+Su propósito es ocultar la ventana actual (ventana de selección de caracteres) utilizando el método <cite>withdraw()</cite>
+y luego proceder a la selección de caracteres invocando la función <cite>seleccionar_caracteres()</cite>.</p>
+<p>La función <cite>seleccionar_caracteres()</cite> es responsable de determinar qué opciones de caracteres fueron
+seleccionadas y construir el conjunto final de caracteres a utilizar en el juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.crear_interfaz">
+<span class="sig-name descname"><span class="pre">crear_interfaz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alfabeto_usado</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.crear_interfaz"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.crear_interfaz" title="Link to this definition">¶</a></dt>
+<dd><p>Crea la interfaz gráfica de la ventana de selección de opciones de caracteres.</p>
+<p>Parámetros:
+:param alfabeto_usado: Indica si se usará el alfabeto de hiragana (True) o katakana (False).</p>
+<p>Detalles:
+Esta función es responsable de crear la interfaz gráfica de la ventana de selección de opciones de
+caracteres. Utiliza la biblioteca tkinter para crear los elementos gráficos, como los botones de selección y
+los checkbuttons. También se encarga de establecer los comandos asociados a los checkbuttons y de mostrar
+tooltips informativos cuando el cursor del mouse pasa sobre ellos.</p>
+<p>Después de construir la interfaz gráfica, establece las dimensiones y la posición de la ventana mediante el
+método <cite>geometry()</cite> y empaqueta los elementos en la ventana. Finalmente, muestra la ventana con las opciones de
+selección de caracteres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.iniciar_juego">
+<span class="sig-name descname"><span class="pre">iniciar_juego</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.iniciar_juego"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.iniciar_juego" title="Link to this definition">¶</a></dt>
+<dd><p>Inicia el juego con las configuraciones y caracteres seleccionados.</p>
+<p>Detalles: Esta función cierra la ventana actual de selección de caracteres y llama a la función “main” del
+módulo “juego” para iniciar el juego con las configuraciones y caracteres seleccionados. Se pasan como
+argumentos el diccionario de caracteres seleccionados, la decisión sobre el modo de juego y la decisión sobre
+el alfabeto a utilizar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.seleccionar_caracteres">
+<span class="sig-name descname"><span class="pre">seleccionar_caracteres</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.seleccionar_caracteres"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.seleccionar_caracteres" title="Link to this definition">¶</a></dt>
+<dd><p>Selecciona los caracteres basados en las opciones elegidas por el usuario.</p>
+<p>Detalles: Esta función determina qué caracteres se incluirán en el juego en función de las opciones
+seleccionadas por el usuario en la ventana de selección de caracteres. Primero, verifica si se va a utilizar
+el alfabeto de hiragana o katakana según la decisión de alfabeto.</p>
+<p>Luego, utiliza las variables de opción (opcion_vocales, opcion_basico, etc.) para decidir qué conjuntos de
+caracteres se deben agregar al diccionario “caracteres”. Cada conjunto se agrega utilizando la operación de
+unión (|) para combinar los conjuntos de caracteres seleccionados.</p>
+<p>Una vez que se han seleccionado los caracteres, se llama a la función “iniciar_juego()” para comenzar el
+juego con los caracteres seleccionados.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.toggle_opcion">
+<span class="sig-name descname"><span class="pre">toggle_opcion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opcion</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.toggle_opcion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.toggle_opcion" title="Link to this definition">¶</a></dt>
+<dd><p>Cambia el estado de una opción de caracteres.</p>
+<p>Parámetros:
+:param opcion: (str) La opción de caracteres cuyo estado se cambiará.</p>
+<p>Detalles:
+Esta función se utiliza para cambiar el estado de una opción de caracteres. Recibe como argumento una cadena que
+representa la opción («Vocales», «Basico», etc.) y cambia el valor correspondiente en las variables de estado
+(<cite>opcion_vocales</cite>, <cite>opcion_basico</cite>, etc.).</p>
+<p>Si la opción estaba en <cite>True</cite>, cambiará a <cite>False</cite>, y viceversa. Esto permite al usuario seleccionar y
+deseleccionar las opciones según sea necesario para el juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="menu_juego.MenuJuego">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">menu_juego.</span></span><span class="sig-name descname"><span class="pre">MenuJuego</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alfabeto_usado</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que representa el menú principal del juego.</p>
+<p>Esta clase crea una ventana de menú donde el jugador puede elegir entre los modos
+de juego «Japonés a Español» o «Español a Japonés».</p>
+<p>Parámetros:
+:param alfabeto_usado: Booleano que indica si se usará el alfabeto hiragana (True) o katakana (False).
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Métodos:
+- __init__(self, alfabeto_usado, menu_principal): Constructor que inicializa la ventana y otros atributos.
+- japones_a_espanol(self): Método que inicia el juego en el modo «Japonés a Español».
+- espanol_a_japones(self): Método que inicia el juego en el modo «Español a Japonés».
+- crear_interfaz(self): Método que crea la interfaz gráfica del menú.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.MenuJuego.crear_interfaz">
+<span class="sig-name descname"><span class="pre">crear_interfaz</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego.crear_interfaz"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego.crear_interfaz" title="Link to this definition">¶</a></dt>
+<dd><p>Crea y muestra la interfaz gráfica para la selección de modo de juego.</p>
+<p>Esta función se encarga de crear y mostrar la interfaz gráfica en la ventana de selección de modo de juego.
+La interfaz incluye dos botones con imágenes correspondientes a los modos de juego disponibles: «Japonés a
+Español» y «Español a Japonés».</p>
+<p>Detalles:
+La función crea dos botones de la clase <cite>tk.Button</cite> para los modos de juego «Japonés a Español» y
+«Español a Japonés». Cada botón tiene una imagen asociada (<cite>self.imagen_japones_a_espanol</cite> o
+<cite>self.imagen_espanol_a_japones</cite>), un comando que se activará cuando se haga clic en el botón y dimensiones de
+ancho y alto.</p>
+<p>Los botones se posicionan en la ventana utilizando el método <cite>place()</cite> y las coordenadas <cite>(x, y)</cite> especificadas.
+El botón «Japonés a Español» se coloca en la posición <cite>(65, 50)</cite> y el botón «Español a Japonés» se coloca en la
+posición <cite>(500, 50)</cite>.</p>
+<p>Cuando se hace clic en cualquiera de los botones, se ejecutará el comando correspondiente (
+<cite>self.japones_a_espanol</cite> o <cite>self.espanol_a_japones</cite>) para cambiar el modo de juego y abrir la ventana de
+selección de caracteres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.MenuJuego.espanol_a_japones">
+<span class="sig-name descname"><span class="pre">espanol_a_japones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego.espanol_a_japones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego.espanol_a_japones" title="Link to this definition">¶</a></dt>
+<dd><p>Cambia la decisión de modo a «Español a Japonés» y abre la ventana de selección de caracteres.</p>
+<p>Esta función se activa cuando el jugador elige el modo «Español a Japonés» en el menú de selección de modo.
+Cambia el atributo <cite>decision</cite> de la clase a <cite>False</cite>, indicando que se ha seleccionado el modo «Español a
+Japonés».</p>
+<p>Detalles:
+La función establece <cite>self.decision</cite> en <cite>False</cite> para indicar que el modo de juego seleccionado es
+«Español a Japonés». Luego, utiliza el método <cite>destroy()</cite> en <cite>self.menu</cite> para cerrar la ventana actual del
+menú.</p>
+<p>Se crea una instancia de la clase <cite>CaracteresSelector</cite>, pasando los parámetros <cite>self.alfabeto</cite> (decisión del
+alfabeto), <cite>self.decision</cite> (decisión de modo) y <cite>self.menu_principal</cite> (ventana principal del programa). Esto
+abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu_juego.MenuJuego.japones_a_espanol">
+<span class="sig-name descname"><span class="pre">japones_a_espanol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego.japones_a_espanol"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego.japones_a_espanol" title="Link to this definition">¶</a></dt>
+<dd><p>Cambia la decisión de modo a «Japonés a Español» y abre la ventana de selección de caracteres.</p>
+<p>Esta función se activa cuando el jugador elige el modo «Japonés a Español» en el menú de selección de modo.
+Cambia el atributo <cite>decision</cite> de la clase a <cite>True</cite>, indicando que se ha seleccionado el modo «Japonés a
+Español».</p>
+<p>Detalles:
+La función establece <cite>self.decision</cite> en <cite>True</cite> para indicar que el modo de juego seleccionado es
+«Japonés a Español». Luego, utiliza el método <cite>destroy()</cite> en <cite>self.menu</cite> para cerrar la ventana actual del
+menú.</p>
+<p>Se crea una instancia de la clase <cite>CaracteresSelector</cite>, pasando los parámetros <cite>self.alfabeto</cite> (decisión del
+alfabeto), <cite>self.decision</cite> (decisión de modo) y <cite>self.menu_principal</cite> (ventana principal del programa). Esto
+abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="menu_juego.cerrar_ventana">
+<span class="sig-prename descclassname"><span class="pre">menu_juego.</span></span><span class="sig-name descname"><span class="pre">cerrar_ventana</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#cerrar_ventana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.cerrar_ventana" title="Link to this definition">¶</a></dt>
+<dd><p>Cierra una ventana secundaria y restaura la visibilidad de la ventana principal.</p>
+<p>Parámetros:
+:param menu: La ventana secundaria a cerrar.
+:param menu_principal: La ventana principal que se restaurará a la visibilidad.</p>
+<p>Detalles:
+Esta función oculta la ventana secundaria (“menu”) utilizando el método “withdraw()”, luego la destruye con el
+método “destroy()”. Posteriormente, hace visible la ventana principal (“menu_principal”) utilizando el método
+“deiconify()”, lo que permite que la ventana principal sea nuevamente visible para el usuario.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="menu_juego.main">
+<span class="sig-prename descclassname"><span class="pre">menu_juego.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alfabeto_usado</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#main"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.main" title="Link to this definition">¶</a></dt>
+<dd><p>Función principal para iniciar la aplicación del juego.</p>
+<p>Detalles:
+Esta función es el punto de entrada para iniciar la aplicación del juego. Toma dos argumentos: “alfabeto_usado”
+que indica si se utilizará el alfabeto de hiragana o katakana, y “menu_principal” que es la ventana principal
+del menú.</p>
+<p>Parámetros:
+:param alfabeto_usado: Un valor booleano que indica si se usará el alfabeto de hiragana (True) o katakana (False).
+:param menu_principal: La ventana principal del menú.</p>
+<p>La función crea una instancia de la clase “MenuJuego”, pasando los valores de “alfabeto_usado” y “menu_principal”
+como argumentos. Esto inicia la ventana del menú del juego.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">menu_juego module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#menu_juego.CaracteresSelector"><code class="docutils literal notranslate"><span class="pre">CaracteresSelector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu_juego.MenuJuego"><code class="docutils literal notranslate"><span class="pre">MenuJuego</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu_juego.cerrar_ventana"><code class="docutils literal notranslate"><span class="pre">cerrar_ventana()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu_juego.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="main.html" title="capítulo anterior">main module</a></li>
+      <li>Next: <a href="modules.html" title="próximo capítulo">documentacion</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/menu_juego.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

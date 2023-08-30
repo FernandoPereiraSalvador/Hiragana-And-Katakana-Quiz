@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>tooltip module &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=4936afed"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="documentacion" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-tooltip">
+<span id="tooltip-module"></span><h1>tooltip module<a class="headerlink" href="#module-tooltip" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="tooltip.Tooltip">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tooltip.</span></span><span class="sig-name descname"><span class="pre">Tooltip</span></span><a class="reference internal" href="_modules/tooltip.html#Tooltip"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#tooltip.Tooltip" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase que maneja la creación y visualización de tooltips (información emergente) en widgets.</p>
+<p>Attributes:
+- tooltip: Ventana emergente que muestra el tooltip.</p>
+<p>Métodos:
+- __init__(self): Inicializa una nueva instancia de Tooltip.
+- mostrar_tooltip(self, widget, text_dict): Muestra un tooltip en un widget específico.
+- ocultar_tooltip(self): Oculta el tooltip si está visible.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tooltip.Tooltip.mostrar_tooltip">
+<span class="sig-name descname"><span class="pre">mostrar_tooltip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tooltip.html#Tooltip.mostrar_tooltip"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#tooltip.Tooltip.mostrar_tooltip" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra un tooltip en un widget específico con información proporcionada en text_dict.</p>
+<p>Parámetros:
+:param widget: El widget en el que se mostrará el tooltip.
+:param text_dict: Un diccionario que contiene la información a mostrar en el tooltip.</p>
+<p>Detalles:
+La función calcula las coordenadas en las que se debe mostrar el tooltip cerca del widget.
+Crea una nueva ventana emergente (Toplevel) y configura su apariencia y contenido utilizando
+el contenido de text_dict. El tooltip se ajusta automáticamente en tamaño para acomodar su contenido.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tooltip.Tooltip.ocultar_tooltip">
+<span class="sig-name descname"><span class="pre">ocultar_tooltip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tooltip.html#Tooltip.ocultar_tooltip"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#tooltip.Tooltip.ocultar_tooltip" title="Link to this definition">¶</a></dt>
+<dd><p>Oculta el tooltip si está visible.</p>
+<p>Detalles:
+La función verifica si hay un tooltip mostrándose en la ventana actual. Si es así,
+se destruye la ventana del tooltip, ocultándolo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">documentacion</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tooltip module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tooltip.Tooltip"><code class="docutils literal notranslate"><span class="pre">Tooltip</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="modules.html" title="capítulo anterior">documentacion</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/tooltip.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

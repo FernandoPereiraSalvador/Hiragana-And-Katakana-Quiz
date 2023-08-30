@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tooltip &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=4936afed"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para tooltip</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+
+
+<div class="viewcode-block" id="Tooltip">
+<a class="viewcode-back" href="../tooltip.html#tooltip.Tooltip">[documentos]</a>
+<span class="k">class</span> <span class="nc">Tooltip</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clase que maneja la creación y visualización de tooltips (información emergente) en widgets.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">    - tooltip: Ventana emergente que muestra el tooltip.</span>
+
+<span class="sd">    Métodos:</span>
+<span class="sd">    - __init__(self): Inicializa una nueva instancia de Tooltip.</span>
+<span class="sd">    - mostrar_tooltip(self, widget, text_dict): Muestra un tooltip en un widget específico.</span>
+<span class="sd">    - ocultar_tooltip(self): Oculta el tooltip si está visible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicializa una nueva instancia de la clase Tooltip.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Tooltip.mostrar_tooltip">
+<a class="viewcode-back" href="../tooltip.html#tooltip.Tooltip.mostrar_tooltip">[documentos]</a>
+    <span class="k">def</span> <span class="nf">mostrar_tooltip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">text_dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Muestra un tooltip en un widget específico con información proporcionada en text_dict.</span>
+
+<span class="sd">        Parámetros:</span>
+<span class="sd">        :param widget: El widget en el que se mostrará el tooltip.</span>
+<span class="sd">        :param text_dict: Un diccionario que contiene la información a mostrar en el tooltip.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función calcula las coordenadas en las que se debe mostrar el tooltip cerca del widget.</span>
+<span class="sd">        Crea una nueva ventana emergente (Toplevel) y configura su apariencia y contenido utilizando</span>
+<span class="sd">        el contenido de text_dict. El tooltip se ajusta automáticamente en tamaño para acomodar su contenido.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Obtener las coordenadas del cursor dentro del widget</span>
+
+        <span class="c1"># Ajustar las coordenadas para que el tooltip se muestre ligeramente desplazado desde el cursor</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s2">&quot;insert&quot;</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">widget</span><span class="o">.</span><span class="n">winfo_rootx</span><span class="p">()</span> <span class="o">+</span> <span class="mi">25</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">widget</span><span class="o">.</span><span class="n">winfo_rooty</span><span class="p">()</span> <span class="o">+</span> <span class="mi">25</span>
+
+        <span class="c1"># Obtener las coordenadas actuales del puntero del mouse</span>
+        <span class="n">x_mouse</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">winfo_pointerx</span><span class="p">()</span>
+        <span class="n">y_mouse</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">winfo_pointery</span><span class="p">()</span>
+
+        <span class="c1"># Crear la ventana emergente para el tooltip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span><span class="o">.</span><span class="n">wm_overrideredirect</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Dividir el contenido del diccionario en filas de texto</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">]])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">),</span> <span class="mi">5</span><span class="p">)]</span>
+
+        <span class="c1"># Crear una etiqueta para mostrar el contenido del tooltip</span>
+        <span class="n">tooltip_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span> <span class="n">wraplength</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                                 <span class="n">relief</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">tooltip_label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="c1"># Ajustar el tamaño del tooltip según su contenido</span>
+        <span class="n">tooltip_width</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">tooltip_label</span><span class="o">.</span><span class="n">winfo_reqwidth</span><span class="p">(),</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="n">tooltip_height</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">tooltip_label</span><span class="o">.</span><span class="n">winfo_reqheight</span><span class="p">(),</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="c1"># Posicionar el tooltip cerca del puntero del mouse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tooltip_width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">tooltip_height</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">x_mouse</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">y_mouse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Tooltip.ocultar_tooltip">
+<a class="viewcode-back" href="../tooltip.html#tooltip.Tooltip.ocultar_tooltip">[documentos]</a>
+    <span class="k">def</span> <span class="nf">ocultar_tooltip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Oculta el tooltip si está visible.</span>
+
+<span class="sd">        Detalles:</span>
+<span class="sd">        La función verifica si hay un tooltip mostrándose en la ventana actual. Si es así,</span>
+<span class="sd">        se destruye la ventana del tooltip, ocultándolo.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

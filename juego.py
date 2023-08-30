@@ -18,10 +18,9 @@ class Juego:
     - numeroErrores (int): Contador del número de errores cometidos durante la partida actual.
     - errores (dict): Diccionario que registra los errores cometidos, donde las claves son los caracteres japoneses
     equivocados y los valores son sus significados.
-    - salida (bool): Indica si el juego ha terminado o no. Si es True, el juego continúa; si es False, el juego se
-    detiene.
-    - menu_principal (Tkinter object): Objeto Tkinter de la ventana principal del programa desde la cual se invocó
-    el juego.
+    - salida (bool): Indica si el juego ha terminado. Si es True, el juego continúa; si es False, el juego se detiene.
+    - menu_principal (Tkinter object): Objeto Tkinter de la ventana principal del programa desde la cual se invocó el
+    juego.
     - num_letras_conseguidas (int): Número de letras acertadas por el jugador en la partida actual, utilizado para
     el seguimiento del progreso.
 
@@ -29,18 +28,18 @@ class Juego:
     - __init__(self, menu_principal): Inicializa una nueva instancia del juego.
     - jugar(self, caracteres, modo_juego, alfabeto_elegido, menu_principal): Inicia el juego de aprendizaje.
     - japones_a_espanol(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo japonés a
-      español.
+    español.
     - espanol_a_japones(self, caracteres, alfabeto_elegido, menu_principal): Inicia el juego en el modo español a
-      japonés.
+    japonés.
     - generar_opciones(caracteres_copia, caracteres_originales): Genera una lista de opciones posibles para el juego de
-      traducción.
+    traducción.
     - repetir(self, caracteres, alfabeto_elegido, menu_principal, modo, numero_errores, errores): Muestra una ventana
-      emergente que pregunta al jugador si desea repetir el juego.
+    emergente que pregunta al jugador si desea repetir el juego.
     - repetir_si(self, letras, alfabeto, menu_principal, modo): Reinicia el juego para continuar jugando.
     - repetir_no(self, menu_principal): Finaliza el juego y muestra el menú principal.
     - cerrar_ventana(self): Cierra la ventana de juego y restaura la ventana principal.
     - crear_contador(self, num_letras_conseguidas, num_letras_faltantes): Crea y muestra un contador de progreso en la
-      ventana de juego.
+    ventana de juego.
     - crear_ventana(self, num_letras_faltantes): Crea y muestra una nueva ventana de juego.
     """
 
@@ -210,7 +209,7 @@ class Juego:
             respuesta_var = tk.StringVar()
 
             # Crear elementos de la ventana: etiquetas, entrada y botón "Continuar"
-            respuesta_label = tk.Label(self.menu, text=f"¿Cual es el siguiente caracter?", font=("Arial", 20))
+            respuesta_label = tk.Label(self.menu, text=f"¿Cuál es el siguiente carácter?", font=("Arial", 20))
             letra_elegida = tk.Label(self.menu, text=f"{caracter_japones}", font=("Arial", 175))
             respuesta_entry = tk.Entry(self.menu, textvariable=respuesta_var, width=30)
             sub_btn = tk.Button(self.menu, text="Continuar", command=submit)
@@ -340,7 +339,7 @@ class Juego:
                 opcion_escogida = random.choice(opciones_posibles)
 
             # Configuración de la ventana de juego y opciones
-            titulo_label = tk.Label(self.menu, text=f"Introduce el caracter correcto", font=("Arial", 20))
+            titulo_label = tk.Label(self.menu, text=f"Introduce el carácter correcto", font=("Arial", 20))
             opcion_escogida_label = tk.Label(self.menu, text=opcion_escogida[0], font=("Arial", 40))
 
             opcion_buttons = []

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>custom_message_box &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=4936afed"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para custom_message_box</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+
+
+<div class="viewcode-block" id="custom_message_box">
+<a class="viewcode-back" href="../custom_message_box.html#custom_message_box.custom_message_box">[documentos]</a>
+<span class="k">def</span> <span class="nf">custom_message_box</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">font_size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crea una ventana emergente personalizada con un mensaje.</span>
+
+<span class="sd">    Esta función crea una nueva ventana emergente utilizando la biblioteca Tkinter,</span>
+<span class="sd">    mostrando un título y un mensaje proporcionados. El tamaño de fuente del mensaje</span>
+<span class="sd">    se puede personalizar con el parámetro `font_size`.</span>
+
+<span class="sd">    Parámetros:</span>
+<span class="sd">    :param title: El título de la ventana emergente.</span>
+<span class="sd">    :param message: El mensaje que se mostrará en la ventana.</span>
+<span class="sd">    :param font_size: El tamaño de fuente del mensaje.</span>
+
+<span class="sd">    Detalles:</span>
+<span class="sd">    La función crea la ventana emergente con un título y un mensaje utilizando la</span>
+<span class="sd">    fuente &quot;Helvetica&quot; y el tamaño de fuente proporcionado. Luego, calcula la posición</span>
+<span class="sd">    para centrar la ventana en la pantalla y ajusta la geometría de la ventana en consecuencia.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Crea una nueva ventana emergente</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Toplevel</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="c1"># Configura el tamaño de fuente del mensaje y muestra el texto</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="p">))</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+    <span class="c1"># Actualiza la ventana para calcular su tamaño</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">update_idletasks</span><span class="p">()</span>
+
+    <span class="c1"># Calcula la posición para centrar la ventana en la pantalla</span>
+    <span class="n">screen_width</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span>
+    <span class="n">screen_height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span>
+    <span class="n">window_width</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">100</span>  <span class="c1"># Ajusta el ancho de la ventana</span>
+    <span class="n">window_height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_height</span><span class="p">()</span>
+    <span class="n">x_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">screen_width</span> <span class="o">-</span> <span class="n">window_width</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">y_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">screen_height</span> <span class="o">-</span> <span class="n">window_height</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="c1"># Ajusta la geometría de la ventana para centrarla en la pantalla</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">window_width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">window_height</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">x_position</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">y_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configuracion.html">configuracion module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

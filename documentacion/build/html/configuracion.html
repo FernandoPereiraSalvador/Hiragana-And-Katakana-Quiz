@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>configuracion module &#8212; documentación de Hiragana and Katakana Quiz - 1.0</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=4936afed"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="custom_message_box module" href="custom_message_box.html" />
+    <link rel="prev" title="Bienvenido a la documentación de Hiragana and Katakana Quiz" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-configuracion">
+<span id="configuracion-module"></span><h1>configuracion module<a class="headerlink" href="#module-configuracion" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="configuracion.Configuracion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configuracion.</span></span><span class="sig-name descname"><span class="pre">Configuracion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#Configuracion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.Configuracion" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Clase para gestionar la ventana de configuración.</p>
+<p>Esta clase define una ventana de configuración que permite al usuario borrar
+los datos de progreso del juego o abrir el repositorio en línea del proyecto.</p>
+<p>Parámetros:
+:param root: Objeto Tkinter representando la ventana principal.
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<p>Detalles:
+La ventana contiene dos opciones: una para borrar los datos de progreso del jugador
+y otra para abrir un enlace al repositorio de GitHub del proyecto.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="configuracion.Configuracion.abrir_repositorio">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">abrir_repositorio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#Configuracion.abrir_repositorio"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.Configuracion.abrir_repositorio" title="Link to this definition">¶</a></dt>
+<dd><p>Abre un navegador web para mostrar el repositorio en línea.</p>
+<p>Detalles:
+Esta función utiliza la biblioteca <cite>webbrowser</cite> para abrir un navegador web
+y mostrar la URL proporcionada. En este caso, la URL es para un repositorio
+en línea. La URL puede ser modificada según se desee.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configuracion.Configuracion.borrar_progreso">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">borrar_progreso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#Configuracion.borrar_progreso"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.Configuracion.borrar_progreso" title="Link to this definition">¶</a></dt>
+<dd><p>Borra los datos de progreso.</p>
+<p>Detalles: Esta función crea una instancia de la clase <cite>GestionDatos</cite> para borrar los datos de progreso
+almacenados y llama a la función <cite>borrar_datos</cite>. Luego, muestra una ventana informativa para indicar que el
+borrado se realizó exitosamente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configuracion.Configuracion.cerrar_ventana">
+<span class="sig-name descname"><span class="pre">cerrar_ventana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#Configuracion.cerrar_ventana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.Configuracion.cerrar_ventana" title="Link to this definition">¶</a></dt>
+<dd><p>Cierra la ventana actual y restaura la ventana principal.</p>
+<p>Detalles:
+Esta función restaura la ventana principal del programa al invocar el método
+<cite>deiconify()</cite> en el objeto <cite>menu_principal</cite>. Luego, cierra la ventana actual
+de configuración al invocar el método <cite>destroy()</cite> en el objeto <cite>root</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configuracion.Configuracion.mostrar_confirmacion">
+<span class="sig-name descname"><span class="pre">mostrar_confirmacion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#Configuracion.mostrar_confirmacion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.Configuracion.mostrar_confirmacion" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra una ventana emergente de confirmación para borrar los datos de progreso.</p>
+<p>Detalles:
+Esta función muestra una ventana emergente de confirmación con un mensaje preguntando
+al usuario si está seguro de borrar los datos de progreso. Si el usuario confirma,
+se llama al método <cite>borrar_progreso</cite> para realizar la acción de borrado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="configuracion.main">
+<span class="sig-prename descclassname"><span class="pre">configuracion.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/configuracion.html#main"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#configuracion.main" title="Link to this definition">¶</a></dt>
+<dd><p>Función principal para iniciar la ventana de configuración.</p>
+<p>Esta función crea una nueva ventana secundaria (<cite>Toplevel</cite>) utilizando
+la instancia <cite>menu_principal</cite>. Luego, instancia la clase <cite>Configuracion</cite>
+para crear y mostrar la ventana de configuración en la nueva ventana.</p>
+<p>Parámetros:
+:param menu_principal: Objeto Tkinter de la ventana principal del programa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Hiragana and Katakana Quiz</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">configuracion module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion.Configuracion"><code class="docutils literal notranslate"><span class="pre">Configuracion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_message_box.html">custom_message_box module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datos.html">datos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="juego.html">juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menu_juego.html">menu_juego module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">documentacion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooltip.html">tooltip module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="capítulo anterior">Bienvenido a la documentación de Hiragana and Katakana Quiz</a></li>
+      <li>Next: <a href="custom_message_box.html" title="próximo capítulo">custom_message_box module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Fernando Pereira.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/configuracion.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
