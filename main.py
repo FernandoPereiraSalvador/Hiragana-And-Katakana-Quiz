@@ -40,7 +40,8 @@ class MenuPrincipal:
         que contiene todos los demás widgets. En este código, el parámetro "root" se pasa al constructor
         de la clase para inicializar la ventana principal de la aplicación.
 
-        Detalles: Esta función establece las propiedades de la ventana, carga imágenes necesarias y llama a la
+        Detalles:
+        Esta función establece las propiedades de la ventana, carga imágenes necesarias y llama a la
         función que crea los botones para la interfaz del menú.
 
         :return: None
@@ -66,7 +67,8 @@ class MenuPrincipal:
         """
         Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
 
-        Detalles: Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
+        Detalles:
+        Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
         menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
         seleccionado es Hiragana (True).
 
@@ -80,7 +82,8 @@ class MenuPrincipal:
         """
         Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
 
-        Detalles: Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
+        Detalles:
+        Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
         menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
         seleccionado es Katakana (False).
 
@@ -94,7 +97,8 @@ class MenuPrincipal:
         Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo
         utilizando la función 'mostrar_grafico_tkinter' de la clase 'GestionDatos'.
 
-        Detalles: Esta función utiliza la clase 'GestionDatos' para mostrar un gráfico del progreso del jugador a lo
+        Detalles:
+        Esta función utiliza la clase 'GestionDatos' para mostrar un gráfico del progreso del jugador a lo
         largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana
         principal actual y luego crea una instancia de la clase 'GestionDatos' para acceder a la función
         'mostrar_grafico_tkinter'. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El
@@ -111,7 +115,8 @@ class MenuPrincipal:
         """
         Oculta la ventana principal y abre la ventana de configuración.
 
-        Detalles: Esta función oculta la ventana principal actual utilizando el método 'withdraw' y luego llama a la
+        Detalles:
+        Esta función oculta la ventana principal actual utilizando el método 'withdraw' y luego llama a la
         función 'main' del módulo 'configuracion' para abrir la ventana de configuración. La instancia actual de la
         ventana principal, 'self.root', se pasa a la función 'main' para asegurarse de que la configuración se
         realice en la misma ventana principal después de ocultarla.

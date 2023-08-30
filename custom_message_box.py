@@ -2,6 +2,25 @@ import tkinter as tk
 
 
 def custom_message_box(title, message, font_size):
+    """
+    Crea una ventana emergente personalizada con un mensaje.
+
+    Esta función crea una nueva ventana emergente utilizando la biblioteca Tkinter,
+    mostrando un título y un mensaje proporcionados. El tamaño de fuente del mensaje
+    se puede personalizar con el parámetro `font_size`.
+
+    Parámetros:
+    :param title: El título de la ventana emergente.
+    :param message: El mensaje que se mostrará en la ventana.
+    :param font_size: El tamaño de fuente del mensaje.
+
+    Detalles:
+    La función crea la ventana emergente con un título y un mensaje utilizando la
+    fuente "Helvetica" y el tamaño de fuente proporcionado. Luego, calcula la posición
+    para centrar la ventana en la pantalla y ajusta la geometría de la ventana en consecuencia.
+
+    :return: None
+    """
     # Crea una nueva ventana emergente
     window = tk.Toplevel()
     window.title(title)
