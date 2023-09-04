@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import PhotoImage
+
+import pkg_resources
+
 import alfabeto.hiragana
 import alfabeto.katakana
 import juego
@@ -58,11 +61,11 @@ class MenuJuego:
 
         # Cargar imágenes para los botones del menú según el alfabeto utilizado
         if alfabeto_usado:
-            self.imagen_japones_a_espanol = PhotoImage(file="menu_imagenes/japonesHiragana.png")
-            self.imagen_espanol_a_japones = PhotoImage(file="menu_imagenes/españolHiragana.png")
+            self.imagen_japones_a_espanol = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/japonesHiragana.png'))
+            self.imagen_espanol_a_japones = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/españolHiragana.png'))
         else:
-            self.imagen_japones_a_espanol = PhotoImage(file="menu_imagenes/japonesKatakana.png")
-            self.imagen_espanol_a_japones = PhotoImage(file="menu_imagenes/españolKatakana.png")
+            self.imagen_japones_a_espanol = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/japonesKatakana.png'))
+            self.imagen_espanol_a_japones = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/españolKatakana.png'))
 
         # Configurar la ventana de menú
         self.menu.geometry("900x550+300+100")

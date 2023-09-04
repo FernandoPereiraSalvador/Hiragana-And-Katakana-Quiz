@@ -117,7 +117,7 @@ class Configuracion:
 
         :return: None
         """
-        url = "https://www.google.com"
+        url = "https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz"
         webbrowser.open(url)
 
 
