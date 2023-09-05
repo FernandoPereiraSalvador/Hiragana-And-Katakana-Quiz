@@ -58,16 +58,16 @@ class MenuPrincipal:
         base_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 
         # Construir la ruta completa al icono .ico
-        icon_path = os.path.join(base_dir, 'menu_imagenes', 'icono.ico')
+        icon_path = os.path.join(base_dir, 'imagenes', 'icono.ico')
 
         # Cargar el icono
         self.root.iconbitmap(icon_path)
 
         # Carga de las imágenes
-        self.imagen_hiragana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/hiragana.png'))
-        self.imagen_katakana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/katakana.png'))
-        self.imagen_registro = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/registro.png'))
-        self.configuracion = PhotoImage(file=pkg_resources.resource_filename(__name__, 'menu_imagenes/configuracion.png'))
+        self.imagen_hiragana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/hiragana.png'))
+        self.imagen_katakana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/katakana.png'))
+        self.imagen_registro = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/registro.png'))
+        self.configuracion = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/configuracion.png'))
 
         # Creación de los botones en la ventana
         self.crear_botones()

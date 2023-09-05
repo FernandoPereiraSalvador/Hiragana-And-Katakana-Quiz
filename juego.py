@@ -466,7 +466,7 @@ class Juego:
         self.menu.protocol("WM_DELETE_WINDOW", self.cerrar_ventana)
         self.menu.resizable(False, False)
         self.menu.title("¿Quieres repetir?")
-        self.menu.iconbitmap("menu_imagenes/icono.ico")
+        self.menu.iconbitmap("imagenes/icono.ico")
 
         # Agregar texto "¿Quieres repetir?" arriba del contenido con un tamaño de fuente más grande
         titulo_label = tk.Label(self.menu, text="¿Quieres repetir?", font=("Helvetica", 20))
@@ -634,7 +634,7 @@ class Juego:
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
         self.menu.title("Japones")
-        self.menu.iconbitmap("menu_imagenes/icono.ico")
+        self.menu.iconbitmap("imagenes/icono.ico")
         self.crear_contador(self.num_letras_conseguidas, len(num_letras_faltantes))
 
 

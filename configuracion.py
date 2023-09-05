@@ -42,7 +42,7 @@ class Configuracion:
         self.root.geometry("900x550+300+100")
         self.root.resizable(False, False)
         self.root.title("Configuración")
-        self.root.iconbitmap("menu_imagenes/icono.ico")
+        self.root.iconbitmap("imagenes/icono.ico")
 
         self.menu_principal = menu_principal  # Ventana principal
 

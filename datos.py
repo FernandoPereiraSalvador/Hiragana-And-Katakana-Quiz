@@ -200,7 +200,7 @@ class GestionDatos:
             root.title("Gráfico de Progreso")
             root.geometry("900x550+300+100")
             root.resizable(False, False)
-            root.iconbitmap("menu_imagenes/icono.ico")
+            root.iconbitmap("imagenes/icono.ico")
 
             # Crear un widget de lienzo con el gráfico y empaquetarlo en la ventana
             canvas = FigureCanvasTkAgg(grafico, master=root)

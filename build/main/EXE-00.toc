@@ -57,7 +57,7 @@
  [],
  False,
  False,
- 1693903326,
+ 1693947034,
  [('run.exe',
    'D:\\Hiragana-And-Katakana-Quiz\\venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')])
