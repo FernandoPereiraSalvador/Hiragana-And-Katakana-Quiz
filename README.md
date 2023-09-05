@@ -29,10 +29,10 @@ Si necesitas información mas detallada sobre el funcionamiento visita la [wiki]
 
 ## Documentación
 
-La documentación completa del proyecto se encuentra dentro de la carpeta `documentacion`. Dentro de esta carpeta, encontrarás dos subcarpetas importantes:
+La documentación completa del proyecto se encuentra dentro de la carpeta `docs`. Dentro de esta carpeta, encontrarás dos subcarpetas importantes:
 
 ### Documentación en HTML
-La documentación en formato HTML está disponible en la carpeta `build/html`. Puedes acceder a esta documentación abriendo el archivo `main.html` en tu navegador web. Esta documentación proporciona información detallada sobre la estructura y el funcionamiento del proyecto.
+La documentación en formato HTML está disponible en la carpeta `build/html`. Puedes acceder a esta documentación abriendo el archivo `index.html` en tu navegador web. Esta documentación proporciona información detallada sobre la estructura y el funcionamiento del proyecto.
 
 ### Documentación en LaTeX
 Además, si prefieres la documentación en formato LaTeX, puedes encontrarla en la carpeta `build/latex`. Puedes compilar y generar el documento final en PDF utilizando un sistema de procesamiento de LaTeX.
