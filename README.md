@@ -1,4 +1,7 @@
-# Hiragana y Katakana Quiz Game
+<div align="center">
+  <h1>Hiragana y Katakana Quiz</h1>
+   <img src="https://i.imgur.com/CJAYZ7x.png" alt="Texto alternativo" width="150" height="100">
+</div>
 
 ## Resumen
 
@@ -16,49 +19,13 @@ Pero eso no es todo. La aplicación también ofrece una función de seguimiento 
 
 ## Funcionamiento
 
-Para ejecutar la aplicación, simplemente sigue estos pasos:
+Para ejecutar la aplicación, simplemente ejecuta el archivo `main.exe` que se encuentra en la carpeta `dist/main` del proyecto. Al hacerlo, se abrirá el menú principal de la aplicación.
 
-1. Ejecuta el archivo main.exe que se encuentra en la carpeta `dist/main` del proyecto. Al hacerlo, se abrirá el menú principal de la aplicación.
-
-
-2. En el menú principal, encontrarás dos botones grandes en el centro que te permiten elegir si deseas aprender Hiragana o Katakana. Además, en la parte superior, verás un botón para mostrar el gráfico de progreso (si no has realizado ninguna partida, se mostrará un mensaje indicando que no hay datos disponibles) y un botón de configuración que ofrece dos opciones: borrar el progreso y abrir el enlace al código en GitHub.
-
-<div style="text-align: center;">
+<div align="center">
   <img src="https://i.imgur.com/PNx2TNe.png" alt="Texto alternativo" width="600" height="400">
 </div>
 
-3. Al seleccionar "Hiragana" o "Katakana" en el menú principal, se abrirá otra ventana donde puedes elegir entre dos modos de juego: de japonés a español o de español a japonés.
-
-<div style="text-align: center;">
-  <img src="https://i.imgur.com/HBUYOW1.png" alt="Texto alternativo" width="600" height="400">
-</div>
-
-4. A continuación, aparecerá una ventana que te permitirá seleccionar los grupos de caracteres que deseas aprender. Los caracteres están agrupados en cinco categorías: vocales, básicos, compuestos, combinados1 y combinados2.
-
-<div style="text-align: center;">
-  <img src="https://i.imgur.com/6vK3K8p.png" alt="Texto alternativo" width="600" height="400">
-</div>
-
-5. Una vez que hayas configurado tus preferencias, el juego comenzará automáticamente.
-
-    1. Modo español a japonés
-   <div style="text-align: center;">
-     <img src="https://i.imgur.com/8K7XmhX.png" alt="Texto alternativo" width="600" height="400">
-   </div>
-   
-    2. Modo japonés a español
-    <div style="text-align: center;">
-      <img src="https://i.imgur.com/SPnVT5E.png" alt="Texto alternativo" width="600" height="400">
-   </div>
-
-6. Durante el juego, tu objetivo será responder correctamente a las preguntas para avanzar en tu aprendizaje. Al finalizar la partida, se te mostrará el número de errores cometidos y tendrás la opción de repetir la partida con las mismas opciones.
-
-<div style="text-align: center;">
-  <img src="https://i.imgur.com/fdZHyme.png" alt="Texto alternativo" width="600" height="400">
-</div>
-
-
-¡Disfruta aprendiendo Hiragana y Katakana con esta divertida aplicación!
+Si necesitas información mas detallada sobre el funcionamiento visita la [wiki](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/wiki/)
 
 ## Documentación
 

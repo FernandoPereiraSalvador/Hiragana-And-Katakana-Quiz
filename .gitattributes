@@ -3,3 +3,6 @@
 *.html linguist-vendored
 *.tex linguist-vendored
 *.sty linguist-vendored
+*.rst linguist-vendored
+*.doctree linguist-vendored
+*.xdy linguist-vendored
