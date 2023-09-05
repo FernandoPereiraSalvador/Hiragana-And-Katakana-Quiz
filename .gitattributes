@@ -6,3 +6,6 @@
 *.rst linguist-vendored
 *.doctree linguist-vendored
 *.xdy linguist-vendored
+*.toc linguist-vendored
+*.sty linguist-vendored
+*.cls linguist-vendored
