@@ -293,7 +293,6 @@ class CaracteresSelector:
         self.menu.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana(self.menu, self.menu_principal))
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
-        self.menu.title("Menu")
         self.menu.iconbitmap("menu_imagenes/icono.ico")
 
         self.crear_interfaz(decision_alfabeto)

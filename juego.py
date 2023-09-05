@@ -154,6 +154,8 @@ class Juego:
         """
         caracteres_copia = caracteres.copy()
         self.num_letras_conseguidas = 1
+        self.numeroErrores = 0
+        self.errores = {}
 
         def submit():
             """
@@ -319,6 +321,8 @@ class Juego:
 
         respuesta = None
         caracteres_copia = caracteres.copy()
+        self.numeroErrores = 0
+        self.errores = {}
 
         # Inicializa el contador de letras conseguidas en 1, ya que el jugador aún no ha adivinado ninguna.
         # Se inicia en 1 en lugar de 0 para que el marcador de letras actual esté adelantado por 1,
