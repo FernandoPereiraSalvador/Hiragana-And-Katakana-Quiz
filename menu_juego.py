@@ -61,15 +61,23 @@ class MenuJuego:
 
         # Cargar imágenes para los botones del menú según el alfabeto utilizado
         if alfabeto_usado:
-            self.imagen_japones_a_espanol = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/japonesHiragana.png'))
-            self.imagen_espanol_a_japones = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/españolHiragana.png'))
+            self.imagen_japones_a_espanol = PhotoImage(
+                file=pkg_resources.resource_filename(__name__, 'imagenes/japonesHiragana.png'))
+            self.imagen_espanol_a_japones = PhotoImage(
+                file=pkg_resources.resource_filename(__name__, 'imagenes/españolHiragana.png'))
         else:
-            self.imagen_japones_a_espanol = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/japonesKatakana.png'))
-            self.imagen_espanol_a_japones = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/españolKatakana.png'))
+            self.imagen_japones_a_espanol = PhotoImage(
+                file=pkg_resources.resource_filename(__name__, 'imagenes/japonesKatakana.png'))
+            self.imagen_espanol_a_japones = PhotoImage(
+                file=pkg_resources.resource_filename(__name__, 'imagenes/españolKatakana.png'))
 
         # Configurar la ventana de menú
         self.menu.geometry("900x550+300+100")
-        self.menu.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana(self.menu, self.menu_principal))
+        self.menu.protocol("WM_DELETE_WINDOW", lambda: (
+            self.menu.withdraw(),
+            self.menu.destroy(),
+            self.menu_principal.deiconify()
+        ))
         self.menu.resizable(False, False)
         self.menu.title("Modo")
         self.menu.iconbitmap("imagenes/icono.ico")
@@ -77,64 +85,6 @@ class MenuJuego:
         # Almacenar la decisión del alfabeto y crear la interfaz gráfica del menú
         self.alfabeto = alfabeto_usado
         self.crear_interfaz()
-
-    def japones_a_espanol(self):
-        """
-        Cambia la decisión de modo a "Japonés a Español" y abre la ventana de selección de caracteres.
-
-        Esta función se activa cuando el jugador elige el modo "Japonés a Español" en el menú de selección de modo.
-        Cambia el atributo `decision` de la clase a `True`, indicando que se ha seleccionado el modo "Japonés a
-        Español".
-
-        Detalles:
-        La función establece `self.decision` en `True` para indicar que el modo de juego seleccionado es
-        "Japonés a Español". Luego, utiliza el método `destroy()` en `self.menu` para cerrar la ventana actual del
-        menú.
-
-        Se crea una instancia de la clase `CaracteresSelector`, pasando los parámetros `self.alfabeto` (decisión del
-        alfabeto), `self.decision` (decisión de modo) y `self.menu_principal` (ventana principal del programa). Esto
-        abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.
-
-        :return: None
-        """
-
-        # Cambiar la decisión a "Japonés a Español"
-        self.decision = True
-
-        # Destruir la ventana de menú actual
-        self.menu.destroy()
-
-        # Crear una instancia de la clase CaracteresSelector para la selección de caracteres
-        CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
-
-    def espanol_a_japones(self):
-        """
-        Cambia la decisión de modo a "Español a Japonés" y abre la ventana de selección de caracteres.
-
-        Esta función se activa cuando el jugador elige el modo "Español a Japonés" en el menú de selección de modo.
-        Cambia el atributo `decision` de la clase a `False`, indicando que se ha seleccionado el modo "Español a
-        Japonés".
-
-        Detalles:
-        La función establece `self.decision` en `False` para indicar que el modo de juego seleccionado es
-        "Español a Japonés". Luego, utiliza el método `destroy()` en `self.menu` para cerrar la ventana actual del
-        menú.
-
-        Se crea una instancia de la clase `CaracteresSelector`, pasando los parámetros `self.alfabeto` (decisión del
-        alfabeto), `self.decision` (decisión de modo) y `self.menu_principal` (ventana principal del programa). Esto
-        abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.
-
-        :return: None
-        """
-
-        # Cambiar la decisión a "Español a Japonés"
-        self.decision = False
-
-        # Destruir la ventana de menú actual
-        self.menu.destroy()
-
-        # Crear una instancia de la clase CaracteresSelector para la selección de caracteres
-        CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
 
     def crear_interfaz(self):
 
@@ -165,7 +115,12 @@ class MenuJuego:
         # Crear botón para el modo "Japonés a Español"
         hiragana_button = tk.Button(
             self.menu,
-            command=self.japones_a_espanol,
+            command=lambda: (
+                # Establece la decision en True (español a japones) y llama a CaracterSelector
+                setattr(self, 'decision', True),
+                self.menu.destroy(),
+                CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
+            ),
             width=325, height=325, image=self.imagen_japones_a_espanol
         )
         hiragana_button.place(x=65, y=50)
@@ -173,7 +128,12 @@ class MenuJuego:
         # Crear botón para el modo "Español a Japonés"
         katakana_button = tk.Button(
             self.menu,
-            command=self.espanol_a_japones,
+            command=lambda: (
+                # Establece la decision en False (japones a español) y llama a CaracterSelector
+                setattr(self, 'decision', False),
+                self.menu.destroy(),
+                CaracteresSelector(self.alfabeto, self.decision, self.menu_principal)
+            ),
             width=325, height=325, image=self.imagen_espanol_a_japones
         )
         katakana_button.place(x=500, y=50)
@@ -290,7 +250,11 @@ class CaracteresSelector:
         # Creación de la ventana de selección de caracteres
         self.menu = tk.Toplevel(menu_principal)
         self.menu.title("Caracteres")
-        self.menu.protocol("WM_DELETE_WINDOW", lambda: cerrar_ventana(self.menu, self.menu_principal))
+        self.menu.protocol("WM_DELETE_WINDOW", lambda: (
+            self.menu.withdraw(),
+            self.menu.destroy(),
+            self.menu_principal.deiconify()
+        ))
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
         self.menu.iconbitmap("imagenes/icono.ico")
@@ -326,24 +290,6 @@ class CaracteresSelector:
             self.opcion_combinado1 = not self.opcion_combinado1
         if opcion == "Combinado 2":
             self.opcion_combinado2 = not self.opcion_combinado2
-
-    def continuar(self):
-        """
-        Oculta la ventana actual y procede a la selección de caracteres.
-
-        Detalles:
-        Esta función se activa cuando el botón "Continuar" en la ventana de selección de caracteres es presionado.
-        Su propósito es ocultar la ventana actual (ventana de selección de caracteres) utilizando el método `withdraw()`
-        y luego proceder a la selección de caracteres invocando la función `seleccionar_caracteres()`.
-
-        La función `seleccionar_caracteres()` es responsable de determinar qué opciones de caracteres fueron
-        seleccionadas y construir el conjunto final de caracteres a utilizar en el juego.
-
-        :return: None
-        """
-
-        self.menu.withdraw()
-        self.seleccionar_caracteres()
 
     def crear_interfaz(self, alfabeto_usado):
         """
@@ -415,7 +361,11 @@ class CaracteresSelector:
 
         # Crea el botón "Continuar" y le asigna un comando
         boton_continuar = tk.Button(
-            boton_frame, text="Continuar", command=self.continuar, font=("Arial", 16), padx=20, pady=10
+            boton_frame, text="Continuar", command=lambda: (
+                # Esconde el menu del juego y llamamos a seleccionar caracteres
+                self.menu.withdraw(),
+                self.seleccionar_caracteres()
+            ), font=("Arial", 16), padx=20, pady=10
         )
         boton_continuar.pack()
 
@@ -459,49 +409,8 @@ class CaracteresSelector:
             self.caracteres |= caracteres_usados.combinado_2
 
         # Iniciar el juego con los caracteres seleccionados
-        self.iniciar_juego()
-
-    def iniciar_juego(self):
-        """
-        Inicia el juego con las configuraciones y caracteres seleccionados.
-
-        Detalles: Esta función cierra la ventana actual de selección de caracteres y llama a la función 'main' del
-        módulo 'juego' para iniciar el juego con las configuraciones y caracteres seleccionados. Se pasan como
-        argumentos el diccionario de caracteres seleccionados, la decisión sobre el modo de juego y la decisión sobre
-        el alfabeto a utilizar.
-
-        :return: None
-        """
-
-        # Cerrar la ventana de selección de caracteres
         self.menu.destroy()
-
-        # Llamar a la función principal del módulo 'juego' para iniciar el juego
         juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto, self.menu_principal)
-
-
-def cerrar_ventana(menu, menu_principal):
-    """
-    Cierra una ventana secundaria y restaura la visibilidad de la ventana principal.
-
-    Parámetros:
-    :param menu: La ventana secundaria a cerrar.
-    :param menu_principal: La ventana principal que se restaurará a la visibilidad.
-
-    Detalles:
-    Esta función oculta la ventana secundaria ('menu') utilizando el método 'withdraw()', luego la destruye con el
-    método 'destroy()'. Posteriormente, hace visible la ventana principal ('menu_principal') utilizando el método
-    'deiconify()', lo que permite que la ventana principal sea nuevamente visible para el usuario.
-
-    :return: None
-    """
-
-    # Ocultar y destruir la ventana secundaria
-    menu.withdraw()
-    menu.destroy()
-
-    # Restaurar la visibilidad de la ventana principal
-    menu_principal.deiconify()
 
 
 def main(alfabeto_usado, menu_principal):

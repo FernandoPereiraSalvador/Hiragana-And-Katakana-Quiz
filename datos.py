@@ -208,36 +208,14 @@ class GestionDatos:
             canvas.get_tk_widget().pack()
 
             # Configurar el manejo del evento de cierre de ventana
-            root.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ventana_registro(root, menu_principal))
+            root.protocol("WM_DELETE_WINDOW", lambda: lambda ventana_registro, ventana_principal: (
+                ventana_registro.destroy(),
+                ventana_principal.deiconify()
+            ))
         else:
             # Mostrar un mensaje emergente si no hay datos para el gráfico
             menu_principal.deiconify()
             custom_message_box("No hay datos", "No se han encontrado datos de progreso", 16)
-
-    @staticmethod
-    def cerrar_ventana_registro(ventana_registro, ventana_principal):
-        """
-        Cierra la ventana de registro y restaura la ventana principal.
-
-        Esta función cierra la ventana de registro (ventana emergente) y restaura
-        la visibilidad de la ventana principal.
-
-        Parámetros:
-        :param ventana_registro: Objeto Tkinter de la ventana de registro (ventana emergente).
-        :param ventana_principal: Objeto Tkinter de la ventana principal del programa.
-
-        Detalles:
-        La función cierra la ventana de registro invocando el método `destroy()` en
-        el objeto `ventana_registro`, lo que provoca su cierre.
-
-        Luego, se utiliza `deiconify()` en el objeto `ventana_principal` para restaurar
-        la visibilidad de la ventana principal que pudo haber sido ocultada cuando se
-        abrió la ventana de registro.
-
-        :return: None
-        """
-        ventana_registro.destroy()
-        ventana_principal.deiconify()
 
     def borrar_datos(self):
         """

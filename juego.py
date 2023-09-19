@@ -482,7 +482,10 @@ class Juego:
         boton_si.pack(side="left", padx=20)
 
         boton_no = tk.Button(botones_frame, text="No", width=15, height=2,
-                             command=lambda: self.repetir_no(menu_principal),
+                             command=lambda: (
+                                 self.menu.destroy(),
+                                 menu_principal.deiconify()
+                             ),
                              font=("Helvetica", 14))
         boton_no.pack(side="right", padx=20)
 
@@ -531,28 +534,6 @@ class Juego:
         else:
             self.menu.destroy()
             self.espanol_a_japones(letras, alfabeto, menu_principal)
-
-    def repetir_no(self, menu_principal):
-        """
-        Finaliza el juego y muestra el menú principal.
-
-        Esta función finaliza el juego y muestra nuevamente el menú principal del programa.
-        Se invoca cuando el jugador decide no repetir el juego y regresar al menú principal.
-
-        Parámetros:
-        :param menu_principal: Objeto Tkinter de la ventana principal del programa.
-
-        Detalles:
-        La función destruye la ventana actual del juego utilizando el método `destroy()`, lo que
-        cierra la ventana emergente del juego actual.
-
-        Luego, utiliza el método `deiconify()` en el objeto `menu_principal` para restaurar la
-        visibilidad y el enfoque en la ventana principal del programa.
-
-        :return: None
-        """
-        self.menu.destroy()
-        menu_principal.deiconify()
 
     def cerrar_ventana(self):
         """

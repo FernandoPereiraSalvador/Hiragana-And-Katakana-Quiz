@@ -8,6 +8,7 @@ from datos import GestionDatos
 import menu_juego
 import pkg_resources
 
+
 # Definición de la clase MenuPrincipal
 class MenuPrincipal:
     """
@@ -72,69 +73,6 @@ class MenuPrincipal:
         # Creación de los botones en la ventana
         self.crear_botones()
 
-    def decision_hiragana(self):
-        """
-        Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
-
-        Detalles:
-        Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
-        menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-        seleccionado es Hiragana (True).
-
-        :return: None
-        """
-
-        self.root.withdraw()
-        menu_juego.main(True, self.root)
-
-    def decision_katakana(self):
-        """
-        Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
-
-        Detalles:
-        Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
-        menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-        seleccionado es Katakana (False).
-
-        :return: None
-        """
-        self.root.withdraw()
-        menu_juego.main(False, self.root)
-
-    def mostrar_registro(self):
-        """
-        Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo
-        utilizando la función 'mostrar_grafico_tkinter' de la clase 'GestionDatos'.
-
-        Detalles:
-        Esta función utiliza la clase 'GestionDatos' para mostrar un gráfico del progreso del jugador a lo
-        largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana
-        principal actual y luego crea una instancia de la clase 'GestionDatos' para acceder a la función
-        'mostrar_grafico_tkinter'. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El
-        parámetro 'self.root' se pasa a la función 'mostrar_grafico_tkinter' para asegurarse de que el gráfico se
-        muestre en la misma ventana principal después de ocultarla.
-
-        :return: None
-        """
-        self.root.withdraw()
-        registro = GestionDatos()
-        registro.mostrar_grafico_tkinter(self.root)
-
-    def abrir_configuracion(self):
-        """
-        Oculta la ventana principal y abre la ventana de configuración.
-
-        Detalles:
-        Esta función oculta la ventana principal actual utilizando el método 'withdraw' y luego llama a la
-        función 'main' del módulo 'configuracion' para abrir la ventana de configuración. La instancia actual de la
-        ventana principal, 'self.root', se pasa a la función 'main' para asegurarse de que la configuración se
-        realice en la misma ventana principal después de ocultarla.
-
-        :return: None
-        """
-        self.root.withdraw()
-        configuracion.main(self.root)
-
     def crear_botones(self):
         """
         Crea los botones para seleccionar modos de juego y acceder a funciones adicionales.
@@ -153,7 +91,12 @@ class MenuPrincipal:
         # Creación del botón para seleccionar Hiragana
         hiragana_button = tk.Button(
             self.root,
-            command=lambda: [self.decision_hiragana()],
+            command=lambda: (
+                # Oculta la ventana principal y inicia el menú de la partida, pasándole True (Hiragana) y la
+                # ventana principal
+                self.root.withdraw(),
+                menu_juego.main(True, self.root)
+            ),
             width=325, height=325, image=self.imagen_hiragana
         )
         hiragana_button.place(x=65, y=50)
@@ -161,7 +104,12 @@ class MenuPrincipal:
         # Creación del botón para seleccionar Katakana
         katakana_button = tk.Button(
             self.root,
-            command=lambda: [self.decision_katakana()],
+            command=lambda: (
+                # Oculta la ventana principal y inicia el menú de la partida, pasándole False (Katakana) y la
+                # ventana principal
+                self.root.withdraw(),
+                menu_juego.main(False, self.root)
+            ),
             width=325, height=325, image=self.imagen_katakana
         )
         katakana_button.place(x=500, y=50)
@@ -169,7 +117,11 @@ class MenuPrincipal:
         # Creación del botón para mostrar el registro
         registro_button = tk.Button(
             self.root,
-            command=lambda: [self.mostrar_registro()],
+            command=lambda: (
+                # Oculta la ventana principal y llama a GestionDatos para mostrar el gráfico del progreso del jugador
+                self.root.withdraw(),
+                GestionDatos().mostrar_grafico_tkinter(self.root)
+            ),
             image=self.imagen_registro, width=40, height=40
         )
         registro_button.place(x=395, y=0)
@@ -177,7 +129,11 @@ class MenuPrincipal:
         # Creación del botón para mostrar la configuración
         configuracion_button = tk.Button(
             self.root,
-            command=lambda: [self.abrir_configuracion()],
+            command=lambda: (
+                # Oculta la ventana principal y llama a la función para abrir la configuración.
+                self.root.withdraw(),
+                configuracion.main(self.root)
+            ),
             image=self.configuracion, width=40, height=40
         )
         configuracion_button.place(x=455, y=0)

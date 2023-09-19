@@ -56,7 +56,9 @@ class Configuracion:
         borrar_bot.pack(pady=20)
 
         # Crear el botón "Repositorio"
-        repositorio_bot = tk.Button(root, text="Repositorio", command=self.abrir_repositorio, height=5, width=25,
+        repositorio_bot = tk.Button(root, text="Repositorio",
+                                    command=lambda: webbrowser.open("https://github.com/FernandoPereiraSalvador"
+                                                                    "/Hiragana-And-Katakana-Quiz"), height=5, width=25,
                                     font=("Helvetica", 20))
         repositorio_bot.pack()
 
@@ -104,22 +106,6 @@ class Configuracion:
         """
         self.menu_principal.deiconify()  # Vuelve a mostrar la ventana principal
         self.root.destroy()  # Cierra la ventana de configuración
-
-    @staticmethod
-    def abrir_repositorio():
-        """
-        Abre un navegador web para mostrar el repositorio en línea.
-
-        Detalles:
-        Esta función utiliza la biblioteca `webbrowser` para abrir un navegador web
-        y mostrar la URL proporcionada. En este caso, la URL es para un repositorio
-        en línea. La URL puede ser modificada según se desee.
-
-        :return: None
-        """
-        url = "https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz"
-        webbrowser.open(url)
-
 
 def main(menu_principal):
     """
