@@ -363,7 +363,7 @@ class CaracteresSelector:
         boton_continuar = tk.Button(
             boton_frame, text="Continuar", command=lambda: (
                 # Esconde el menu del juego y llamamos a seleccionar caracteres
-                self.menu.withdraw(),
+
                 self.seleccionar_caracteres()
             ), font=("Arial", 16), padx=20, pady=10
         )
@@ -409,8 +409,10 @@ class CaracteresSelector:
             self.caracteres |= caracteres_usados.combinado_2
 
         # Iniciar el juego con los caracteres seleccionados
-        self.menu.destroy()
-        juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto, self.menu_principal)
+        if self.opcion_vocales or self.opcion_basico or self.opcion_compuesto or self.opcion_combinado1 \
+                or self.opcion_combinado2:
+            self.menu.destroy()
+            juego.main(self.caracteres, self.decisionModo, self.decisionAlfabeto, self.menu_principal)
 
 
 def main(alfabeto_usado, menu_principal):
