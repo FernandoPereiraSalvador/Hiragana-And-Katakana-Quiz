@@ -55,11 +55,9 @@ class MenuPrincipal:
         self.root.geometry("900x550+300+100")
         self.root.resizable(False, False)
         self.root.title("Menu")
-        # Obtener la ruta del directorio donde se encuentra el archivo de script .py o .exe
-        base_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
 
         # Construir la ruta completa al icono .ico
-        icon_path = os.path.join(base_dir, 'imagenes', 'icono.ico')
+        icon_path = os.path.join("imagenes","icono.ico")
 
         # Cargar el icono
         self.root.iconbitmap(icon_path)
