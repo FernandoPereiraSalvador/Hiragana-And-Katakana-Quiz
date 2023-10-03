@@ -63,28 +63,6 @@ cuadrado vacío (“[]”) en el archivo, lo que efectivamente borra todos los d
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="datos.GestionDatos.cerrar_ventana_registro">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cerrar_ventana_registro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ventana_registro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ventana_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datos.html#GestionDatos.cerrar_ventana_registro"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#datos.GestionDatos.cerrar_ventana_registro" title="Link to this definition">¶</a></dt>
-<dd><p>Cierra la ventana de registro y restaura la ventana principal.</p>
-<p>Esta función cierra la ventana de registro (ventana emergente) y restaura
-la visibilidad de la ventana principal.</p>
-<p>Parámetros:
-:param ventana_registro: Objeto Tkinter de la ventana de registro (ventana emergente).
-:param ventana_principal: Objeto Tkinter de la ventana principal del programa.</p>
-<p>Detalles:
-La función cierra la ventana de registro invocando el método <cite>destroy()</cite> en
-el objeto <cite>ventana_registro</cite>, lo que provoca su cierre.</p>
-<p>Luego, se utiliza <cite>deiconify()</cite> en el objeto <cite>ventana_principal</cite> para restaurar
-la visibilidad de la ventana principal que pudo haber sido ocultada cuando se
-abrió la ventana de registro.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="datos.GestionDatos.generar_grafico">
 <span class="sig-name descname"><span class="pre">generar_grafico</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/datos.html#GestionDatos.generar_grafico"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#datos.GestionDatos.generar_grafico" title="Link to this definition">¶</a></dt>
 <dd><p>Genera y devuelve un gráfico de progreso del jugador.</p>

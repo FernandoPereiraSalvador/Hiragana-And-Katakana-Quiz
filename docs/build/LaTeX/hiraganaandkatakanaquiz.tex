@@ -66,7 +66,7 @@
 
 
 \title{Hiragana and Katakana Quiz}
-\date{30 de agosto de 2023}
+\date{03 de octubre de 2023}
 \release{1.0}
 \author{Fernando Pereira}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -117,30 +117,6 @@ Parámetros:
 Detalles:
 La ventana contiene dos opciones: una para borrar los datos de progreso del jugador
 y otra para abrir un enlace al repositorio de GitHub del proyecto.
-\index{abrir\_repositorio() (método estático de configuracion.Configuracion)@\spxentry{abrir\_repositorio()}\spxextra{método estático de configuracion.Configuracion}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{configuracion:configuracion.Configuracion.abrir_repositorio}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{abrir\_repositorio}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Abre un navegador web para mostrar el repositorio en línea.
-
-\sphinxAtStartPar
-Detalles:
-Esta función utiliza la biblioteca \sphinxtitleref{webbrowser} para abrir un navegador web
-y mostrar la URL proporcionada. En este caso, la URL es para un repositorio
-en línea. La URL puede ser modificada según se desee.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
 \index{borrar\_progreso() (método estático de configuracion.Configuracion)@\spxentry{borrar\_progreso()}\spxextra{método estático de configuracion.Configuracion}}
 
 \begin{fulllineitems}
@@ -332,43 +308,6 @@ cuadrado vacío (“{[}{]}”) en el archivo, lo que efectivamente borra todos l
 \sphinxAtStartPar
 Si se produce un error durante la operación, se muestra un mensaje de error emergente utilizando la función
 “custom\_message\_box”, indicando el tipo de error que ocurrió.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{cerrar\_ventana\_registro() (método estático de datos.GestionDatos)@\spxentry{cerrar\_ventana\_registro()}\spxextra{método estático de datos.GestionDatos}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{datos:datos.GestionDatos.cerrar_ventana_registro}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{cerrar\_ventana\_registro}}}{\sphinxparam{\DUrole{n}{ventana\_registro}}\sphinxparamcomma \sphinxparam{\DUrole{n}{ventana\_principal}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Cierra la ventana de registro y restaura la ventana principal.
-
-\sphinxAtStartPar
-Esta función cierra la ventana de registro (ventana emergente) y restaura
-la visibilidad de la ventana principal.
-
-\sphinxAtStartPar
-Parámetros:
-:param ventana\_registro: Objeto Tkinter de la ventana de registro (ventana emergente).
-:param ventana\_principal: Objeto Tkinter de la ventana principal del programa.
-
-\sphinxAtStartPar
-Detalles:
-La función cierra la ventana de registro invocando el método \sphinxtitleref{destroy()} en
-el objeto \sphinxtitleref{ventana\_registro}, lo que provoca su cierre.
-
-\sphinxAtStartPar
-Luego, se utiliza \sphinxtitleref{deiconify()} en el objeto \sphinxtitleref{ventana\_principal} para restaurar
-la visibilidad de la ventana principal que pudo haber sido ocultada cuando se
-abrió la ventana de registro.
 \begin{quote}\begin{description}
 \sphinxlineitem{Devuelve}
 \sphinxAtStartPar
@@ -895,41 +834,6 @@ None
 
 \end{fulllineitems}
 
-\index{repetir\_no() (método de juego.Juego)@\spxentry{repetir\_no()}\spxextra{método de juego.Juego}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{juego:juego.Juego.repetir_no}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{repetir\_no}}}{\sphinxparam{\DUrole{n}{menu\_principal}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Finaliza el juego y muestra el menú principal.
-
-\sphinxAtStartPar
-Esta función finaliza el juego y muestra nuevamente el menú principal del programa.
-Se invoca cuando el jugador decide no repetir el juego y regresar al menú principal.
-
-\sphinxAtStartPar
-Parámetros:
-:param menu\_principal: Objeto Tkinter de la ventana principal del programa.
-
-\sphinxAtStartPar
-Detalles:
-La función destruye la ventana actual del juego utilizando el método \sphinxtitleref{destroy()}, lo que
-cierra la ventana emergente del juego actual.
-
-\sphinxAtStartPar
-Luego, utiliza el método \sphinxtitleref{deiconify()} en el objeto \sphinxtitleref{menu\_principal} para restaurar la
-visibilidad y el enfoque en la ventana principal del programa.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
 \index{repetir\_si() (método de juego.Juego)@\spxentry{repetir\_si()}\spxextra{método de juego.Juego}}
 
 \begin{fulllineitems}
@@ -1051,31 +955,6 @@ abrir\_configuracion(self): Abre la ventana de configuración.
 crear\_botones(self): Crea los botones en la ventana principal.
 
 \end{description}
-\index{abrir\_configuracion() (método de main.MenuPrincipal)@\spxentry{abrir\_configuracion()}\spxextra{método de main.MenuPrincipal}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{main:main.MenuPrincipal.abrir_configuracion}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{abrir\_configuracion}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Oculta la ventana principal y abre la ventana de configuración.
-
-\sphinxAtStartPar
-Detalles:
-Esta función oculta la ventana principal actual utilizando el método “withdraw” y luego llama a la
-función “main” del módulo “configuracion” para abrir la ventana de configuración. La instancia actual de la
-ventana principal, “self.root”, se pasa a la función “main” para asegurarse de que la configuración se
-realice en la misma ventana principal después de ocultarla.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
 \index{crear\_botones() (método de main.MenuPrincipal)@\spxentry{crear\_botones()}\spxextra{método de main.MenuPrincipal}}
 
 \begin{fulllineitems}
@@ -1096,82 +975,6 @@ Detalles:
 Esta función utiliza la librería Tkinter para crear y posicionar los botones en la ventana principal. Cada
 botón está asociado a una función específica (como “decision\_hiragana”, “decision\_katakana”, “mostrar\_registro”,
 y “abrir\_configuracion”) y se configura para llamar a la función correspondiente cuando se hace clic en él.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{decision\_hiragana() (método de main.MenuPrincipal)@\spxentry{decision\_hiragana()}\spxextra{método de main.MenuPrincipal}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{main:main.MenuPrincipal.decision_hiragana}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{decision\_hiragana}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
-
-\sphinxAtStartPar
-Detalles:
-Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
-menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-seleccionado es Hiragana (True).
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{decision\_katakana() (método de main.MenuPrincipal)@\spxentry{decision\_katakana()}\spxextra{método de main.MenuPrincipal}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{main:main.MenuPrincipal.decision_katakana}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{decision\_katakana}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.
-
-\sphinxAtStartPar
-Detalles:
-Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
-menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-seleccionado es Katakana (False).
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{mostrar\_registro() (método de main.MenuPrincipal)@\spxentry{mostrar\_registro()}\spxextra{método de main.MenuPrincipal}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{main:main.MenuPrincipal.mostrar_registro}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{mostrar\_registro}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo
-utilizando la función “mostrar\_grafico\_tkinter” de la clase “GestionDatos”.
-
-\sphinxAtStartPar
-Detalles:
-Esta función utiliza la clase “GestionDatos” para mostrar un gráfico del progreso del jugador a lo
-largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana
-principal actual y luego crea una instancia de la clase “GestionDatos” para acceder a la función
-“mostrar\_grafico\_tkinter”. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El
-parámetro “self.root” se pasa a la función “mostrar\_grafico\_tkinter” para asegurarse de que el gráfico se
-muestre en la misma ventana principal después de ocultarla.
 \begin{quote}\begin{description}
 \sphinxlineitem{Devuelve}
 \sphinxAtStartPar
@@ -1269,34 +1072,6 @@ seleccionar\_caracteres(): Procesa las opciones seleccionadas y almacena los car
 iniciar\_juego(): Inicia el juego con los caracteres seleccionados.
 
 \end{description}
-\index{continuar() (método de menu\_juego.CaracteresSelector)@\spxentry{continuar()}\spxextra{método de menu\_juego.CaracteresSelector}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{menu_juego:menu_juego.CaracteresSelector.continuar}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{continuar}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Oculta la ventana actual y procede a la selección de caracteres.
-
-\sphinxAtStartPar
-Detalles:
-Esta función se activa cuando el botón «Continuar» en la ventana de selección de caracteres es presionado.
-Su propósito es ocultar la ventana actual (ventana de selección de caracteres) utilizando el método \sphinxtitleref{withdraw()}
-y luego proceder a la selección de caracteres invocando la función \sphinxtitleref{seleccionar\_caracteres()}.
-
-\sphinxAtStartPar
-La función \sphinxtitleref{seleccionar\_caracteres()} es responsable de determinar qué opciones de caracteres fueron
-seleccionadas y construir el conjunto final de caracteres a utilizar en el juego.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
 \index{crear\_interfaz() (método de menu\_juego.CaracteresSelector)@\spxentry{crear\_interfaz()}\spxextra{método de menu\_juego.CaracteresSelector}}
 
 \begin{fulllineitems}
@@ -1322,30 +1097,6 @@ tooltips informativos cuando el cursor del mouse pasa sobre ellos.
 Después de construir la interfaz gráfica, establece las dimensiones y la posición de la ventana mediante el
 método \sphinxtitleref{geometry()} y empaqueta los elementos en la ventana. Finalmente, muestra la ventana con las opciones de
 selección de caracteres.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{iniciar\_juego() (método de menu\_juego.CaracteresSelector)@\spxentry{iniciar\_juego()}\spxextra{método de menu\_juego.CaracteresSelector}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{menu_juego:menu_juego.CaracteresSelector.iniciar_juego}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{iniciar\_juego}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Inicia el juego con las configuraciones y caracteres seleccionados.
-
-\sphinxAtStartPar
-Detalles: Esta función cierra la ventana actual de selección de caracteres y llama a la función “main” del
-módulo “juego” para iniciar el juego con las configuraciones y caracteres seleccionados. Se pasan como
-argumentos el diccionario de caracteres seleccionados, la decisión sobre el modo de juego y la decisión sobre
-el alfabeto a utilizar.
 \begin{quote}\begin{description}
 \sphinxlineitem{Devuelve}
 \sphinxAtStartPar
@@ -1490,103 +1241,6 @@ None
 
 \end{fulllineitems}
 
-\index{espanol\_a\_japones() (método de menu\_juego.MenuJuego)@\spxentry{espanol\_a\_japones()}\spxextra{método de menu\_juego.MenuJuego}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{menu_juego:menu_juego.MenuJuego.espanol_a_japones}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{espanol\_a\_japones}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Cambia la decisión de modo a «Español a Japonés» y abre la ventana de selección de caracteres.
-
-\sphinxAtStartPar
-Esta función se activa cuando el jugador elige el modo «Español a Japonés» en el menú de selección de modo.
-Cambia el atributo \sphinxtitleref{decision} de la clase a \sphinxtitleref{False}, indicando que se ha seleccionado el modo «Español a
-Japonés».
-
-\sphinxAtStartPar
-Detalles:
-La función establece \sphinxtitleref{self.decision} en \sphinxtitleref{False} para indicar que el modo de juego seleccionado es
-«Español a Japonés». Luego, utiliza el método \sphinxtitleref{destroy()} en \sphinxtitleref{self.menu} para cerrar la ventana actual del
-menú.
-
-\sphinxAtStartPar
-Se crea una instancia de la clase \sphinxtitleref{CaracteresSelector}, pasando los parámetros \sphinxtitleref{self.alfabeto} (decisión del
-alfabeto), \sphinxtitleref{self.decision} (decisión de modo) y \sphinxtitleref{self.menu\_principal} (ventana principal del programa). Esto
-abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{japones\_a\_espanol() (método de menu\_juego.MenuJuego)@\spxentry{japones\_a\_espanol()}\spxextra{método de menu\_juego.MenuJuego}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{menu_juego:menu_juego.MenuJuego.japones_a_espanol}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{japones\_a\_espanol}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Cambia la decisión de modo a «Japonés a Español» y abre la ventana de selección de caracteres.
-
-\sphinxAtStartPar
-Esta función se activa cuando el jugador elige el modo «Japonés a Español» en el menú de selección de modo.
-Cambia el atributo \sphinxtitleref{decision} de la clase a \sphinxtitleref{True}, indicando que se ha seleccionado el modo «Japonés a
-Español».
-
-\sphinxAtStartPar
-Detalles:
-La función establece \sphinxtitleref{self.decision} en \sphinxtitleref{True} para indicar que el modo de juego seleccionado es
-«Japonés a Español». Luego, utiliza el método \sphinxtitleref{destroy()} en \sphinxtitleref{self.menu} para cerrar la ventana actual del
-menú.
-
-\sphinxAtStartPar
-Se crea una instancia de la clase \sphinxtitleref{CaracteresSelector}, pasando los parámetros \sphinxtitleref{self.alfabeto} (decisión del
-alfabeto), \sphinxtitleref{self.decision} (decisión de modo) y \sphinxtitleref{self.menu\_principal} (ventana principal del programa). Esto
-abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{cerrar\_ventana() (en el módulo menu\_juego)@\spxentry{cerrar\_ventana()}\spxextra{en el módulo menu\_juego}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{menu_juego:menu_juego.cerrar_ventana}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{menu\_juego.}}\sphinxbfcode{\sphinxupquote{cerrar\_ventana}}}{\sphinxparam{\DUrole{n}{menu}}\sphinxparamcomma \sphinxparam{\DUrole{n}{menu\_principal}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Cierra una ventana secundaria y restaura la visibilidad de la ventana principal.
-
-\sphinxAtStartPar
-Parámetros:
-:param menu: La ventana secundaria a cerrar.
-:param menu\_principal: La ventana principal que se restaurará a la visibilidad.
-
-\sphinxAtStartPar
-Detalles:
-Esta función oculta la ventana secundaria (“menu”) utilizando el método “withdraw()”, luego la destruye con el
-método “destroy()”. Posteriormente, hace visible la ventana principal (“menu\_principal”) utilizando el método
-“deiconify()”, lo que permite que la ventana principal sea nuevamente visible para el usuario.
-\begin{quote}\begin{description}
-\sphinxlineitem{Devuelve}
-\sphinxAtStartPar
-None
-
-\end{description}\end{quote}
 
 \end{fulllineitems}
 

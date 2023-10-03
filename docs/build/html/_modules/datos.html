@@ -32,6 +32,8 @@
   <h1>Código fuente para datos</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Importar librerías de manejo de datos y visualización</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -72,7 +74,7 @@
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data_file</span> <span class="o">=</span> <span class="s1">&#39;datos/datos_partidas.json&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;datos&quot;</span><span class="p">,</span><span class="s2">&quot;datos_partidas.json&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GestionDatos.guardar">
 <a class="viewcode-back" href="../datos.html#datos.GestionDatos.guardar">[documentos]</a>
@@ -245,47 +247,23 @@
             <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gráfico de Progreso&quot;</span><span class="p">)</span>
             <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
             <span class="n">root</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-            <span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;icono.ico&quot;</span><span class="p">))</span>
+
+            <span class="c1"># Configurar el manejo del evento de cierre de ventana</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">(),</span>
+                <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>
+            <span class="p">))</span>
 
             <span class="c1"># Crear un widget de lienzo con el gráfico y empaquetarlo en la ventana</span>
             <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvasTkAgg</span><span class="p">(</span><span class="n">grafico</span><span class="p">,</span> <span class="n">master</span><span class="o">=</span><span class="n">root</span><span class="p">)</span>
             <span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
             <span class="n">canvas</span><span class="o">.</span><span class="n">get_tk_widget</span><span class="p">()</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
 
-            <span class="c1"># Configurar el manejo del evento de cierre de ventana</span>
-            <span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cerrar_ventana_registro</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Mostrar un mensaje emergente si no hay datos para el gráfico</span>
             <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>
             <span class="n">custom_message_box</span><span class="p">(</span><span class="s2">&quot;No hay datos&quot;</span><span class="p">,</span> <span class="s2">&quot;No se han encontrado datos de progreso&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="GestionDatos.cerrar_ventana_registro">
-<a class="viewcode-back" href="../datos.html#datos.GestionDatos.cerrar_ventana_registro">[documentos]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">cerrar_ventana_registro</span><span class="p">(</span><span class="n">ventana_registro</span><span class="p">,</span> <span class="n">ventana_principal</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Cierra la ventana de registro y restaura la ventana principal.</span>
-
-<span class="sd">        Esta función cierra la ventana de registro (ventana emergente) y restaura</span>
-<span class="sd">        la visibilidad de la ventana principal.</span>
-
-<span class="sd">        Parámetros:</span>
-<span class="sd">        :param ventana_registro: Objeto Tkinter de la ventana de registro (ventana emergente).</span>
-<span class="sd">        :param ventana_principal: Objeto Tkinter de la ventana principal del programa.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        La función cierra la ventana de registro invocando el método `destroy()` en</span>
-<span class="sd">        el objeto `ventana_registro`, lo que provoca su cierre.</span>
-
-<span class="sd">        Luego, se utiliza `deiconify()` en el objeto `ventana_principal` para restaurar</span>
-<span class="sd">        la visibilidad de la ventana principal que pudo haber sido ocultada cuando se</span>
-<span class="sd">        abrió la ventana de registro.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ventana_registro</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="n">ventana_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="GestionDatos.borrar_datos">

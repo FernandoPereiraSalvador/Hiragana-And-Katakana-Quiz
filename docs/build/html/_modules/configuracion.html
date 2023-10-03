@@ -30,7 +30,8 @@
           <div class="body" role="main">
             
   <h1>Código fuente para configuracion</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">import</span> <span class="nn">webbrowser</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
 <span class="kn">from</span> <span class="nn">datos</span> <span class="kn">import</span> <span class="n">GestionDatos</span>
@@ -76,7 +77,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Configuración&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;icono.ico&quot;</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span> <span class="o">=</span> <span class="n">menu_principal</span>  <span class="c1"># Ventana principal</span>
 
@@ -90,7 +91,9 @@
         <span class="n">borrar_bot</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
         <span class="c1"># Crear el botón &quot;Repositorio&quot;</span>
-        <span class="n">repositorio_bot</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Repositorio&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">abrir_repositorio</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+        <span class="n">repositorio_bot</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Repositorio&quot;</span><span class="p">,</span>
+                                    <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;https://github.com/FernandoPereiraSalvador&quot;</span>
+                                                                    <span class="s2">&quot;/Hiragana-And-Katakana-Quiz&quot;</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
                                     <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
         <span class="n">repositorio_bot</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
 
@@ -146,26 +149,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>  <span class="c1"># Vuelve a mostrar la ventana principal</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># Cierra la ventana de configuración</span></div>
-
-
-<div class="viewcode-block" id="Configuracion.abrir_repositorio">
-<a class="viewcode-back" href="../configuracion.html#configuracion.Configuracion.abrir_repositorio">[documentos]</a>
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">abrir_repositorio</span><span class="p">():</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Abre un navegador web para mostrar el repositorio en línea.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        Esta función utiliza la biblioteca `webbrowser` para abrir un navegador web</span>
-<span class="sd">        y mostrar la URL proporcionada. En este caso, la URL es para un repositorio</span>
-<span class="sd">        en línea. La URL puede ser modificada según se desee.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.google.com&quot;</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 </div>
-
 
 
 <div class="viewcode-block" id="main">

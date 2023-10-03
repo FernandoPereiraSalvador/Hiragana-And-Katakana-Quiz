@@ -30,12 +30,15 @@
           <div class="body" role="main">
             
   <h1>Código fuente para main</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">PhotoImage</span><span class="p">,</span> <span class="n">messagebox</span>
 
 <span class="kn">import</span> <span class="nn">configuracion</span>
 <span class="kn">from</span> <span class="nn">datos</span> <span class="kn">import</span> <span class="n">GestionDatos</span>
 <span class="kn">import</span> <span class="nn">menu_juego</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
 
 
 <span class="c1"># Definición de la clase MenuPrincipal</span>
@@ -86,91 +89,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Menu&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Construir la ruta completa al icono .ico</span>
+        <span class="n">icon_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;icono.ico&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Cargar el icono</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">icon_path</span><span class="p">)</span>
 
         <span class="c1"># Carga de las imágenes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_hiragana</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/hiragana.png&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_katakana</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/katakana.png&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_registro</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/registro.png&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">configuracion</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;menu_imagenes/configuracion.png&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_hiragana</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;hiragana.png&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_katakana</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;katakana.png&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagen_registro</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;registro.png&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuracion</span> <span class="o">=</span> <span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;configuracion.png&quot;</span><span class="p">))</span>
 
         <span class="c1"># Creación de los botones en la ventana</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crear_botones</span><span class="p">()</span>
-
-<div class="viewcode-block" id="MenuPrincipal.decision_hiragana">
-<a class="viewcode-back" href="../main.html#main.MenuPrincipal.decision_hiragana">[documentos]</a>
-    <span class="k">def</span> <span class="nf">decision_hiragana</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el</span>
-<span class="sd">        menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego</span>
-<span class="sd">        seleccionado es Hiragana (True).</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
-        <span class="n">menu_juego</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="MenuPrincipal.decision_katakana">
-<a class="viewcode-back" href="../main.html#main.MenuPrincipal.decision_katakana">[documentos]</a>
-    <span class="k">def</span> <span class="nf">decision_katakana</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el</span>
-<span class="sd">        menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego</span>
-<span class="sd">        seleccionado es Katakana (False).</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
-        <span class="n">menu_juego</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="MenuPrincipal.mostrar_registro">
-<a class="viewcode-back" href="../main.html#main.MenuPrincipal.mostrar_registro">[documentos]</a>
-    <span class="k">def</span> <span class="nf">mostrar_registro</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo</span>
-<span class="sd">        utilizando la función &#39;mostrar_grafico_tkinter&#39; de la clase &#39;GestionDatos&#39;.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        Esta función utiliza la clase &#39;GestionDatos&#39; para mostrar un gráfico del progreso del jugador a lo</span>
-<span class="sd">        largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana</span>
-<span class="sd">        principal actual y luego crea una instancia de la clase &#39;GestionDatos&#39; para acceder a la función</span>
-<span class="sd">        &#39;mostrar_grafico_tkinter&#39;. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El</span>
-<span class="sd">        parámetro &#39;self.root&#39; se pasa a la función &#39;mostrar_grafico_tkinter&#39; para asegurarse de que el gráfico se</span>
-<span class="sd">        muestre en la misma ventana principal después de ocultarla.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
-        <span class="n">registro</span> <span class="o">=</span> <span class="n">GestionDatos</span><span class="p">()</span>
-        <span class="n">registro</span><span class="o">.</span><span class="n">mostrar_grafico_tkinter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="MenuPrincipal.abrir_configuracion">
-<a class="viewcode-back" href="../main.html#main.MenuPrincipal.abrir_configuracion">[documentos]</a>
-    <span class="k">def</span> <span class="nf">abrir_configuracion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Oculta la ventana principal y abre la ventana de configuración.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        Esta función oculta la ventana principal actual utilizando el método &#39;withdraw&#39; y luego llama a la</span>
-<span class="sd">        función &#39;main&#39; del módulo &#39;configuracion&#39; para abrir la ventana de configuración. La instancia actual de la</span>
-<span class="sd">        ventana principal, &#39;self.root&#39;, se pasa a la función &#39;main&#39; para asegurarse de que la configuración se</span>
-<span class="sd">        realice en la misma ventana principal después de ocultarla.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>
-        <span class="n">configuracion</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="MenuPrincipal.crear_botones">
 <a class="viewcode-back" href="../main.html#main.MenuPrincipal.crear_botones">[documentos]</a>
@@ -192,7 +125,12 @@
         <span class="c1"># Creación del botón para seleccionar Hiragana</span>
         <span class="n">hiragana_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decision_hiragana</span><span class="p">()],</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                <span class="c1"># Oculta la ventana principal y inicia el menú de la partida, pasándole True (Hiragana) y la</span>
+                <span class="c1"># ventana principal</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(),</span>
+                <span class="n">menu_juego</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imagen_hiragana</span>
         <span class="p">)</span>
         <span class="n">hiragana_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
@@ -200,7 +138,12 @@
         <span class="c1"># Creación del botón para seleccionar Katakana</span>
         <span class="n">katakana_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decision_katakana</span><span class="p">()],</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                <span class="c1"># Oculta la ventana principal y inicia el menú de la partida, pasándole False (Katakana) y la</span>
+                <span class="c1"># ventana principal</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(),</span>
+                <span class="n">menu_juego</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="p">),</span>
             <span class="n">width</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imagen_katakana</span>
         <span class="p">)</span>
         <span class="n">katakana_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
@@ -208,7 +151,11 @@
         <span class="c1"># Creación del botón para mostrar el registro</span>
         <span class="n">registro_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mostrar_registro</span><span class="p">()],</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                <span class="c1"># Oculta la ventana principal y llama a GestionDatos para mostrar el gráfico del progreso del jugador</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(),</span>
+                <span class="n">GestionDatos</span><span class="p">()</span><span class="o">.</span><span class="n">mostrar_grafico_tkinter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="p">),</span>
             <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imagen_registro</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span>
         <span class="p">)</span>
         <span class="n">registro_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">395</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -216,7 +163,11 @@
         <span class="c1"># Creación del botón para mostrar la configuración</span>
         <span class="n">configuracion_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span>
-            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">abrir_configuracion</span><span class="p">()],</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                <span class="c1"># Oculta la ventana principal y llama a la función para abrir la configuración.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(),</span>
+                <span class="n">configuracion</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="p">),</span>
             <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">configuracion</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span>
         <span class="p">)</span>
         <span class="n">configuracion_button</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">455</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>

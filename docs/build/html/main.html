@@ -58,22 +58,6 @@ crear_botones(self): Crea los botones en la ventana principal.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="main.MenuPrincipal.abrir_configuracion">
-<span class="sig-name descname"><span class="pre">abrir_configuracion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.abrir_configuracion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.abrir_configuracion" title="Link to this definition">¶</a></dt>
-<dd><p>Oculta la ventana principal y abre la ventana de configuración.</p>
-<p>Detalles:
-Esta función oculta la ventana principal actual utilizando el método “withdraw” y luego llama a la
-función “main” del módulo “configuracion” para abrir la ventana de configuración. La instancia actual de la
-ventana principal, “self.root”, se pasa a la función “main” para asegurarse de que la configuración se
-realice en la misma ventana principal después de ocultarla.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="main.MenuPrincipal.crear_botones">
 <span class="sig-name descname"><span class="pre">crear_botones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.crear_botones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.crear_botones" title="Link to this definition">¶</a></dt>
 <dd><p>Crea los botones para seleccionar modos de juego y acceder a funciones adicionales.</p>
@@ -84,55 +68,6 @@ progreso del jugador y acceder a la configuración de la aplicación.</p>
 Esta función utiliza la librería Tkinter para crear y posicionar los botones en la ventana principal. Cada
 botón está asociado a una función específica (como “decision_hiragana”, “decision_katakana”, “mostrar_registro”,
 y “abrir_configuracion”) y se configura para llamar a la función correspondiente cuando se hace clic en él.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="main.MenuPrincipal.decision_hiragana">
-<span class="sig-name descname"><span class="pre">decision_hiragana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.decision_hiragana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.decision_hiragana" title="Link to this definition">¶</a></dt>
-<dd><p>Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</p>
-<p>Detalles:
-Esta función se activa al hacer click en el boton hiragana. Y oculta la ventana principal y abre el
-menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-seleccionado es Hiragana (True).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="main.MenuPrincipal.decision_katakana">
-<span class="sig-name descname"><span class="pre">decision_katakana</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.decision_katakana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.decision_katakana" title="Link to this definition">¶</a></dt>
-<dd><p>Oculta la ventana principal y llama a la función de menú del juego para elegir el modo de juego.</p>
-<p>Detalles:
-Esta función se activa al hacer click en el boton katakana. Y oculta la ventana principal y abre el
-menú de selección de modo de juego. Se le pasa un parámetro booleano para indicar si el modo de juego
-seleccionado es Katakana (False).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="main.MenuPrincipal.mostrar_registro">
-<span class="sig-name descname"><span class="pre">mostrar_registro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#MenuPrincipal.mostrar_registro"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#main.MenuPrincipal.mostrar_registro" title="Link to this definition">¶</a></dt>
-<dd><p>Oculta la ventana principal y muestra un gráfico del progreso del jugador a lo largo del tiempo
-utilizando la función “mostrar_grafico_tkinter” de la clase “GestionDatos”.</p>
-<p>Detalles:
-Esta función utiliza la clase “GestionDatos” para mostrar un gráfico del progreso del jugador a lo
-largo del tiempo en una ventana secundaria utilizando la librería Tkinter. Primero, oculta la ventana
-principal actual y luego crea una instancia de la clase “GestionDatos” para acceder a la función
-“mostrar_grafico_tkinter”. Dicha función es responsable de mostrar el gráfico en una ventana secundaria. El
-parámetro “self.root” se pasa a la función “mostrar_grafico_tkinter” para asegurarse de que el gráfico se
-muestre en la misma ventana principal después de ocultarla.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>

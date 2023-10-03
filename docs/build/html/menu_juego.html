@@ -70,23 +70,6 @@ iniciar_juego(): Inicia el juego con los caracteres seleccionados.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.continuar">
-<span class="sig-name descname"><span class="pre">continuar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.continuar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.continuar" title="Link to this definition">¶</a></dt>
-<dd><p>Oculta la ventana actual y procede a la selección de caracteres.</p>
-<p>Detalles:
-Esta función se activa cuando el botón «Continuar» en la ventana de selección de caracteres es presionado.
-Su propósito es ocultar la ventana actual (ventana de selección de caracteres) utilizando el método <cite>withdraw()</cite>
-y luego proceder a la selección de caracteres invocando la función <cite>seleccionar_caracteres()</cite>.</p>
-<p>La función <cite>seleccionar_caracteres()</cite> es responsable de determinar qué opciones de caracteres fueron
-seleccionadas y construir el conjunto final de caracteres a utilizar en el juego.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="menu_juego.CaracteresSelector.crear_interfaz">
 <span class="sig-name descname"><span class="pre">crear_interfaz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alfabeto_usado</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.crear_interfaz"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.crear_interfaz" title="Link to this definition">¶</a></dt>
 <dd><p>Crea la interfaz gráfica de la ventana de selección de opciones de caracteres.</p>
@@ -100,21 +83,6 @@ tooltips informativos cuando el cursor del mouse pasa sobre ellos.</p>
 <p>Después de construir la interfaz gráfica, establece las dimensiones y la posición de la ventana mediante el
 método <cite>geometry()</cite> y empaqueta los elementos en la ventana. Finalmente, muestra la ventana con las opciones de
 selección de caracteres.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="menu_juego.CaracteresSelector.iniciar_juego">
-<span class="sig-name descname"><span class="pre">iniciar_juego</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#CaracteresSelector.iniciar_juego"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.CaracteresSelector.iniciar_juego" title="Link to this definition">¶</a></dt>
-<dd><p>Inicia el juego con las configuraciones y caracteres seleccionados.</p>
-<p>Detalles: Esta función cierra la ventana actual de selección de caracteres y llama a la función “main” del
-módulo “juego” para iniciar el juego con las configuraciones y caracteres seleccionados. Se pasan como
-argumentos el diccionario de caracteres seleccionados, la decisión sobre el modo de juego y la decisión sobre
-el alfabeto a utilizar.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Devuelve<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -202,66 +170,6 @@ selección de caracteres.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="menu_juego.MenuJuego.espanol_a_japones">
-<span class="sig-name descname"><span class="pre">espanol_a_japones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego.espanol_a_japones"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego.espanol_a_japones" title="Link to this definition">¶</a></dt>
-<dd><p>Cambia la decisión de modo a «Español a Japonés» y abre la ventana de selección de caracteres.</p>
-<p>Esta función se activa cuando el jugador elige el modo «Español a Japonés» en el menú de selección de modo.
-Cambia el atributo <cite>decision</cite> de la clase a <cite>False</cite>, indicando que se ha seleccionado el modo «Español a
-Japonés».</p>
-<p>Detalles:
-La función establece <cite>self.decision</cite> en <cite>False</cite> para indicar que el modo de juego seleccionado es
-«Español a Japonés». Luego, utiliza el método <cite>destroy()</cite> en <cite>self.menu</cite> para cerrar la ventana actual del
-menú.</p>
-<p>Se crea una instancia de la clase <cite>CaracteresSelector</cite>, pasando los parámetros <cite>self.alfabeto</cite> (decisión del
-alfabeto), <cite>self.decision</cite> (decisión de modo) y <cite>self.menu_principal</cite> (ventana principal del programa). Esto
-abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="menu_juego.MenuJuego.japones_a_espanol">
-<span class="sig-name descname"><span class="pre">japones_a_espanol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#MenuJuego.japones_a_espanol"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.MenuJuego.japones_a_espanol" title="Link to this definition">¶</a></dt>
-<dd><p>Cambia la decisión de modo a «Japonés a Español» y abre la ventana de selección de caracteres.</p>
-<p>Esta función se activa cuando el jugador elige el modo «Japonés a Español» en el menú de selección de modo.
-Cambia el atributo <cite>decision</cite> de la clase a <cite>True</cite>, indicando que se ha seleccionado el modo «Japonés a
-Español».</p>
-<p>Detalles:
-La función establece <cite>self.decision</cite> en <cite>True</cite> para indicar que el modo de juego seleccionado es
-«Japonés a Español». Luego, utiliza el método <cite>destroy()</cite> en <cite>self.menu</cite> para cerrar la ventana actual del
-menú.</p>
-<p>Se crea una instancia de la clase <cite>CaracteresSelector</cite>, pasando los parámetros <cite>self.alfabeto</cite> (decisión del
-alfabeto), <cite>self.decision</cite> (decisión de modo) y <cite>self.menu_principal</cite> (ventana principal del programa). Esto
-abre la ventana de selección de caracteres para que el jugador elija qué caracteres utilizar en el juego.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="menu_juego.cerrar_ventana">
-<span class="sig-prename descclassname"><span class="pre">menu_juego.</span></span><span class="sig-name descname"><span class="pre">cerrar_ventana</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">menu_principal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu_juego.html#cerrar_ventana"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#menu_juego.cerrar_ventana" title="Link to this definition">¶</a></dt>
-<dd><p>Cierra una ventana secundaria y restaura la visibilidad de la ventana principal.</p>
-<p>Parámetros:
-:param menu: La ventana secundaria a cerrar.
-:param menu_principal: La ventana principal que se restaurará a la visibilidad.</p>
-<p>Detalles:
-Esta función oculta la ventana secundaria (“menu”) utilizando el método “withdraw()”, luego la destruye con el
-método “destroy()”. Posteriormente, hace visible la ventana principal (“menu_principal”) utilizando el método
-“deiconify()”, lo que permite que la ventana principal sea nuevamente visible para el usuario.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -313,7 +221,6 @@ como argumentos. Esto inicia la ventana del menú del juego.</p>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">menu_juego module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#menu_juego.CaracteresSelector"><code class="docutils literal notranslate"><span class="pre">CaracteresSelector</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#menu_juego.MenuJuego"><code class="docutils literal notranslate"><span class="pre">MenuJuego</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#menu_juego.cerrar_ventana"><code class="docutils literal notranslate"><span class="pre">cerrar_ventana()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#menu_juego.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>

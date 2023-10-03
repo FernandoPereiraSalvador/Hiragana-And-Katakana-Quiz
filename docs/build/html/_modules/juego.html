@@ -30,7 +30,8 @@
           <div class="body" role="main">
             
   <h1>Código fuente para juego</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span></span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -193,6 +194,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">caracteres_copia</span> <span class="o">=</span> <span class="n">caracteres</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errores</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">def</span> <span class="nf">submit</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
@@ -361,6 +364,8 @@
 
         <span class="n">respuesta</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">caracteres_copia</span> <span class="o">=</span> <span class="n">caracteres</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numeroErrores</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errores</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># Inicializa el contador de letras conseguidas en 1, ya que el jugador aún no ha adivinado ninguna.</span>
         <span class="c1"># Se inicia en 1 en lugar de 0 para que el marcador de letras actual esté adelantado por 1,</span>
@@ -510,7 +515,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cerrar_ventana</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;¿Quieres repetir?&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span> <span class="s2">&quot;icono.ico&quot;</span><span class="p">))</span>
 
         <span class="c1"># Agregar texto &quot;¿Quieres repetir?&quot; arriba del contenido con un tamaño de fuente más grande</span>
         <span class="n">titulo_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;¿Quieres repetir?&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
@@ -526,7 +531,10 @@
         <span class="n">boton_si</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
         <span class="n">boton_no</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">botones_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                             <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repetir_no</span><span class="p">(</span><span class="n">menu_principal</span><span class="p">),</span>
+                             <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">(),</span>
+                                 <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span>
+                             <span class="p">),</span>
                              <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
         <span class="n">boton_no</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
@@ -578,31 +586,6 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">espanol_a_japones</span><span class="p">(</span><span class="n">letras</span><span class="p">,</span> <span class="n">alfabeto</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Juego.repetir_no">
-<a class="viewcode-back" href="../juego.html#juego.Juego.repetir_no">[documentos]</a>
-    <span class="k">def</span> <span class="nf">repetir_no</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">menu_principal</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Finaliza el juego y muestra el menú principal.</span>
-
-<span class="sd">        Esta función finaliza el juego y muestra nuevamente el menú principal del programa.</span>
-<span class="sd">        Se invoca cuando el jugador decide no repetir el juego y regresar al menú principal.</span>
-
-<span class="sd">        Parámetros:</span>
-<span class="sd">        :param menu_principal: Objeto Tkinter de la ventana principal del programa.</span>
-
-<span class="sd">        Detalles:</span>
-<span class="sd">        La función destruye la ventana actual del juego utilizando el método `destroy()`, lo que</span>
-<span class="sd">        cierra la ventana emergente del juego actual.</span>
-
-<span class="sd">        Luego, utiliza el método `deiconify()` en el objeto `menu_principal` para restaurar la</span>
-<span class="sd">        visibilidad y el enfoque en la ventana principal del programa.</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-        <span class="n">menu_principal</span><span class="o">.</span><span class="n">deiconify</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Juego.cerrar_ventana">
@@ -693,7 +676,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;900x550+300+100&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Japones&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="s2">&quot;menu_imagenes/icono.ico&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">iconbitmap</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;imagenes&quot;</span><span class="p">,</span><span class="s2">&quot;icono.ico&quot;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">crear_contador</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_letras_conseguidas</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_letras_faltantes</span><span class="p">))</span></div>
 </div>
 
