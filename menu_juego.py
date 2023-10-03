@@ -335,7 +335,7 @@ class CaracteresSelector:
         # Lista de opciones con sus variables asociadas y textos tooltip
         opciones = [
             ("Vocales", self.opcion_vocales_var, vocales),
-            ("Básico", self.opcion_basico_var, basico),
+            ("Basico", self.opcion_basico_var, basico),
             ("Compuesto", self.opcion_compuesto_var, compuesto),
             ("Combinado 1", self.opcion_combinado1_var, combinado_1),
             ("Combinado 2", self.opcion_combinado2_var, combinado_2)
