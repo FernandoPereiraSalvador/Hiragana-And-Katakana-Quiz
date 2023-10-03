@@ -27,14 +27,22 @@ Para ejecutar la aplicación, simplemente ejecuta el archivo `main.exe` que se e
 
 Si necesitas información mas detallada sobre el funcionamiento visita la [wiki](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/wiki/)
 
-## Documentación
+## Imagenes
 
-La documentación completa del proyecto se encuentra dentro de la carpeta `docs`. Dentro de esta carpeta, encontrarás dos subcarpetas importantes:
+1. Modo español a jponés
 
-### Documentación en HTML
-La documentación en formato HTML está disponible en la carpeta `build/html`. Puedes acceder a esta documentación abriendo el archivo `index.html` en tu navegador web. Esta documentación proporciona información detallada sobre la estructura y el funcionamiento del proyecto.
+<div align="center">
+  <img src="https://i.imgur.com/8K7XmhX.png" alt="Texto alternativo" width="600" height="400">
+</div>
 
-### Documentación en LaTeX
-Además, si prefieres la documentación en formato LaTeX, puedes encontrarla en la carpeta `build/latex`. Puedes compilar y generar el documento final en PDF utilizando un sistema de procesamiento de LaTeX.
+2. Modo japonés a español
 
-Esta documentación es una fuente valiosa de información técnica y detalles sobre el proyecto. Si tienes alguna pregunta o necesitas aclaraciones adicionales, no dudes en consultar esta documentación.
+<div align="center">
+  <img src="https://i.imgur.com/SPnVT5E.png" alt="Texto alternativo" width="600" height="400">
+</div>
+
+3. Gráfico del progreso del jugador
+
+<div align="center">
+  <img src="https://i.imgur.com/fdZHyme.png" alt="Texto alternativo" width="600" height="400">
+</div>
