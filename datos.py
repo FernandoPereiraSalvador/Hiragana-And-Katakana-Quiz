@@ -1,5 +1,7 @@
 # Importar librerías de manejo de datos y visualización
 import json
+import os
+
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -38,7 +40,7 @@ class GestionDatos:
 
         :return: None
         """
-        self.data_file = 'datos/datos_partidas.json'
+        self.data_file = os.path.join("datos","datos_partidas.json")
 
     def guardar(self, numero_errores, errores, alfabeto_elegido):
         """
@@ -200,18 +202,19 @@ class GestionDatos:
             root.title("Gráfico de Progreso")
             root.geometry("900x550+300+100")
             root.resizable(False, False)
-            root.iconbitmap("imagenes/icono.ico")
+            root.iconbitmap(os.path.join("imagenes","icono.ico"))
+
+            # Configurar el manejo del evento de cierre de ventana
+            root.protocol("WM_DELETE_WINDOW", lambda: (
+                root.destroy(),
+                menu_principal.deiconify()
+            ))
 
             # Crear un widget de lienzo con el gráfico y empaquetarlo en la ventana
             canvas = FigureCanvasTkAgg(grafico, master=root)
             canvas.draw()
             canvas.get_tk_widget().pack()
 
-            # Configurar el manejo del evento de cierre de ventana
-            root.protocol("WM_DELETE_WINDOW", lambda: lambda ventana_registro, ventana_principal: (
-                ventana_registro.destroy(),
-                ventana_principal.deiconify()
-            ))
         else:
             # Mostrar un mensaje emergente si no hay datos para el gráfico
             menu_principal.deiconify()

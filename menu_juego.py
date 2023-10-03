@@ -1,3 +1,4 @@
+import os.path
 import tkinter as tk
 from tkinter import PhotoImage
 
@@ -62,14 +63,14 @@ class MenuJuego:
         # Cargar imágenes para los botones del menú según el alfabeto utilizado
         if alfabeto_usado:
             self.imagen_japones_a_espanol = PhotoImage(
-                file=pkg_resources.resource_filename(__name__, 'imagenes/japonesHiragana.png'))
+                file=os.path.join("imagenes","japonesHiragana.png"))
             self.imagen_espanol_a_japones = PhotoImage(
-                file=pkg_resources.resource_filename(__name__, 'imagenes/españolHiragana.png'))
+                file=os.path.join("imagenes","españolHiragana.png"))
         else:
             self.imagen_japones_a_espanol = PhotoImage(
-                file=pkg_resources.resource_filename(__name__, 'imagenes/japonesKatakana.png'))
+                file=os.path.join("imagenes","japonesKatakana.png"))
             self.imagen_espanol_a_japones = PhotoImage(
-                file=pkg_resources.resource_filename(__name__, 'imagenes/españolKatakana.png'))
+                file=os.path.join("imagenes","españolKatakana.png"))
 
         # Configurar la ventana de menú
         self.menu.geometry("900x550+300+100")
@@ -80,7 +81,7 @@ class MenuJuego:
         ))
         self.menu.resizable(False, False)
         self.menu.title("Modo")
-        self.menu.iconbitmap("imagenes/icono.ico")
+        self.menu.iconbitmap(os.path.join("imagenes","icono.ico"))
 
         # Almacenar la decisión del alfabeto y crear la interfaz gráfica del menú
         self.alfabeto = alfabeto_usado
@@ -257,7 +258,7 @@ class CaracteresSelector:
         ))
         self.menu.geometry("900x550+300+100")
         self.menu.resizable(False, False)
-        self.menu.iconbitmap("imagenes/icono.ico")
+        self.menu.iconbitmap(os.path.join("imagenes","icono.ico"))
 
         self.crear_interfaz(decision_alfabeto)
 
@@ -408,7 +409,7 @@ class CaracteresSelector:
         if self.opcion_combinado2:
             self.caracteres |= caracteres_usados.combinado_2
 
-        # Iniciar el juego con los caracteres seleccionados
+        # Iniciar el juego con los caracteres seleccionados si hemos seleccionado una opción mínimo
         if self.opcion_vocales or self.opcion_basico or self.opcion_compuesto or self.opcion_combinado1 \
                 or self.opcion_combinado2:
             self.menu.destroy()

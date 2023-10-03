@@ -65,10 +65,10 @@ class MenuPrincipal:
         self.root.iconbitmap(icon_path)
 
         # Carga de las imágenes
-        self.imagen_hiragana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/hiragana.png'))
-        self.imagen_katakana = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/katakana.png'))
-        self.imagen_registro = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/registro.png'))
-        self.configuracion = PhotoImage(file=pkg_resources.resource_filename(__name__, 'imagenes/configuracion.png'))
+        self.imagen_hiragana = PhotoImage(file=os.path.join("imagenes","hiragana.png"))
+        self.imagen_katakana = PhotoImage(file=os.path.join("imagenes","katakana.png"))
+        self.imagen_registro = PhotoImage(file=os.path.join("imagenes","registro.png"))
+        self.configuracion = PhotoImage(file=os.path.join("imagenes","configuracion.png"))
 
         # Creación de los botones en la ventana
         self.crear_botones()
