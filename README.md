@@ -3,45 +3,45 @@
    <img src="https://i.imgur.com/CJAYZ7x.png" alt="Texto alternativo" width="150" height="150">
 </div>
 
-## Resumen
+## Summary
 
-El Hiragana y Katakana Quiz es una emocionante aplicación diseñada para aprender los sistemas de escritura japonesa, Hiragana y Katakana, de una manera divertida e interactiva. Este juego ofrece dos modos de juego únicos:
+The Hiragana and Katakana Quiz is an exciting app designed to learn the Japanese writing systems, Hiragana and Katakana, in a fun and interactive way. This game offers two unique game modes:
 
-- **Japonés a Español:** En este modo, se presenta un caracter en japonés y desafía al jugador a ingresar su equivalente en español. Es una excelente manera de aprender la pronunciación y la correspondencia entre los caracteres japoneses y su significado en español.
+- **Japanese to Spanish:** In this mode, a Japanese character is presented and challenges the player to enter its Spanish equivalent. It is an excellent way to learn the correspondence between Japanese characters and their meaning in Spanish.
 
-- **Español a Japonés:** En este modo, el jugador ve un caracter en español y debe seleccionar la opción correcta entre tres posibles en japonés. Esto ayuda a reforzar el reconocimiento visual y la traducción inversa de los caracteres.
+- **Spanish to Japanese:** In this mode, the player sees a character in Spanish and must select the correct option among three possible ones in Japanese. This helps reinforce visual recognition and reverse translation of characters.
 
-Además de estos emocionantes modos de juego, los usuarios tienen la libertad de elegir qué caracteres del alfabeto desean practicar, lo que permite una experiencia de aprendizaje altamente personalizada.
+In addition to these exciting game modes, users have the freedom to choose which alphabet characters they want to practice, allowing for a highly personalized learning experience.
 
-Pero eso no es todo. La aplicación también ofrece una función de seguimiento del progreso del jugador. Genera gráficos que muestran el avance del usuario a lo largo del tiempo y destacan las áreas en las que pueden necesitar mejorar. Esto fomenta la motivación y el aprendizaje constante.
+But that is not all. The app also offers a player progress tracking feature. Generates graphs that show user progress over time and highlight areas where they may need improvement. This encourages motivation and constant learning.
 
-¡Prepárate para sumergirte en el fascinante mundo de la escritura japonesa con el Hiragana y Katakana Quiz Game! Aprender nunca ha sido tan divertido.
+Get ready to immerse yourself in the fascinating world of Japanese writing with the Hiragana and Katakana Quiz Game! Learning has never been so fun.
 
-## Funcionamiento
+## Operation
 
-Para ejecutar la aplicación, simplemente ejecuta el archivo `main.exe` que se encuentra en la carpeta `dist/main` del proyecto. Al hacerlo, se abrirá el menú principal de la aplicación.
+To run the application, simply run the `main.exe` file located in the `dist/main` folder of the project. Doing so will open the main menu of the application.
 
 <div align="center">
   <img src="https://i.imgur.com/PNx2TNe.png" alt="Texto alternativo" width="600" height="400">
 </div>
 
-Si necesitas información mas detallada sobre el funcionamiento visita la [wiki](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/wiki/)
+If you need more detailed information about operation, visit the [wiki](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/wiki/)
 
-## Imagenes
+## Images
 
-1. Modo español a jponés
+1. Spanish to Japanese mode
 
 <div align="center">
   <img src="https://i.imgur.com/8K7XmhX.png" alt="Texto alternativo" width="600" height="400">
 </div>
 
-2. Modo japonés a español
+2. Japanese to Spanish mode
 
 <div align="center">
   <img src="https://i.imgur.com/SPnVT5E.png" alt="Texto alternativo" width="600" height="400">
 </div>
 
-3. Gráfico del progreso del jugador
+3. Player progress graph
 
 <div align="center">
   <img src="https://i.imgur.com/fdZHyme.png" alt="Texto alternativo" width="600" height="400">
