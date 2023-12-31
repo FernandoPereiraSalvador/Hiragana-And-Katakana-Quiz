@@ -1,7 +1,6 @@
 <div align="center">
   <h1>Hiragana y Katakana Quiz</h1>
-   <img src="https://i.imgur.com/CJAYZ7x.png" alt="Texto alternativo" width="150" height="150">
-   <img src="quiz.gif" alt="Snake" width="450" height="450">
+   <img src="quiz.gif" alt="Snake" width="550" height="450">
 </div>
 
 ## Summary
