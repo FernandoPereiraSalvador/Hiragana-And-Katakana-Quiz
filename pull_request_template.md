@@ -1,24 +1,24 @@
-# Solicitud de Extracción (PR)
+# Extraction Request (PR)
 
-Gracias por tu contribución al repositorio de Fabrikam Fiber. Antes de enviar esta PR, por favor asegúrate de lo siguiente:
+Thank you for your contribution to the Fabrikam Fiber repository. Before submitting this PR, please make sure of the following:
 
-## Antes de Enviar
+## Before Submitting
 
-- [ ] Tu código compila sin errores ni advertencias.
-- [ ] Estás utilizando la terminología aprobada.
-- [ ] Has agregado pruebas unitarias para tu código.
+- [ ] Your code compiles without errors or warnings.
+- [ ] You are using the approved terminology.
+- You have added unit tests for your code.
 
-## Descripción Detallada
+## Detailed Description
 
-Proporciona una descripción detallada de los cambios que has realizado en esta PR. Esto ayudará a los revisores a comprender mejor el propósito y alcance de tus contribuciones.
+Provide a detailed description of the changes you have made in this PR. This will help reviewers better understand the purpose and scope of your contributions.
 
-## Documentación o Referencias
+## Documentation or References
 
-Si hay documentación relacionada o un issue que está vinculado a esta PR, por favor proporciona enlaces para que podamos obtener más contexto.
+If there is related documentation or an issue that is linked to this PR, please provide links so we can get more context.
 
-## Comentarios Adicionales
+## Additional Comments
 
-Si tienes alguna pregunta o comentario adicional que no encaja en las categorías anteriores, por favor compártelo aquí.
+If you have any additional questions or comments that do not fit into the above categories, please share them here.
 
-¡Agradecemos tu colaboración en hacer que nuestro proyecto sea aún mejor!
+We appreciate your collaboration in making our project even better!
 
