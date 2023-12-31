@@ -1,72 +1,72 @@
-# Guía de Contribución para Hiragana and Katakana Quiz
-## Empezar
+## Contribution Guide for Hiragana and Katakana Quiz
+## Get Started
 
-¡Gracias por invertir tu tiempo en contribuir a nuestro proyecto! Cualquier contribución que realices se verá reflejada en [github.com](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz) :sparkles:.
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [github.com](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz) :sparkles:.
 
-Lee nuestro [Código de Conducta](./CODE_OF_CONDUCT.md) para mantener nuestra comunidad accesible y respetuosa.
+Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community accessible and respectful.
 
-En esta guía, obtendrás una descripción general del flujo de contribución, desde abrir un issue, crear una solicitud de extracción (pull request), revisar y fusionar la solicitud de extracción.
+In this guide, you will get an overview of the contribution flow, from opening an issue, creating a pull request, reviewing and merging the pull request.
 
-## Guía para nuevos contribuyentes
+## Guide for new contributors
 
-Para obtener una descripción general del proyecto, lee el [README](README.md). Aquí tienes algunos recursos para ayudarte a comenzar con las contribuciones de código abierto:
+For an overview of the project, read the [README](README.md). Here are some resources to help you get started with open source contributions:
 
-- [Encontrar formas de contribuir al código abierto en GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github)
-- [Configurar Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
-- [Flujo de GitHub](https://docs.github.com/en/get-started/quickstart/github-flow)
-- [Colaborar con solicitudes de extracción](https://docs.github.com/en/github/collaborating-with-pull-requests)
+- [Finding ways to contribute to open source on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github)
+- Configuring Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
+- [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow)
+- [Contributing to pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
 
 ### Issues
 
-#### Crear un nuevo issue
+#### Create a new issue
 
-Si encuentras un problema en la documentación, [busca si ya existe un issue relacionado](https://docs.github.com/en/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). Si no existe un issue relacionado, puedes abrir uno nuevo utilizando un formulario de issue relevante [aquí](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/issues/new/choose).
+If you find a problem in the documentation, [check if a related issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If no related issue exists, you can open a new one using a relevant issue form [here](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/issues/new/choose).
 
-#### Resolver un issue
+#### Resolving an issue
 
-Echa un vistazo a nuestros [issues existentes](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/issues) para encontrar uno que te interese. Puedes reducir la búsqueda utilizando etiquetas (`labels`) como filtros. Como regla general, no asignamos issues a nadie. Si encuentras un issue en el que quieras trabajar, puedes abrir una solicitud de extracción (PR) con la solución.
+Take a look at our [existing issues](https://github.com/FernandoPereiraSalvador/Hiragana-And-Katakana-Quiz/issues) to find one that interests you. You can narrow your search by using `labels` as filters. As a general rule, we do not assign issues to anyone. If you find an issue you want to work on, you can open a pull request (PR) with the solution.
 
-### Realizar Cambios
+### Make Changes
 
-#### Realizar cambios en la interfaz de usuario (UI)
+#### Make changes to the user interface (UI)
 
-Haz clic en **Hacer una contribución** en la parte inferior de cualquier página de documentación para realizar pequeños cambios, como corregir una falta de ortografía, arreglar una oración o corregir un enlace roto. Esto te llevará al archivo `.md` donde podrás realizar los cambios y [crear una solicitud de extracción](#solicitud-de-extracción) para su revisión.
+Click **Make a Contribution** at the bottom of any documentation page to make small changes, such as correcting a spelling mistake, fixing a sentence, or correcting a broken link. This will take you to the `.md` file where you can make the changes and [create a pull-request](#pull-request) for review.
 
-#### Realizar cambios en un entorno de desarrollo
+#### Making changes in a development environment
 
-Para obtener más información sobre cómo usar un entorno de desarrollo para trabajar en la documentación de GitHub, consulta "[Trabajar en un entorno de desarrollo](https://github.com/github/docs/blob/main/contributing/codespace.md)."
+For more information on using a development environment to work on GitHub documentation, see "[Working in a development environment](https://github.com/github/docs/blob/main/contributing/codespace.md)."
 
-#### Realizar cambios localmente
+#### Make changes locally
 
-1. Haz un fork del repositorio.
-   - Usando GitHub Desktop:
-     - [Introducción a GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) te guiará en la configuración de Desktop.
-     - Una vez configurado Desktop, puedes usarlo para [hacer un fork del repositorio](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
+1. Make a fork of the repository.
+   - Using GitHub Desktop:
+     - [Introduction to GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will walk you through setting up Desktop.
+     - Once Desktop is set up, you can use it to [make a fork of the repository](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
 
-   - Usando la línea de comandos:
-     - [Hacer un fork del repositorio](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) para poder realizar tus cambios sin afectar el proyecto original hasta que estés listo para fusionarlos.
+   - Using the command line:
+     - [make a repository fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so you can make your changes without affecting the original project until you are ready to merge them.
 
-2. Instala o actualiza a **Node.js**, en la versión especificada en `.node-version`.
+2. Install or upgrade to **Node.js**, in the version specified in `.node-version`.
 
-3. Crea una rama de trabajo y comienza con tus cambios.
+3. Create a working branch and start your changes.
 
-### Confirma tus cambios
+### Commit your changes
 
-Confirma los cambios una vez que estés satisfecho con ellos. No olvides revisar tu propio trabajo para acelerar el proceso de revisión :zap:.
+Commit your changes once you are satisfied with them. Don't forget to check your own work to speed up the review process :zap:.
 
-### Solicitud de Extracción
+### Extraction Request
 
-Cuando hayas terminado con los cambios, crea una solicitud de extracción, también conocida como PR.
-- Completa la plantilla "Listo para revisión" para que podamos revisar tu PR. Esta plantilla ayuda a los revisores a comprender tus cambios y el propósito de tu solicitud de extracción.
-- No olvides [vincular la PR al issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) si estás resolviendo uno.
-- Habilita la casilla para [permitir ediciones del mantenedor](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) para que la rama pueda actualizarse para su fusión.
-Una vez que envíes tu PR, un miembro del equipo de documentación lo revisará. Es posible que hagamos preguntas o solicitemos información adicional.
-- Es posible que solicitemos cambios antes de poder fusionar una PR, ya sea mediante [cambios sugeridos](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) o comentarios en la solicitud de extracción. Puedes aplicar cambios sugeridos directamente a través de la interfaz de usuario. Puedes hacer cualquier otro cambio en tu fork y luego confirmarlos en tu rama.
-- A medida que actualices tu PR y apliques cambios, marca cada conversación como [resuelta](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
-- Si encuentras problemas al fusionar, consulta este [tutorial de Git](https://github.com/skills/resolve-merge-conflicts) para ayudarte a resolver conflictos de fusión y otros problemas.
+When you are finished with your changes, create a pull request, also known as a PR.
+- Complete the "Ready for Review" template so we can review your PR. This template helps reviewers understand your changes and the purpose of your pull request.
+- Don't forget to [link the PR to the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are resolving one.
+- Check the box to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so that the branch can be updated for merging.
+Once you submit your PR, a member of the documentation team will review it. We may ask questions or request additional information.
+- We may request changes before we can merge a PR, either via [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or comments in the extract request. You can apply suggested changes directly through the user interface. You can make any other changes in your fork and then commit them to your branch.
+- As you update your PR and apply changes, mark each conversation as [resolved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
+- If you encounter problems when merging, check out this [Git tutorial](https://github.com/skills/resolve-merge-conflicts) to help you resolve merge conflicts and other issues.
 
-### Tu PR ha sido fusionada!
+### Your PR has been merged!
 
-¡Felicidades :tada::tada:! Nuestro equipo te agradece :sparkles:.
+Congratulations :tada::tada:! Our team thanks you :sparkles:.
 
-Una vez que tu PR se haya fusionado, tus contribuciones serán públicamente visibles en la [documentación del proyecto](README.md).
+Once your PR has been merged, your contributions will be publicly visible in the [project documentation](README.md).
