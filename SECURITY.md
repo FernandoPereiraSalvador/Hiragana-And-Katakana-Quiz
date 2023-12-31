@@ -1,30 +1,30 @@
-# Política de seguridad
+## Security policy
 
-## Versiones soportadas
+## Supported versions
 
-Actualmente, solo tenemos una versión de este proyecto:
+Currently, we only have one version of this project:
 
-| Versión | Compatible          |
+| Version | Compatible |
 | ------- | ------------------ |
-| 1.0     | :white_check_mark: |
+| 1.0 | | :white_check_mark: |
 
-No se han detectado vulnerabilidades en la versión actual.
+No vulnerabilities have been detected in the current version.
 
-## Reportar una Vulnerabilidad
+## Report a Vulnerability
 
-Si descubres una vulnerabilidad en este proyecto, te animamos a informarnos. Trabajamos para mantener este proyecto seguro para todos nuestros usuarios, y tu ayuda es fundamental para lograrlo.
+If you discover a vulnerability in this project, we encourage you to report it to us. We are working to keep this project safe for all our users, and your help is critical to achieving this.
 
-Para reportar una vulnerabilidad, sigue estos pasos:
+To report a vulnerability, follow these steps:
 
-1. Envía un correo electrónico a fernandopereirasalvador@gmail.com con los detalles de la vulnerabilidad. Por favor, incluye la siguiente información:
-   - Descripción detallada de la vulnerabilidad.
-   - Pasos para reproducir la vulnerabilidad.
-   - Información sobre la versión en la que se encontró la vulnerabilidad.
+1. Send an email to fernandopereirasalvador@gmail.com with details of the vulnerability. Please include the following information:
+   - Detailed description of the vulnerability.
+   - Steps to reproduce the vulnerability.
+   - Information about the version in which the vulnerability was found.
 
-2. Confirma la recepción de tu informe de vulnerabilidad lo mas pronto posible. Te proporcionaremos una actualización sobre el estado de tu informe dentro de ese período.
+2. Confirm receipt of your vulnerability report as soon as possible. We will provide you with an update on the status of your report within that period.
 
-3. Trabajaremos en solucionar la vulnerabilidad y te informaremos sobre los pasos que estamos tomando para abordarla.
+3. We will work on fixing the vulnerability and inform you about the steps we are taking to address it.
 
-4. Una vez que hayamos solucionado la vulnerabilidad, te proporcionaremos detalles sobre la versión corregida que contiene la solución.
+4. Once we have fixed the vulnerability, we will provide you with details on the fixed version containing the fix.
 
-Agradecemos tu ayuda en hacer que este proyecto sea más seguro para todos los usuarios. Tu colaboración es fundamental en nuestro esfuerzo por mantener la seguridad y la integridad del proyecto.
+We appreciate your help in making this project more secure for all users. Your collaboration is critical in our efforts to maintain the security and integrity of the project.
